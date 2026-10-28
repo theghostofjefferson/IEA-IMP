@@ -96,9 +96,38 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
               {redFlag.reasons.length} · Status: Flagged
             </p>
 
-            <p className="type-heading mt-6 max-w-[40rem] text-ink-inverse">
-              IEA has flagged this school. The reasons are published below.
-            </p>
+            <div className="red-flag-case-summary mt-7 grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(15rem,0.65fr)] md:items-end">
+              <p className="type-heading max-w-[40rem] text-ink-inverse">
+                IEA has flagged this school. The reasons are published below.
+              </p>
+              <aside className="red-flag-summary-card" aria-label="Notice summary">
+                <p className="type-label text-gold">Notice summary</p>
+                <div className="mt-4 grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="type-caption text-ink-inverse/65">Reasons published</p>
+                    <p className="mt-1 font-serif type-numeric text-ink-inverse">{redFlag.reasons.length}</p>
+                  </div>
+                  <div>
+                    <p className="type-caption text-ink-inverse/65">{matchedSchool ? "Ranking position" : "Ranking status"}</p>
+                    <p className="mt-1 font-serif type-numeric-sm text-ink-inverse">
+                      {matchedSchool ? `#${matchedSchool.rank}` : "Separate notice"}
+                    </p>
+                  </div>
+                </div>
+                {matchedSchool ? (
+                  <Link
+                    to={`/school/${matchedSchool.id}`}
+                    className="mt-4 inline-block type-caption text-gold underline underline-offset-4 hover:decoration-2"
+                  >
+                    Explore the full school profile →
+                  </Link>
+                ) : (
+                  <p className="mt-4 type-caption text-ink-inverse/70">
+                    This notice is maintained separately from the ranked school table.
+                  </p>
+                )}
+              </aside>
+            </div>
           </div>
 
           <Rule tone="rule" className="mt-12 md:mt-16" />
@@ -136,35 +165,15 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
             </ol>
           )}
 
-          {matchedSchool ? (
-            <Reveal className="mt-8" delayMs={90}>
-              <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2 border-y border-rule-soft py-4">
-                <span className="type-label text-ink-faint">In the ranking</span>
-                <span className="font-serif type-numeric-sm text-bronze-ink">
-                  #{matchedSchool.rank}
-                </span>
-                <span className="type-caption text-ink-muted">
-                  overall {matchedSchool.overallScore.toFixed(1)}
-                </span>
-                <Link
-                  to={`/school/${matchedSchool.id}`}
-                  className="type-caption text-bronze-ink underline underline-offset-4 hover:decoration-2"
-                >
-                  View its ranking profile →
-                </Link>
-              </div>
-            </Reveal>
-          ) : null}
-
           {/* Source well. */}
           <Reveal className="mt-12 md:mt-16" delayMs={120}>
             <div className="border-l-2 border-band-weak bg-sunken px-6 py-6 md:px-8">
               <p className="type-label text-band-weak">About this flag</p>
               <p className="type-body-lg measure mt-3 text-ink-muted">
-                These highlights document student-reported abuses for public awareness and
-                accountability. They reflect information shared with IEA and do not necessarily
-                constitute independently verified things. Publication does not imply that IEA is the
-                originator of the allegations.
+                These highlights record student-reported concerns submitted to IEA. They are
+                published for public awareness and accountability. They are not necessarily
+                independently verified, and publication does not imply that IEA originated the
+                underlying allegations.
               </p>
               <p className="type-body-lg measure mt-6 text-ink-muted">
                 If you have any queries, please contact us at{" "}
