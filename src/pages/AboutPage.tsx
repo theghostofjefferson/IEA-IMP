@@ -205,7 +205,7 @@ export function AboutPage() {
         <Reveal className="py-12 md:py-16" delayMs={220}>
           <div className="flex items-center gap-3">
             <AccentRule />
-            <span className="type-label text-bronze-ink">Independence</span>
+            <span className="type-label text-bronze-ink">Institutional independence</span>
           </div>
           <h2 className="type-heading mt-4 text-ink">Who we answer to</h2>
           <ul className="mt-6 max-w-[46rem] border-y border-rule-soft">
@@ -247,15 +247,13 @@ export function AboutPage() {
           <h2 className="type-subheading mt-3 font-bold text-ink-muted">The Madisonian tradition</h2>
           <div className="mt-4 flex flex-col gap-3">
             <p className="type-caption measure text-ink-faint">
-              The Institute&rsquo;s founders hold that the ideas of James Madison remain
-              central to how freedom is understood and protected around the world: that
-              power must be checked, that those who hold it must answer to the people it
-              affects, and that open information is a precondition of self-government.
-            </p>
-            <p className="type-caption measure text-ink-faint">
-              These ideas shaped both why the Institute exists and how it works. One of
-              its founders has said that he would not have undertaken this project
-              without them, and this site is designed in that spirit.
+              The founder holds that the ideas of James Madison remain central to how
+              freedom is understood and protected around the world: that power must be
+              checked, that those who hold it must answer to the people it affects, and
+              that open information is a precondition of self-government. These principles
+              inform the Institute&rsquo;s purpose and practice. The founder has stated
+              that he would not have undertaken this project without them, and the
+              Institute seeks to conduct its work in that spirit.
             </p>
           </div>
         </section>
