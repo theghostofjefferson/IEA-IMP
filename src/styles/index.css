@@ -969,3 +969,21 @@ html.intro-active {
   background: var(--claret);
   opacity: 0.62;
 }
+
+
+.top-table-panel {
+  border-top: 2px solid var(--bronze);
+  padding-top: 1rem;
+}
+
+.red-flag-summary-card {
+  border: 1px solid rgb(201 164 92 / 0.38);
+  border-top: 2px solid var(--gold);
+  background: rgb(19 10 15 / 0.62);
+  padding: 1rem 1.125rem;
+  backdrop-filter: blur(3px);
+}
+
+.red-flag-summary-card .text-ink-inverse {
+  color: var(--ink-inverse);
+}
