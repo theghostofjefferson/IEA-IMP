@@ -53,7 +53,7 @@ export function Hero() {
           </div>
 
           <div className="flex flex-col gap-3 justify-self-start md:justify-self-end">
-            <Button asChild size="lg" className="w-full bg-ink-inverse text-ink hover:bg-bronze-soft sm:w-auto">
+            <Button asChild size="lg" className="w-full border border-gold bg-gold text-ink hover:bg-bronze-soft sm:w-auto">
               <Link to="/rankings">View the rankings</Link>
             </Button>
             <div className="flex flex-col gap-1 sm:flex-row sm:gap-4">
@@ -96,8 +96,8 @@ export function Hero() {
       {/* Red-flag spotlight + top of the table, side by side. */}
       <div className="grid gap-12 pt-10 md:grid-cols-2 md:gap-16">
         <Reveal className="min-w-0" delayMs={120}>
-          <div className="min-w-0">
-            <h2 className="type-label">
+          <div className="min-w-0 border-t-2 border-band-weak bg-ink px-5 py-6 text-ink-inverse md:px-7">
+            <h2 className="type-label text-gold">
               <Link
                 to="/rankings?view=redflags"
                 className="rounded-sm text-ink-faint underline decoration-1 underline-offset-4 transition-colors duration-[120ms] hover:text-bronze-ink"
@@ -105,25 +105,37 @@ export function Hero() {
                 Red flag schools <span aria-hidden="true">→</span>
               </Link>
             </h2>
+            <figure className="relative mt-4 overflow-hidden border border-band-weak/60 bg-sunken">
+              <img
+                src="/images/red-flag-students.svg"
+                alt="Students demonstrating outside a school in Nepal"
+                className="h-48 w-full object-cover grayscale contrast-125 md:h-56"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption className="border-t border-band-weak/50 px-3 py-2 type-caption text-ink-inverse/75">
+                Student demonstration · Nepal
+              </figcaption>
+            </figure>
             <div className="mt-4 grid gap-3">
               {flaggedPreview.map((redFlag) => (
                 <Link
                   key={redFlag.id}
                   to={`/red-flag/${redFlag.id}`}
-                  className="group flex min-w-0 items-stretch gap-3 rounded-sm border border-rule-soft bg-surface p-3 transition-colors duration-[120ms] hover:border-band-weak"
+                  className="group flex min-w-0 items-stretch gap-3 rounded-sm border border-ink-inverse/20 bg-ink/70 p-3 transition-colors duration-[120ms] hover:border-band-weak"
                 >
                   <span aria-hidden="true" className="w-1 shrink-0 bg-band-weak" />
                   <div className="min-w-0 flex-1">
-                    <p className="truncate font-serif text-[0.9375rem] font-bold text-ink group-hover:underline">
+                    <p className="truncate font-serif text-[0.9375rem] font-bold text-ink-inverse group-hover:underline">
                       {redFlag.name}
                     </p>
-                    <p className="type-caption mt-1 line-clamp-2 text-ink-muted">
+                    <p className="type-caption mt-1 line-clamp-2 text-ink-inverse/75">
                       {redFlag.reasons[0] ?? "Published reasons pending."}
                     </p>
                   </div>
                   <span
                     aria-hidden="true"
-                    className="shrink-0 self-center text-ink-faint transition-transform duration-[120ms] group-hover:translate-x-0.5"
+                    className="shrink-0 self-center text-gold transition-transform duration-[120ms] group-hover:translate-x-0.5"
                   >
                     →
                   </span>
@@ -132,7 +144,7 @@ export function Hero() {
             </div>
             <Link
               to="/rankings?view=redflags"
-              className="type-caption mt-4 inline-block text-bronze-ink underline decoration-1 underline-offset-4 hover:decoration-2"
+              className="type-caption mt-4 inline-block text-gold underline decoration-1 underline-offset-4 hover:decoration-2"
             >
               See all {redFlags.length} flagged schools
             </Link>
