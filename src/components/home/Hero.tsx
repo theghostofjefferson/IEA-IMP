@@ -96,7 +96,7 @@ export function Hero() {
       {/* Red-flag spotlight + top of the table, side by side. */}
       <div className="grid gap-12 pt-10 md:grid-cols-2 md:gap-16">
         <Reveal className="min-w-0" delayMs={120}>
-          <div className="min-w-0 border-t-2 border-band-weak bg-ink px-5 py-6 text-ink-inverse md:px-7">
+          <div className="red-flag-panel min-w-0 px-5 py-6 md:px-7">
             <h2 className="type-label text-gold">
               <Link
                 to="/rankings?view=redflags"
@@ -105,24 +105,12 @@ export function Hero() {
                 Red flag schools <span aria-hidden="true">→</span>
               </Link>
             </h2>
-            <figure className="relative mt-4 overflow-hidden border border-band-weak/60 bg-sunken">
-              <img
-                src="/images/red-flag-students.svg"
-                alt="Students demonstrating outside a school in Nepal"
-                className="h-48 w-full object-cover grayscale contrast-125 md:h-56"
-                loading="lazy"
-                decoding="async"
-              />
-              <figcaption className="border-t border-band-weak/50 px-3 py-2 type-caption text-ink-inverse/75">
-                Student demonstration · Nepal
-              </figcaption>
-            </figure>
             <div className="mt-4 grid gap-3">
               {flaggedPreview.map((redFlag) => (
                 <Link
                   key={redFlag.id}
                   to={`/red-flag/${redFlag.id}`}
-                  className="group flex min-w-0 items-stretch gap-3 rounded-sm border border-ink-inverse/20 bg-ink/70 p-3 transition-colors duration-[120ms] hover:border-band-weak"
+                  className="group flex min-w-0 items-stretch gap-3 rounded-sm border border-ink-inverse/25 bg-claret/35 p-3 transition-colors duration-[120ms] hover:border-gold"
                 >
                   <span aria-hidden="true" className="w-1 shrink-0 bg-band-weak" />
                   <div className="min-w-0 flex-1">
