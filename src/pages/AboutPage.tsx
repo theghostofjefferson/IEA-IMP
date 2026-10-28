@@ -272,6 +272,54 @@ export function AboutPage() {
           </div>
         </section>
 
+        {/* --- institutional legal position -------------------------------- */}
+        <Reveal className="py-12 md:py-16" delayMs={300}>
+          <section className="institutional-legal-position" aria-labelledby="legal-position-title">
+            <span className="legal-position-mark" aria-hidden="true">§</span>
+            <div className="legal-position-content">
+              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-gold/35 pb-5">
+                <div className="flex items-center gap-3">
+                  <span className="accent-mark" />
+                  <p className="type-label text-gold">Institutional position · Legal action</p>
+                </div>
+                <span className="type-caption text-ink-inverse/55">IEA / PUBLIC STATEMENT</span>
+              </div>
+
+              <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(15rem,0.75fr)_minmax(0,1.5fr)] lg:gap-16">
+                <div>
+                  <p className="type-label text-gold/80">Principle and remedy</p>
+                  <h2 id="legal-position-title" className="type-title mt-4 max-w-[18ch] text-ink-inverse">
+                    Institutional Position on Individualized Legal Action
+                  </h2>
+                  <div className="mt-6 h-px w-20 bg-gold" />
+                </div>
+
+                <div className="legal-position-copy flex flex-col gap-5">
+                  <p className="type-body-lg text-ink-inverse/90">
+                    The Institute for Educational Accountability (IEA) generally seeks to address systemic failures in educational accountability rather than single out individual schools. Our work is guided by evidence, institutional reform, and the public interest.
+                  </p>
+                  <p className="type-body-lg text-ink-inverse/90">
+                    However, this approach should not be mistaken for a relinquishment of our legal rights. Where an individual school initiates legal proceedings against IEA, engages in unlawful conduct against the Institute, or otherwise seeks to obstruct its legitimate activities, IEA reserves the right to pursue appropriate individualized legal remedies, including counterclaims and independent legal proceedings where justified by the facts and applicable law.
+                  </p>
+                  <p className="type-body-lg text-ink-inverse/90">
+                    Where relevant and legally permissible, such proceedings may include the presentation of documented evidence and student accounts concerning the school&rsquo;s conduct. Evidence collected through our research may be submitted to the competent judicial authorities when appropriate, subject to applicable evidentiary rules, confidentiality obligations, and the protection of students&rsquo; identities where required.
+                  </p>
+                  <p className="type-body-lg text-ink-inverse/90">
+                    IEA remains committed to the rule of law. Our preference for systemic reform does not preclude pursuing accountability against individual institutions when circumstances warrant it.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-8 flex items-center gap-3 border-t border-gold/35 pt-5">
+                <span aria-hidden="true" className="size-2 rotate-45 bg-gold" />
+                <p className="type-caption text-ink-inverse/65">
+                  Evidence, due process, and the public interest govern the Institute&rsquo;s actions.
+                </p>
+              </div>
+            </div>
+          </section>
+        </Reveal>
+
         {/* --- founder letters --------------------------------------------- */}
         <MessageModal
           open={letter === "president"}
