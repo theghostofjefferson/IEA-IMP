@@ -140,8 +140,8 @@ export function Hero() {
         </Reveal>
 
         <Reveal className="min-w-0" delayMs={180}>
-          <aside className="min-w-0">
-            <h2 className="type-label">
+          <aside className="top-table-panel min-w-0">
+            <h2 className="type-heading font-bold">
               <Link
                 to="/rankings?view=all"
                 className="rounded-sm text-ink-faint underline decoration-1 underline-offset-4 transition-colors duration-[120ms] hover:text-bronze-ink"
@@ -160,7 +160,7 @@ export function Hero() {
                       to={`/school/${school.id}`}
                       className="flex min-w-0 items-baseline gap-2 rounded-sm"
                     >
-                      <span className="font-serif type-numeric-sm text-bronze-ink">
+                      <span className="inline-flex size-7 shrink-0 items-center justify-center border border-bronze/50 bg-bronze-wash font-serif text-sm font-bold text-bronze-ink">
                         {school.rank}
                       </span>
                       <span className="truncate font-serif text-[0.9375rem] font-bold text-ink hover:underline">
