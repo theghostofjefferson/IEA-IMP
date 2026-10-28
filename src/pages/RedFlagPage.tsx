@@ -40,7 +40,7 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
   return (
     <>
       {/* Warning banner — the only red surface on the page. */}
-      <div className="bg-band-weak text-ink-inverse">
+      <div className="red-flag-alert">
         <Container>
           <div className="flex items-center gap-3 py-3 md:py-4">
             <span
@@ -57,13 +57,13 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
       </div>
 
       {/* Red left rail down the whole content area. */}
-      <div className="border-l-2 border-band-weak">
+      <div className="red-flag-page border-l-2 border-claret">
         <Container>
-          <div className="animate-route-in pt-10 md:pt-16">
-            <nav aria-label="Breadcrumb" className="type-caption text-ink-faint">
+          <div className="red-flag-detail-hero animate-route-in">
+            <nav aria-label="Breadcrumb" className="type-caption text-ink-inverse/75">
               <Link
                 to="/rankings?view=redflags"
-                className="text-bronze-ink underline underline-offset-4 hover:decoration-2"
+                className="text-gold underline underline-offset-4 hover:decoration-2"
               >
                 Red flag schools
               </Link>
@@ -73,12 +73,12 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
 
             <div className="relative mt-8 flex items-center gap-4 md:mt-10">
               <Monogram name={redFlag.name} size="lg" />
-              <span className="type-label text-band-weak">Red flag school</span>
+              <span className="type-label text-gold">Red flag school</span>
 
               {/* Rotated stamp. */}
               <span
                 aria-hidden="true"
-                className="absolute right-0 top-0 hidden -rotate-6 select-none border-2 border-band-weak px-3 py-1 font-sans text-xs font-bold uppercase tracking-[0.2em] text-band-weak md:inline-block"
+                className="absolute right-0 top-0 hidden -rotate-6 select-none border-2 border-gold/70 px-3 py-1 font-sans text-xs font-bold uppercase tracking-[0.2em] text-gold md:inline-block"
               >
                 Flagged
               </span>
@@ -86,17 +86,17 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
 
             <h1
               tabIndex={-1}
-              className="type-display measure-tight mt-6 text-ink outline-none"
+              className="type-display measure-tight mt-6 text-ink-inverse outline-none"
             >
               {redFlag.name}
             </h1>
 
-            <p className="type-caption mt-4 text-ink-faint">
+            <p className="type-caption mt-4 text-ink-inverse/70">
               Published by IEA · {meta.publicationDate.slice(0, 4)} · Reasons:{" "}
               {redFlag.reasons.length} · Status: Flagged
             </p>
 
-            <p className="type-heading mt-6 max-w-[40rem] text-ink">
+            <p className="type-heading mt-6 max-w-[40rem] text-ink-inverse">
               IEA has flagged this school. The reasons are published below.
             </p>
           </div>
@@ -116,15 +116,15 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
               No specific reasons have been published for this school yet.
             </p>
           ) : (
-            <ol className="flex flex-col">
+            <ol className="red-flag-reason-list flex flex-col">
               {redFlag.reasons.map((reason, i) => (
                 <li
                   key={reason}
-                  className="grid gap-x-6 gap-y-2 border-b border-band-weak/30 py-6 last:border-b-0 md:grid-cols-[3.5rem_minmax(0,1fr)]"
+                  className="grid gap-x-6 gap-y-2 border-b border-claret/20 py-6 last:border-b-0 md:grid-cols-[3.5rem_minmax(0,1fr)]"
                 >
                   <span
                     aria-hidden="true"
-                    className="font-serif type-numeric leading-none text-band-weak"
+                    className="font-serif type-numeric leading-none text-claret"
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
