@@ -310,12 +310,6 @@ export function AboutPage() {
                 </div>
               </div>
 
-              <div className="mt-8 flex items-center gap-3 border-t border-gold/35 pt-5">
-                <span aria-hidden="true" className="size-2 rotate-45 bg-gold" />
-                <p className="type-caption text-ink-inverse/65">
-                  Evidence, due process, and the public interest govern the Institute&rsquo;s actions.
-                </p>
-              </div>
             </div>
           </section>
         </Reveal>
