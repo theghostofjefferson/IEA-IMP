@@ -36,7 +36,7 @@ export function RankingsPage() {
         <header className={view === "redflags" ? "red-flag-index-header" : "pt-12 md:pt-20"}>
           <Reveal staggerMs={60}>
             <h1 tabIndex={-1} className="type-title text-ink outline-none">
-              {view === "redflags" ? "Red flag schools" : "Rankings"}
+              {view === "redflags" ? "Institutions under review" : "Rankings"}
             </h1>
 
             <dl className="type-caption mt-6 flex flex-wrap gap-x-8 gap-y-1 text-ink-faint">
