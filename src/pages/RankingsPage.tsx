@@ -52,7 +52,7 @@ export function RankingsPage() {
               </div>
               <div className="flex gap-2">
                 <dt>Source</dt>
-                <dd className="text-ink-muted">{view === "redflags" ? "IEA findings from third-party sources" : meta.source}</dd>
+                <dd className="text-ink-muted">{view === "redflags" ? "Student submissions and public-source feedback" : meta.source}</dd>
               </div>
             </dl>
           </Reveal>
