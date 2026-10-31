@@ -99,6 +99,135 @@ export function Hero() {
         </div>
       </Reveal>
 
+      <Reveal className="min-w-0 mt-8" delayMs={90}>
+        <details className="group overflow-hidden rounded-sm border border-claret/60 bg-ink text-ink-inverse transition-[background-color,border-color,box-shadow] duration-500 group-open:border-[#cf4650] group-open:bg-[#1b0b11] group-open:shadow-[0_0_36px_rgba(181,28,42,0.28)]">
+          <summary className="flex cursor-pointer list-none items-center gap-4 px-5 py-5 sm:px-7 sm:py-6 [&::-webkit-details-marker]:hidden">
+            <span
+              aria-hidden="true"
+              className="inline-flex size-11 shrink-0 items-center justify-center border border-claret font-serif text-2xl font-bold text-[#c54a53] transition-colors duration-500 group-open:border-[#ed525e] group-open:text-[#ff727b]"
+            >
+              !
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="type-label block text-gold">IEA statement · 31 October 2026</span>
+              <span className="type-heading mt-1 block text-ink-inverse">
+                On the Assault on Freedom of Expression in Nepal
+              </span>
+              <span className="type-caption mt-2 block text-ink-inverse/65">
+                A statement on press freedom, recent events, and why IEA continues its work
+              </span>
+            </span>
+            <span className="type-caption hidden shrink-0 text-gold sm:block">
+              Read statement <span aria-hidden="true" className="inline-block transition-transform duration-300 group-open:rotate-45">+</span>
+            </span>
+          </summary>
+
+          <article className="border-t border-claret/50 px-5 py-6 sm:px-7 md:py-8">
+            <div className="mx-auto flex max-w-4xl flex-col gap-6">
+              <p className="type-body-lg measure">
+                IEA and I are enraged by what we regard as a serious assault on freedom of expression
+                in Nepal. We are concerned by broad or uncertain applications of defamation and
+                cybercrime provisions to expression. Press-freedom organizations have documented
+                concerns about the use of the Electronic Transactions Act in cases involving
+                journalists and online speech, including in{" "}
+                <a
+                  href="https://kathmandupost.com/national/2026/04/29/nepal-s-electronic-transactions-law-continues-to-be-misused-to-stifle-free-speech"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-gold underline underline-offset-4"
+                >
+                  reporting on Section 47 of the Act
+                </a>{" "}
+                and{" "}
+                <a
+                  href="https://www.freedomforum.org.np/publications/item/annual-press-freedom-report-2026"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-gold underline underline-offset-4"
+                >
+                  Freedom Forum&apos;s 2026 press-freedom report
+                </a>
+                .
+              </p>
+
+              <p className="type-body-lg measure">
+                On 30 October 2026, police entered newsrooms in Kathmandu and detained several
+                journalists; the detentions were reported the next day.{" "}
+                <a
+                  href="https://kathmandupost.com/national/2026/10/31/police-cite-pmo-concerns-to-justify-summoning-journalists"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-gold underline underline-offset-4"
+                >
+                  Contemporary reporting
+                </a>{" "}
+                records the events and the stated police explanation. Separately, major social
+                media platforms were blocked in September 2025 and the restrictions were later
+                withdrawn, as documented by the{" "}
+                <a
+                  href="https://apnews.com/article/e111d7de4ac8223088159182c664d1f2"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-gold underline underline-offset-4"
+                >
+                  Associated Press
+                </a>
+                .
+              </p>
+
+              <p className="type-heading measure border-l-2 border-claret pl-4 text-ink-inverse">
+                Cybercrime laws cannot be handed out like Halloween candy. Defamation must not
+                become a convenient instrument for silencing criticism. Constitutional liberties
+                must not depend on the goodwill of those exercising power.
+              </p>
+
+              <p className="type-body-lg measure">
+                IEA has received direct threats. Together with the increasingly hostile environment,
+                this has compelled us to make substantial changes to our website and temporarily
+                restrict certain publications. Let there be no misunderstanding:{" "}
+                <strong>a change in our methods is not a surrender of our convictions.</strong>
+              </p>
+
+              <p className="type-body-lg measure">
+                IEA is exploring lawful avenues to preserve, document, and bring these reports to
+                public attention. I am personally working to develop those avenues. We remain
+                committed to institutional accountability and intend to pursue it through lawful
+                means.
+              </p>
+
+              <p className="type-body-lg measure">
+                What saddens us most is how severely these circumstances have limited our ability to
+                inform students about what is happening in their educational environments. There is
+                much we wish to communicate, but cannot presently publish.
+              </p>
+
+              <p className="type-body measure border-l-2 border-gold/70 pl-4">
+                Students seeking advice, assistance, or guidance concerning their rights may contact
+                us at{" "}
+                <a
+                  href="mailto:help@ieainstitute.org"
+                  className="font-bold text-gold underline underline-offset-4"
+                >
+                  help@ieainstitute.org
+                </a>
+                .
+              </p>
+
+              <blockquote className="type-heading measure border-t border-claret/50 pt-6 text-ink-inverse">
+                <strong>
+                  We do not require the permission of those in power to believe in constitutional
+                  liberty. Nor do threats alter the principles upon which this institution was
+                  founded.
+                </strong>
+                <footer className="type-caption mt-4 text-gold">
+                  Ron · Institute for Educational Accountability
+                </footer>
+              </blockquote>
+            </div>
+          </article>
+        </details>
+      </Reveal>
+
       {/* Red-flag spotlight + top of the table, side by side. */}
       <div className="grid gap-12 pt-10 md:grid-cols-2 md:gap-16">
         <Reveal className="min-w-0" delayMs={120}>
