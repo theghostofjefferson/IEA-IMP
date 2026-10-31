@@ -1083,10 +1083,9 @@ html.intro-active {
 .founder-profile-card {
   isolation: isolate;
   overflow: hidden;
-  border: 2px solid color-mix(in srgb, var(--ink) 70%, var(--bronze));
-  border-top: 4px solid color-mix(in srgb, var(--ink) 70%, var(--bronze));
-  border-radius: 1.5rem;
-  background: color-mix(in srgb, var(--ink) 84%, var(--brown));
+  border: 0;
+  border-radius: 0;
+  background: transparent;
   padding: 2rem 1.5rem;
 }
 
