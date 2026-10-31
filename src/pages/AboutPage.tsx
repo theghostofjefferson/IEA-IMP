@@ -186,7 +186,7 @@ export function AboutPage() {
                     31 October 2026
                   </span>
                   <span className="mt-1.5 block font-serif text-[0.95rem] font-semibold italic leading-snug text-ink-inverse">
-                    &ldquo;I am not content to stand still by the will of God.&rdquo;
+                    &ldquo;We are not content to stand still by the will of God.&rdquo;
                   </span>
                   <span className="mt-2 block font-sans text-[0.6rem] uppercase tracking-[0.2em] text-ink-inverse/60 transition-colors group-hover:text-[#c9b27c]">
                     Read the IEA statement &rarr;
