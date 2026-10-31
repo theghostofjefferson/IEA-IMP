@@ -33,8 +33,7 @@
  *                                       `iea-revamp.vercel.app`
  *   4. `VERCEL_URL`                     set on every Vercel deploy, including
  *                                       previews, so preview builds are valid
- *   5. `https://ieainstitute.org`       placeholder for local dev —
- *                                       set a real origin before launch.
+ *   5. `https://www.ieainstitute.org`   the canonical production origin
  *
  * Usage
  *   node scripts/build-sitemap.mjs
@@ -50,7 +49,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 
 /** Placeholder until a domain is chosen. `check-sitemap.mjs` imports this. */
-export const DEFAULT_ORIGIN = "https://ieainstitute.org";
+export const DEFAULT_ORIGIN = "https://www.ieainstitute.org";
 
 /**
  * Where the site lives, right now, in this build.
@@ -62,9 +61,15 @@ export const DEFAULT_ORIGIN = "https://ieainstitute.org";
  */
 export function resolveOrigin(argv = process.argv, env = process.env) {
   const arg = argv.find((a) => a.startsWith("--origin="))?.split("=").slice(1).join("=");
+  // A production deploy always advertises the canonical origin. Vercel's
+  // VERCEL_PROJECT_PRODUCTION_URL can be the *.vercel.app address (or the apex
+  // domain) rather than the www host Search Console is verified for, which put
+  // non-canonical URLs in the sitemap. Previews still use their own URL below.
+  const productionCanonical = !arg && !env.IEA_ORIGIN && env.VERCEL_ENV === "production";
   const raw =
     arg ||
     env.IEA_ORIGIN ||
+    (productionCanonical ? DEFAULT_ORIGIN : "") ||
     // Vercel sets both of these. The project one is the stable production
     // address; the deploy one is unique per deploy and is the right fallback
     // for previews.
@@ -78,9 +83,13 @@ export function resolveOrigin(argv = process.argv, env = process.env) {
 
   return {
     origin: withScheme.replace(/\/+$/, ""),
-    isPlaceholder: withScheme.replace(/\/+$/, "") === DEFAULT_ORIGIN,
+    // The default is the real canonical origin now; only warn when a local
+    // build fell back to it by accident.
+    isPlaceholder: false,
     source: arg
       ? "--origin"
+      : productionCanonical
+        ? "production canonical"
       : env.IEA_ORIGIN
         ? "IEA_ORIGIN"
         : env.VERCEL_PROJECT_PRODUCTION_URL

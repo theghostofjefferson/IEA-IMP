@@ -4,4 +4,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ieainstitute.org/sitemap.xml
+Sitemap: https://www.ieainstitute.org/sitemap.xml
