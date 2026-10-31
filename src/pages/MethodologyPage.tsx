@@ -55,9 +55,10 @@ export function MethodologyPage() {
               Methodology
             </h1>
             <p className="type-body-lg measure mt-6 text-ink-muted">
-              This page explains the methodology used to calculate the school rankings.
-              The Institute&rsquo;s broader research methodology is not public at this
-              stage and will be published alongside the annual report.
+              This page separates the school-ranking methodology from the broader research
+              methodology for the Annual Report. The ranking methodology is explained below;
+              the broader research methodology remains private for now and will be published
+              alongside the Annual Report.
             </p>
           </Reveal>
         </header>
@@ -66,7 +67,7 @@ export function MethodologyPage() {
 
         <Reveal className="py-16 md:py-24" delayMs={60}>
           <section className="defer-paint">
-            <SectionHeader eyebrow="Method" title="How the ranking is calculated" />
+            <SectionHeader eyebrow="Ranking methodology" title="How the ranking is calculated" />
 
             <ol className="mt-10 flex flex-col">
               {steps.map((step, i) => (
@@ -137,6 +138,25 @@ export function MethodologyPage() {
 
         <Reveal className="py-16 md:py-24" delayMs={120}>
           <HowToRead />
+        </Reveal>
+
+        <Rule tone="rule" />
+
+        <Reveal className="py-12 md:py-16" delayMs={180}>
+          <section
+            className="max-w-[70ch] border-l-2 border-bronze bg-bronze-wash/30 py-6 pl-6 pr-5 md:py-8 md:pl-8"
+            aria-labelledby="annual-research-methodology-title"
+          >
+            <p className="type-label text-bronze-ink">Annual Report methodology</p>
+            <h2 id="annual-research-methodology-title" className="type-heading mt-3 text-ink">
+              Broader research methodology
+            </h2>
+            <p className="type-body-lg mt-4 text-ink-muted">
+              This methodology covers the Institute&apos;s broader investigations and research,
+              separately from the school-ranking methodology above. It remains private for now
+              and will be published alongside the Annual Report.
+            </p>
+          </section>
         </Reveal>
       </div>
     </Container>
