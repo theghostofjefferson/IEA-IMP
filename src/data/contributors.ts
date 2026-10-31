@@ -21,7 +21,7 @@ import type { Contributor } from "@/lib/types";
 
 /** Real people, credited. */
 export const contributors: Contributor[] = [
-  { id: "yogeshwor-sharma", name: "Yogeshwor Sharma", role: "Founder, President, & Head of Operations", photo: "/people/yogeshwor-sharma.jpg" },
+  { id: "yogeshwor-sharma", name: "Yogeshwor Sharma", role: "Co-Founder, President, & Head of Operations", photo: "/people/yogeshwor-sharma.jpg" },
   { id: "eron-subedi", name: "Eron Subedi", role: "Founder, Chief Architect & Chief of Investigations", photo: "/people/eron-subedi.jpeg" },
   { id: "aarohan-baral", name: "Aarohan Baral", role: "Lead Developer", },
   { id: "tikaram-sharma", name: "Tikaram Sharma", role: "Co-Founder & Statistical Analyst",  },
