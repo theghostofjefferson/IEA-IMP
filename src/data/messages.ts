@@ -25,7 +25,7 @@ export type MessageBlock =
 export const presidentMessage: MessageBlock[] = [
   {
     kind: "byline",
-    text: "Yogeshwor Sharma | Founder, President Institute for Educational Accountability",
+    text: "Yogeshwor Sharma | Co-Founder, President, & Head of Operations, Institute for Educational Accountability",
   },
   {
     kind: "p",
