@@ -11,17 +11,14 @@ import { formatCountPlus, formatDate } from "@/lib/format";
 import { meta } from "@/lib/data";
 
 /**
- * The method, in full.
+ * Ranking methodology.
  *
- * This page carries what the home page used to carry: how the score is
- * calculated, and the legend for reading a row. The home page links here
- * rather than repeating it, so the landing page is the pitch and this is the
- * proof.
+ * This page explains how school ranking scores are calculated and interpreted.
+ * The Institute's broader research methodology is private for now and will be
+ * published alongside the annual report.
  *
- * The five steps are the same ones stated on `/about` — stated here as
- * dropdowns rather than an always-open list, so a reader who wants the method
- * can open the one step they doubt, and a reader who does not is not handed a
- * wall of text before the legend.
+ * The scoring steps are presented as dropdowns so readers can open the details
+ * they need without starting with a wall of text.
  */
 export function MethodologyPage() {
   useEffect(() => applySeo(SEO.methodology), []);
@@ -58,8 +55,9 @@ export function MethodologyPage() {
               Methodology
             </h1>
             <p className="type-body-lg measure mt-6 text-ink-muted">
-              Every score on this site can be traced back to a survey response and a
-              published weight. Here is exactly how.
+              This page explains the methodology used to calculate the school rankings.
+              The Institute&rsquo;s broader research methodology is not public at this
+              stage and will be published alongside the annual report.
             </p>
           </Reveal>
         </header>
@@ -68,7 +66,7 @@ export function MethodologyPage() {
 
         <Reveal className="py-16 md:py-24" delayMs={60}>
           <section className="defer-paint">
-            <SectionHeader eyebrow="Method" title="How the score is calculated" />
+            <SectionHeader eyebrow="Method" title="How the ranking is calculated" />
 
             <ol className="mt-10 flex flex-col">
               {steps.map((step, i) => (
