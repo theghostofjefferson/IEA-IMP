@@ -50,10 +50,10 @@ export function RedFlagList() {
               </span>
             </div>
             <p className="type-caption mt-2 line-clamp-2 text-ink-muted">
-              {redFlag.reasons[0] ?? "Published reasons pending."}
+              {redFlag.reasons[0] ?? "Review items pending."}
             </p>
             <span className="type-caption mt-2 block text-ink-faint">
-              {redFlag.reasons.length} reason{redFlag.reasons.length === 1 ? "" : "s"} · Read more →
+              {redFlag.reasons.length} review item{redFlag.reasons.length === 1 ? "" : "s"} · View details →
             </span>
           </Link>
         </li>
