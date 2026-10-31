@@ -50,7 +50,7 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
               !
             </span>
             <p className="type-label text-ink-inverse">
-              Red flag — this school has been flagged by IEA
+              Selected for institutional review
             </p>
           </div>
         </Container>
@@ -73,14 +73,14 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
 
             <div className="relative mt-8 flex items-center gap-4 md:mt-10">
               <Monogram name={redFlag.name} size="lg" />
-              <span className="type-label text-gold">Red flag school</span>
+              <span className="type-label text-gold">Institution under review</span>
 
               {/* Rotated stamp. */}
               <span
                 aria-hidden="true"
                 className="absolute right-0 top-0 hidden -rotate-6 select-none border-2 border-gold/70 px-3 py-1 font-sans text-xs font-bold uppercase tracking-[0.2em] text-gold md:inline-block"
               >
-                Flagged
+                Under review
               </span>
             </div>
 
@@ -93,20 +93,20 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
 
             <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <p className="type-caption text-ink-inverse/70">
-                Published by IEA · {meta.publicationDate.slice(0, 4)} · Reasons:{" "}
-                {redFlag.reasons.length} · Status: Flagged
+                Published by IEA · {meta.publicationDate.slice(0, 4)} · Review items:{" "}
+                {redFlag.reasons.length} · Status: Under review
               </p>
             </div>
 
             <div className="red-flag-case-summary mt-7 grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(15rem,0.65fr)] md:items-end">
               <p className="type-heading max-w-[40rem] text-ink-inverse">
-                IEA has flagged this school. The reasons are published below.
+                This institution was selected for institutional review under IEA’s research criteria. The reported concerns below are third-party submissions and have not necessarily been independently verified. Inclusion is not a factual finding, verdict, or determination of liability by IEA.
               </p>
-              <aside className="red-flag-summary-card" aria-label="Notice summary">
-                <p className="type-label text-gold">Notice summary</p>
+              <aside className="red-flag-summary-card" aria-label="Review summary">
+                <p className="type-label text-gold">Review summary</p>
                 <div className="mt-4 grid grid-cols-2 gap-4">
                   <div>
-                    <p className="type-caption text-ink-inverse/65">Reasons published</p>
+                    <p className="type-caption text-ink-inverse/65">Items for review</p>
                     <p className="mt-1 font-serif type-numeric text-ink-inverse">{redFlag.reasons.length}</p>
                   </div>
                   <div>
@@ -136,8 +136,8 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
 
           <Reveal className="py-2 md:py-4" delayMs={60}>
             <SectionHeader
-              eyebrow="The reasons"
-              title="Why this school is flagged"
+              eyebrow="Reported concerns"
+              title="Basis for institutional review"
               className="mb-8 md:mb-10 [&_.type-label]:text-band-weak"
             />
           </Reveal>
@@ -170,12 +170,12 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
           {/* Source well. */}
           <Reveal className="mt-12 md:mt-16" delayMs={120}>
             <div className="border-l-2 border-band-weak bg-sunken px-6 py-6 md:px-8">
-              <p className="type-label text-band-weak">About this flag</p>
+              <p className="type-label text-band-weak">About this review</p>
               <p className="type-body-lg measure mt-3 text-ink-muted">
-                These highlights record student-reported concerns submitted to IEA. They are
-                published for public awareness and accountability. They are not necessarily
-                independently verified, and publication does not imply that IEA originated the
-                underlying allegations.
+                The items below summarize third-party reports or public-source feedback received
+                by IEA. Selection reflects IEA’s research criteria for institutional review; it
+                is not a verified finding of fact, guilt, or legal liability. IEA does not
+                originate the underlying allegations.
               </p>
               <p className="type-body-lg measure mt-6 text-ink-muted">
                 If you have any queries, please contact us at{" "}
