@@ -177,13 +177,21 @@ export function AboutPage() {
                   role="Founder, Executive Chairman & Chief of Investigations"
                   featured
                 />
-                <div className="mx-auto mt-5 max-w-[20rem] border-y-4 border-double border-[#d9b56a] bg-ink px-6 py-6 text-center shadow-[0_10px_30px_-12px_rgba(19,26,44,0.7)]">
-                  <p className="font-sans text-sm font-black uppercase tracking-[0.35em] text-[#d9b56a]">OCT 31</p>
-                  <div aria-hidden="true" className="mx-auto my-3 h-0.5 w-10 bg-[#d9b56a]" />
-                  <p className="font-serif text-lg font-black uppercase leading-snug tracking-[0.08em] text-ink-inverse">
-                    I am not content to stand still by the will of God.
-                  </p>
-                </div>
+                <Link
+                  to="/#statement"
+                  aria-label="Read the IEA statement of 31 October 2026 on the assault on freedom of expression in Nepal"
+                  className="group mx-auto mt-5 block w-full max-w-[16rem] border-y border-[#b89a5e] bg-[#1c2438] px-4 py-3 text-center transition-colors hover:bg-[#232d46] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b89a5e]"
+                >
+                  <span className="block font-sans text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-[#c9b27c]">
+                    31 October 2026
+                  </span>
+                  <span className="mt-1.5 block font-serif text-[0.95rem] font-semibold italic leading-snug text-ink-inverse">
+                    &ldquo;We are not content to stand still by the will of God.&rdquo;
+                  </span>
+                  <span className="mt-2 block font-sans text-[0.6rem] uppercase tracking-[0.2em] text-ink-inverse/60 transition-colors group-hover:text-[#c9b27c]">
+                    Read the IEA statement &rarr;
+                  </span>
+                </Link>
                 <Button
                   onClick={() => setLetter("founder")}
                   className="bg-letter text-ink-inverse hover:bg-letter-deep active:bg-letter-deep"
