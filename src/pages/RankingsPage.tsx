@@ -9,6 +9,7 @@ import { RankingsToolbar } from "@/components/rankings/RankingsToolbar";
 import { SchoolListRow } from "@/components/rankings/SchoolListRow";
 import { EmptyState } from "@/components/rankings/EmptyState";
 import { RedFlagList } from "@/components/red-flags/RedFlagList";
+import { RedFlagLegalNotice } from "@/components/red-flags/RedFlagLegalNotice";
 import { useRankings } from "@/hooks/useRankings";
 import { meta } from "@/lib/data";
 import { SEO, applySeo } from "@/lib/seo";
@@ -58,6 +59,12 @@ export function RankingsPage() {
         </header>
 
         <Rule tone="rule" className="mt-8 md:mt-10" />
+
+        {view === "redflags" ? (
+          <Reveal className="pt-4" delayMs={30}>
+            <RedFlagLegalNotice />
+          </Reveal>
+        ) : null}
 
         <Reveal className="py-8 md:py-10" delayMs={60}>
           <RankingsToolbar
