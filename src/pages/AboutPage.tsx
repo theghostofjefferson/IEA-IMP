@@ -177,9 +177,10 @@ export function AboutPage() {
                   role="Founder, Executive Chairman & Chief of Investigations"
                   featured
                 />
-                <div className="mx-auto mt-5 max-w-[19rem] border-y-2 border-double border-bronze/60 bg-bronze-soft/45 px-5 py-4 text-center">
-                  <p className="type-label tracking-[0.22em] text-ink">OCT 31</p>
-                  <p className="mt-2 font-serif text-sm font-bold uppercase leading-relaxed tracking-[0.06em] text-ink">
+                <div className="mx-auto mt-5 max-w-[20rem] border-y-4 border-double border-[#d9b56a] bg-ink px-6 py-6 text-center shadow-[0_10px_30px_-12px_rgba(19,26,44,0.7)]">
+                  <p className="font-sans text-sm font-black uppercase tracking-[0.35em] text-[#d9b56a]">OCT 31</p>
+                  <div aria-hidden="true" className="mx-auto my-3 h-0.5 w-10 bg-[#d9b56a]" />
+                  <p className="font-serif text-lg font-black uppercase leading-snug tracking-[0.08em] text-ink-inverse">
                     I am not content to stand still by the will of God.
                   </p>
                 </div>
