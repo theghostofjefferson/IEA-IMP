@@ -1,4 +1,5 @@
-import { Link } from "react-router";
+import { useEffect, useRef } from "react";
+import { Link, useLocation } from "react-router";
 
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
@@ -20,6 +21,19 @@ import { meta, redFlags, schools, totalSchools } from "@/lib/data";
  * used elsewhere, so the page makes its argument before the reader scrolls.
  */
 export function Hero() {
+  const { hash } = useLocation();
+  const statementRef = useRef<HTMLDetailsElement>(null);
+
+  // Deep link: `/#statement` opens the statement and brings it into view.
+  useEffect(() => {
+    if (hash !== "#statement") return;
+    const el = statementRef.current;
+    if (!el) return;
+    el.open = true;
+    const id = window.setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 120);
+    return () => window.clearTimeout(id);
+  }, [hash]);
+
   const top5 = schools.slice(0, 5);
   const flaggedIds = new Set([
     "ace-higher-secondary-school",
@@ -100,7 +114,7 @@ export function Hero() {
       </Reveal>
 
       <Reveal className="min-w-0 mt-8" delayMs={90}>
-        <details className="group overflow-hidden rounded-sm border border-claret/60 bg-ink text-ink-inverse transition-[background-color,border-color,box-shadow] duration-500 open:border-[#cf4650] open:bg-[#1b0b11] open:shadow-[0_0_36px_rgba(181,28,42,0.28)]">
+        <details id="statement" ref={statementRef} className="group scroll-mt-24 overflow-hidden rounded-sm border border-claret/60 bg-ink text-ink-inverse transition-[background-color,border-color,box-shadow] duration-500 open:border-[#cf4650] open:bg-[#1b0b11] open:shadow-[0_0_36px_rgba(181,28,42,0.28)]">
           <summary className="flex cursor-pointer list-none items-center gap-4 px-5 py-5 sm:px-7 sm:py-6 [&::-webkit-details-marker]:hidden">
             <span
               aria-hidden="true"
