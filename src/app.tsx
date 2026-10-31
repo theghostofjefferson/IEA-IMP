@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useRef, type ReactNode } from "react";
+import { Suspense, lazy, useEffect, useLayoutEffect, useRef, type ReactNode } from "react";
 import { BrowserRouter, Route, Routes, useLocation, useNavigationType } from "react-router";
 
 import { ErrorBoundary } from "@/components/site/ErrorBoundary";
@@ -149,13 +149,23 @@ function ScrollReset({ pathname }: { pathname: string }) {
   const view = new URLSearchParams(search).get("view") ?? "";
   const isFirstRender = useRef(true);
 
-  useEffect(() => {
+  // Layout effect: reset before the browser paints the new page, rather than
+  // after, so the page never flashes at the old offset.
+  useLayoutEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;
     }
     if (navType === "POP") return;
-    const toTop = () => window.scrollTo({ top: 0, behavior: "instant" });
+    // Plain `scrollTo(0, 0)` + direct scrollTop writes: some mobile browsers
+    // ignore the options-object form (`{ behavior: "instant" }`) entirely, which
+    // left the new page at the previous page's scroll offset. Smooth scrolling is
+    // never enabled globally, so this is already instant.
+    const toTop = () => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
     toTop();
     // Lazy-loaded routes mount after this effect runs, and mobile browsers can
     // restore or anchor the old offset once the new content paints. Re-assert
