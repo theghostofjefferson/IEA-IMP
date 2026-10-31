@@ -109,7 +109,7 @@ export const founderMessage: MessageBlock[] = [
     style: "italic",
     lines: [
       "Eron Subedi",
-      "Founder, Institute for Educational Accountability (IEA)",
+      "Founder, Executive Chairman & Chief of Investigations, Institute for Educational Accountability (IEA)",
     ],
   },
 ];
