@@ -170,7 +170,7 @@ export function AboutPage() {
           {/* Founders */}
           <section className="relative mb-14 md:mb-20">
             <div className="absolute inset-0 -z-10 bg-bronze-soft/40 rounded-2xl blur-3xl" />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
               <div className="founder-profile-card founder-profile-card--liberte md:col-start-1">
                 <TeamCard
                   name="Eron Subedi"
