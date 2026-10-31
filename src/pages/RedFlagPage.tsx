@@ -144,7 +144,7 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
 
           {redFlag.reasons.length === 0 ? (
             <p className="type-body-lg measure text-ink-muted">
-              No specific reasons have been published for this school yet.
+              No review items are currently published for this institution.
             </p>
           ) : (
             <ol className="red-flag-reason-list flex flex-col">
