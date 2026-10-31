@@ -28,6 +28,8 @@ export type Seo = {
    * so the links out of the page still pass authority to the schools.
    */
   noindex?: boolean;
+  /** Social-share title when it should differ from the document title. */
+  ogTitle?: string;
 };
 
 /**
@@ -58,6 +60,7 @@ export const SEO = {
   home: build(
     SUFFIX,
     "An independent examination of Nepali schools, grounded in verified student testimony, field inquiry, and credible public sources, undertaken to illuminate the institutions entrusted with educating the next generation.",
+    { title: `${SUFFIX} | Independent School Evaluation in Nepal`, ogTitle: SUFFIX },
   ),
   rankings: build(
     "Rankings",
@@ -162,11 +165,11 @@ function setLink(rel: string, href: string) {
  * `EISDIR`. See docs/09-BUGS.md § C3.
  */
 export function headTags(seo: Seo, path: string, origin: string): HeadTag[] {
-  const image = new URL("/og-image.png", origin).toString();
+  const image = new URL("/og-logo.png", origin).toString();
   const tags: HeadTag[] = [
     { tag: "title", text: seo.title },
     { tag: "meta", attr: "name", key: "description", content: seo.description },
-    { tag: "meta", attr: "property", key: "og:title", content: seo.title },
+    { tag: "meta", attr: "property", key: "og:title", content: seo.ogTitle ?? seo.title },
     { tag: "meta", attr: "property", key: "og:description", content: seo.description },
     { tag: "meta", attr: "property", key: "og:image", content: image },
     { tag: "meta", attr: "name", key: "twitter:card", content: "summary_large_image" },
