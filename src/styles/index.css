@@ -1099,7 +1099,8 @@ html.intro-active {
 }
 
 .founder-profile-card .text-ink-faint {
-  color: rgb(244 236 216 / 0.72);
+  color: var(--ink-muted);
+  font-weight: 700;
 }
 
 @media (max-width: 48rem) {
