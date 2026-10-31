@@ -133,10 +133,10 @@ export function RankingsToolbar({
           variant="outline"
           value={view}
           onValueChange={(v) => v && onView(v as View)}
-          aria-label="Choose which schools to show"
+          aria-label="Choose between rankings and institutions under review"
           className="w-fit"
         >
-          <ToggleGroupItem value="redflags">Red flags</ToggleGroupItem>
+          <ToggleGroupItem value="redflags"><span className="hidden sm:inline">Institutions under review</span><span className="sm:hidden">Under review</span></ToggleGroupItem>
           <ToggleGroupItem value="all">All schools</ToggleGroupItem>
         </ToggleGroup>
       </div>
@@ -155,10 +155,10 @@ export function RankingsToolbar({
         variant="outline"
         value={view}
         onValueChange={(v) => v && onView(v as View)}
-        aria-label="Choose which schools to show"
+        aria-label="Choose between rankings and institutions under review"
         className="w-fit"
       >
-        <ToggleGroupItem value="redflags">Red flags</ToggleGroupItem>
+        <ToggleGroupItem value="redflags"><span className="hidden sm:inline">Institutions under review</span><span className="sm:hidden">Under review</span></ToggleGroupItem>
         <ToggleGroupItem value="all">All schools</ToggleGroupItem>
       </ToggleGroup>
 
