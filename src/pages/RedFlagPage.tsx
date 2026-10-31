@@ -65,7 +65,7 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
                 to="/rankings?view=redflags"
                 className="text-gold underline underline-offset-4 hover:decoration-2"
               >
-                Red flag schools
+                Institutions under review
               </Link>
               <span aria-hidden="true" className="mx-2">/</span>
               <span aria-current="page">{redFlag.name}</span>
@@ -197,7 +197,7 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
             <div className="border-t-2 border-band-weak bg-sunken px-6 py-8 md:px-8">
               <div className="flex flex-wrap gap-4">
                 <ButtonLink to="/rankings?view=redflags">
-                  See all flagged schools →
+                  View institutions under review →
                 </ButtonLink>
                 <ButtonLink to="/">Back to the home page</ButtonLink>
               </div>
