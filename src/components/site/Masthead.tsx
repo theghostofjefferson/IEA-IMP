@@ -458,7 +458,11 @@ export function Masthead() {
                 <NavLink
                   ref={i === 0 ? firstLinkRef : undefined}
                   to={link.to}
-                  onClick={() => setOpen(false)}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    navigate(link.to);
+                    setOpen(false);
+                  }}
                   className={({ isActive }) =>
                     cn(
                       "group relative inline-flex items-baseline font-serif text-[2.25rem] font-bold leading-[1.1] tracking-[-0.02em] transition-colors md:text-[3rem] xl:text-[3.5rem]",
