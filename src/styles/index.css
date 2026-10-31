@@ -1086,7 +1086,7 @@ html.intro-active {
   border: 2px solid color-mix(in srgb, var(--ink) 70%, var(--bronze));
   border-top: 4px solid color-mix(in srgb, var(--ink) 70%, var(--bronze));
   border-radius: 1.5rem;
-  background: #131a35;
+  background: color-mix(in srgb, var(--ink) 84%, var(--brown));
   padding: 2rem 1.5rem;
 }
 
