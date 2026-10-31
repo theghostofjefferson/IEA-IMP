@@ -104,19 +104,19 @@ export function schoolSeo(school: School): Seo {
 /**
  * Per-red-flag SEO.
  *
- * A flagged school has no rank or score, so the title and description are built
+ * An institution under review has no rank or score, so the title and description are built
  * from the name and the first published reason instead. A generic title across
  * the list would make the pages indistinguishable in search results.
  */
 export function redFlagSeo(redFlag: RedFlag): Seo {
   const summary =
     redFlag.reasons.length > 0
-      ? `Flagged for: ${redFlag.reasons[0]}${redFlag.reasons.length > 1 ? `, and ${redFlag.reasons.length - 1} more.` : "."}`
-      : "Listed on the IEA Institute red-flag list.";
+      ? `Reported for review: ${redFlag.reasons[0]}${redFlag.reasons.length > 1 ? `, and ${redFlag.reasons.length - 1} additional review items.` : "."}`
+      : "Selected for institutional review by IEA.";
 
   return {
-    title: `${redFlag.name} — red flag`,
-    description: `${redFlag.name} is on the IEA Institute red-flag list. ${summary} Read the published reasons and how to respond.`,
+    title: `${redFlag.name} — institution under review`,
+    description: `${redFlag.name} was selected for institutional review by IEA. ${summary} Read the published review items and how to respond.`,
   };
 }
 
