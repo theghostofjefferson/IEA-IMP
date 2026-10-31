@@ -1,5 +1,5 @@
 /**
- * Collapsed reader notice for the Red Flag initiative.
+ * Collapsed reader notice for the Institutional review initiative.
  *
  * Native details/summary keeps the full legal notice available without
  * expanding it into the page by default.
@@ -9,7 +9,7 @@ export function RedFlagLegalNotice() {
     <details className="group my-6 border border-gold/40 bg-ink/45 backdrop-blur-sm">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 sm:px-6 [&::-webkit-details-marker]:hidden">
         <span className="flex min-w-0 flex-col gap-1">
-          <span className="type-label text-gold">Red Flag initiative · Reader notice</span>
+          <span className="type-label text-gold">Institutional review initiative · Reader notice</span>
           <span className="type-heading text-ink-inverse">
             Legal notice &amp; disclaimer
           </span>
@@ -29,7 +29,7 @@ export function RedFlagLegalNotice() {
         <section>
           <h3 className="type-label text-gold">1. Source and attribution of reports</h3>
           <p className="type-body measure mt-3 text-ink-inverse/85">
-            The reports appearing under IEA&apos;s Red Flag initiative originate from information
+            The reports appearing under IEA&apos;s Institutional review initiative originate from information
             submitted by third parties through the Institute&apos;s surveys, research activities,
             field investigations, and other reporting channels. The underlying allegations are
             those of their respective submitters and respondents. They are not allegations
@@ -46,15 +46,15 @@ export function RedFlagLegalNotice() {
         </section>
 
         <section>
-          <h3 className="type-label text-gold">2. Research classification and Red Flag designation</h3>
+          <h3 className="type-label text-gold">2. Institutional review classification</h3>
           <p className="type-body measure mt-3 text-ink-inverse/85">
-            The Red Flag designation represents a classification arising from IEA&apos;s research
+            Selection for institutional review is a research classification arising from IEA&apos;s
             methodology and assessment criteria. Reports may be identified for further scrutiny on
             account of their reported nature, frequency, severity, or relevance to institutional
             accountability.
           </p>
           <p className="type-body measure mt-4 text-ink-inverse/85">
-            A Red Flag designation is neither a judicial finding nor a determination of criminal or
+            Selection for institutional review is neither a judicial finding nor a determination of criminal or
             civil liability. It does not establish that an individual or institution has committed
             an offence, nor should it be interpreted as a declaration of guilt.
           </p>
@@ -63,9 +63,9 @@ export function RedFlagLegalNotice() {
         <section>
           <h3 className="type-label text-gold">3. Purpose and public interest</h3>
           <p className="type-body measure mt-3 text-ink-inverse/85">
-            The initiative exists to document reported incidents of abuse, assault, intimidation,
-            violence, coercion, and other forms of misconduct that may undermine the safety, dignity,
-            and rights of individuals within educational environments.
+            The initiative documents third-party reports concerning student safety, dignity, and rights
+            within educational environments, including reports about staff-student interactions,
+            disciplinary practices, and institutional procedures.
           </p>
           <p className="type-body measure mt-4 text-ink-inverse/85">
             Publication is undertaken for legitimate research, educational accountability, and
@@ -126,7 +126,7 @@ export function RedFlagLegalNotice() {
         <section>
           <h3 className="type-label text-gold">7. Applicable law</h3>
           <p className="type-body measure mt-3 text-ink-inverse/85">
-            All publication activities undertaken through the Red Flag initiative remain subject to
+            All publication activities undertaken through the Institutional review initiative remain subject to
             the Constitution of Nepal and applicable legislation, including the National Penal
             (Code) Act, 2074, the Privacy Act, 2075, and the Electronic Transactions Act, 2063.
           </p>
@@ -147,8 +147,8 @@ export function RedFlagLegalNotice() {
             research criteria, and facilitate institutional accountability.
           </p>
           <p className="type-body measure mt-4 text-ink-inverse/85">
-            The allegations originate with their respective submitters. The Red Flag designation
-            originates with IEA&apos;s research methodology. Any determination of legal liability
+            The allegations originate with their respective submitters. The institutional review
+            classification originates with IEA&apos;s research methodology. Any determination of legal liability
             remains a matter for the competent judicial authorities.
           </p>
           <blockquote className="mt-6 border-l-2 border-gold pl-4 font-serif text-ink-inverse">
