@@ -1395,3 +1395,8 @@ html.intro-active {
     background-color: rgb(19 10 15 / 0.42);
   }
 }
+
+/* Give the two principal founders a shared bronze name accent. */
+.founder-profile-card .group > div > p:first-child {
+  color: var(--bronze-ink);
+}
