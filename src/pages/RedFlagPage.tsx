@@ -100,7 +100,7 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
 
             <div className="red-flag-case-summary mt-7 grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(15rem,0.65fr)] md:items-end">
               <p className="type-heading max-w-[40rem] text-ink-inverse">
-                This institution was selected for institutional review under IEA’s research criteria. The reported concerns below are third-party submissions and have not necessarily been independently verified. Inclusion is not a factual finding, verdict, or determination of liability by IEA.
+                This institution was selected for institutional review under IEA’s research criteria. The index points below summarize third-party student submissions and, where identified, public-source feedback; they have not necessarily been independently verified. Inclusion is not a factual finding, verdict, or determination of liability by IEA.
               </p>
               <aside className="red-flag-summary-card" aria-label="Review summary">
                 <p className="type-label text-gold">Review summary</p>
@@ -136,8 +136,8 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
 
           <Reveal className="py-2 md:py-4" delayMs={60}>
             <SectionHeader
-              eyebrow="Reported concerns"
-              title="Basis for institutional review"
+              eyebrow="Feedback and source indices"
+              title="Research index points"
               className="mb-8 md:mb-10 [&_.type-label]:text-band-weak"
             />
           </Reveal>
