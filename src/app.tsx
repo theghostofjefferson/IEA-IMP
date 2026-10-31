@@ -143,6 +143,10 @@ function PageFallback() {
  */
 function ScrollReset({ pathname }: { pathname: string }) {
   const navType = useNavigationType();
+  const { search } = useLocation();
+  // The rankings page switches between "rankings" and "under review" via `?view=`
+  // on the same pathname, so that param counts as a page change too.
+  const view = new URLSearchParams(search).get("view") ?? "";
   const isFirstRender = useRef(true);
 
   useEffect(() => {
@@ -151,8 +155,17 @@ function ScrollReset({ pathname }: { pathname: string }) {
       return;
     }
     if (navType === "POP") return;
-    window.scrollTo({ top: 0, behavior: "instant" });
-  }, [pathname, navType]);
+    const toTop = () => window.scrollTo({ top: 0, behavior: "instant" });
+    toTop();
+    // Lazy-loaded routes mount after this effect runs, and mobile browsers can
+    // restore or anchor the old offset once the new content paints. Re-assert
+    // the top over the next couple of frames.
+    const a = requestAnimationFrame(() => {
+      toTop();
+      requestAnimationFrame(toTop);
+    });
+    return () => cancelAnimationFrame(a);
+  }, [pathname, view, navType]);
 
   useEffect(() => {
     // Wait a frame so the new page's heading is in the DOM.
