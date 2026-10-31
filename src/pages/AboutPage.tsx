@@ -425,18 +425,7 @@ export function AboutPage() {
                   </p>
                 }
               />
-              <FaqItem
-                question="Why are Yogeshwor Sharma and Eron Subedi listed as founders, while others are listed as co-founders?"
-                answer={
-                  <p className="type-body measure-snug text-ink-muted">
-                    Yogeshwor Sharma and Eron Subedi started the Institute from scratch and carried
-                    out the original founding work. Those listed separately as co-founders joined
-                    before the Institute was formally established and contributed to its early
-                    development, but were not part of the original founding effort. The titles
-                    distinguish these roles in the Institute's formation.
-                  </p>
-                }
-              />
+
             </div>
           </section>
         </Reveal>
