@@ -155,16 +155,40 @@ function ScrollReset({ pathname }: { pathname: string }) {
       return;
     }
     if (navType === "POP") return;
-    const toTop = () => window.scrollTo({ top: 0, behavior: "instant" });
-    toTop();
-    // Lazy-loaded routes mount after this effect runs, and mobile browsers can
-    // restore or anchor the old offset once the new content paints. Re-assert
-    // the top over the next couple of frames.
-    const a = requestAnimationFrame(() => {
-      toTop();
-      requestAnimationFrame(toTop);
-    });
-    return () => cancelAnimationFrame(a);
+    // Deep links such as `/#statement` scroll themselves into view; one reset
+    // only, so the hold below never fights them.
+    if (window.location.hash) {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      return;
+    }
+    // Hold the page at the top for a short window instead of scrolling once.
+    // On a first visit the lazy route chunk and fonts arrive after this effect,
+    // and on phones the page height changes underneath us (collapsing to the
+    // placeholder, then growing), so a single scroll gets undone and the new
+    // page opens at the previous page's offset. Re-applying every frame until
+    // the content settles - and stopping the instant the reader touches,
+    // scrolls or presses a key - avoids that without ever fighting them.
+    let stopped = false;
+    let raf = 0;
+    const started = performance.now();
+    const HOLD_MS = 900;
+    const stop = () => {
+      stopped = true;
+      cancelAnimationFrame(raf);
+    };
+    const tick = () => {
+      if (stopped) return;
+      if (window.scrollY !== 0) window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      if (performance.now() - started < HOLD_MS) raf = requestAnimationFrame(tick);
+    };
+    const events = ["touchstart", "wheel", "keydown", "mousedown"] as const;
+    for (const e of events) window.addEventListener(e, stop, { passive: true, once: true });
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    raf = requestAnimationFrame(tick);
+    return () => {
+      stop();
+      for (const e of events) window.removeEventListener(e, stop);
+    };
   }, [pathname, view, navType]);
 
   useEffect(() => {
