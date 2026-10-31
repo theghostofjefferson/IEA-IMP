@@ -60,7 +60,7 @@ export const presidentMessage: MessageBlock[] = [
 export const founderMessage: MessageBlock[] = [
   {
     kind: "byline",
-    text: "Eron Subedi | Founder, Institute for Educational Accountability",
+    text: "Eron Subedi | Founder, Executive Chairman & Chief of Investigations, Institute for Educational Accountability",
   },
   {
     kind: "epigraph",
