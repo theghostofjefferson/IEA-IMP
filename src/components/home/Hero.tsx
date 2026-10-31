@@ -94,7 +94,7 @@ export function Hero() {
         <div className="mt-8 grid grid-cols-2 gap-0 border-y border-rule-soft md:grid-cols-4">
           <StatCell value={formatCount(totalSchools)} label="schools rated" />
           <StatCell value={formatCountPlus(meta.totalResponses)} label="responses" border />
-          <StatCell value={formatCount(redFlags.length)} label="red-flagged" border />
+          <StatCell value={formatCount(redFlags.length)} label="under review" border />
           <StatCell value={formatDate(meta.publicationDate)} label="published" border />
         </div>
       </Reveal>
@@ -108,7 +108,7 @@ export function Hero() {
                 to="/rankings?view=redflags"
                 className="rounded-sm text-ink-faint underline decoration-1 underline-offset-4 transition-colors duration-[120ms] hover:text-bronze-ink"
               >
-                Red flag schools <span aria-hidden="true">→</span>
+                Institutions under review <span aria-hidden="true">→</span>
               </Link>
             </h2>
             <div className="mt-4 grid gap-3">
@@ -124,7 +124,7 @@ export function Hero() {
                       {redFlag.name}
                     </p>
                     <p className="type-caption mt-1 line-clamp-2 text-ink-inverse/75">
-                      {redFlag.reasons[0] ?? "Published reasons pending."}
+                      {redFlag.reasons[0] ?? "Review items pending."}
                     </p>
                   </div>
                   <span
@@ -140,7 +140,7 @@ export function Hero() {
               to="/rankings?view=redflags"
               className="type-caption mt-4 inline-block text-gold underline decoration-1 underline-offset-4 hover:decoration-2"
             >
-              See all {redFlags.length} flagged schools
+              See all {redFlags.length} institutions under review
             </Link>
           </div>
         </Reveal>
