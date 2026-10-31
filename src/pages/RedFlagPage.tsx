@@ -142,6 +142,14 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
             />
           </Reveal>
 
+          <p className="type-body measure mb-8 text-ink-muted">
+            Each index point summarizes a subject appearing in third-party student submissions
+            or public-source material, as identified in the text. The entries do not measure
+            prevalence across a school community, verify every account, or determine wrongdoing.
+            Public digital commentary is described as such only where that is the source; student
+            submissions are not represented as public-domain discourse.
+          </p>
+
           {redFlag.reasons.length === 0 ? (
             <p className="type-body-lg measure text-ink-muted">
               No review items are currently published for this institution.
