@@ -188,7 +188,7 @@ export function AboutPage() {
               <div className="founder-profile-card founder-profile-card--liberte">
                 <TeamCard
                   name="Eron Subedi"
-                  role="Founder, Chief Architect & Chief of Investigations"
+                  role="Founder, Executive Chairman & Chief of Investigations"
                   featured
                 />
                 <Button
