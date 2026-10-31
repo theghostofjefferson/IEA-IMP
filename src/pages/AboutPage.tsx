@@ -206,7 +206,7 @@ export function AboutPage() {
           {/* Leadership — Aarohan, Tikaram, Prajjwal */}
           <section className="mb-14 md:mb-20">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10 items-start justify-items-center">
-              <TeamCard name="Aarohan Baral" role="Lead Developer" photo={photoByName.get("Aarohan Baral")} />
+              <TeamCard name="Aarohan Baral" role="Founding Member & Lead Developer" photo={photoByName.get("Aarohan Baral")} />
               <TeamCard name="Tikaram Sharma" role="Co-Founder & Statistical Analyst" photo={photoByName.get("Tikaram Sharma")} />
               <TeamCard name="Prajjwal Dhakal" role="Founding Member" photo={photoByName.get("Prajjwal Dhakal")} />
             </div>
