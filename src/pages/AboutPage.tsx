@@ -174,7 +174,7 @@ export function AboutPage() {
               <div className="founder-profile-card founder-profile-card--president">
                 <TeamCard
                   name="Yogeshwor Sharma"
-                  role="Founder, President, & Head of Operations"
+                  role="Co-Founder, President, & Head of Operations"
                   featured
                   photo={photoByName.get("Yogeshwor Sharma")}
                 />
