@@ -1,5 +1,5 @@
 /**
- * Collapsed reader notice for the Institutional review initiative.
+ * Collapsed reader notice for the institutional review initiative.
  *
  * Native details/summary keeps the full legal notice available without
  * expanding it into the page by default.
@@ -29,7 +29,7 @@ export function RedFlagLegalNotice() {
         <section>
           <h3 className="type-label text-gold">1. Source and attribution of reports</h3>
           <p className="type-body measure mt-3 text-ink-inverse/85">
-            The reports appearing under IEA&apos;s Institutional review initiative originate from information
+            The reports appearing under IEA&apos;s institutional review initiative originate from information
             submitted by third parties through the Institute&apos;s surveys, research activities,
             field investigations, and other reporting channels. The underlying allegations are
             those of their respective submitters and respondents. They are not allegations
@@ -126,7 +126,7 @@ export function RedFlagLegalNotice() {
         <section>
           <h3 className="type-label text-gold">7. Applicable law</h3>
           <p className="type-body measure mt-3 text-ink-inverse/85">
-            All publication activities undertaken through the Institutional review initiative remain subject to
+            All publication activities undertaken through the institutional review initiative remain subject to
             the Constitution of Nepal and applicable legislation, including the National Penal
             (Code) Act, 2074, the Privacy Act, 2075, and the Electronic Transactions Act, 2063.
           </p>
