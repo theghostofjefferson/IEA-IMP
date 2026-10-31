@@ -177,6 +177,12 @@ export function AboutPage() {
                   role="Founder, Executive Chairman & Chief of Investigations"
                   featured
                 />
+                <div className="mx-auto mt-5 max-w-[19rem] border-y-2 border-double border-bronze/50 bg-bronze-soft/25 px-5 py-4 text-center">
+                  <p className="type-label tracking-[0.22em] text-bronze-ink">OCT 31</p>
+                  <p className="mt-2 font-serif text-sm font-bold uppercase leading-relaxed tracking-[0.06em] text-ink">
+                    I am not content to stand still by the will of God.
+                  </p>
+                </div>
                 <Button
                   onClick={() => setLetter("founder")}
                   className="bg-letter text-ink-inverse hover:bg-letter-deep active:bg-letter-deep"
