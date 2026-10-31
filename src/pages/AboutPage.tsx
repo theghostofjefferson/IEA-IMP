@@ -110,7 +110,7 @@ export function AboutPage() {
           </StatRow>
 
           <p className="type-body measure mt-8 text-ink-muted">
-            All data was collected from anonymous surveys.
+            Survey respondents provided their identities to IEA. Those identities are held confidentially and are not disclosed publicly.
           </p>
         </Reveal>
 
@@ -398,8 +398,9 @@ export function AboutPage() {
                 question="How are survey participants' responses handled?"
                 answer={
                   <p className="type-body measure-snug text-ink-muted">
-                    Surveys are collected anonymously. The Institute does not publish participants'
-                    names or individual responses.
+                    Survey respondents identify themselves to IEA. The Institute keeps their identities
+                    confidential and does not disclose them publicly. Individual responses are
+                    not published.
                   </p>
                 }
               />
