@@ -19,6 +19,7 @@ export function Monogram({
   size = "md",
   /** Renders nothing and reserves the space when the name is not known yet. */
   blank = false,
+  tone = "brand",
   className,
 }: {
   /** The full name the monogram is derived from. */
@@ -28,6 +29,8 @@ export function Monogram({
   size?: "sm" | "md" | "lg" | "xl";
   /** Reserved blank slot — see docs/04-COMPONENTS.md. */
   blank?: boolean;
+  /** Use neutral initials for people without photos. */
+  tone?: "brand" | "neutral";
   className?: string;
 }) {
   const initials = label ?? initialsOf(name);
@@ -46,9 +49,17 @@ export function Monogram({
         size === "xl" && "size-16 text-lg",
         className,
       )}
-      style={blank ? { backgroundColor: "var(--color-sunken)" } : { backgroundColor: monogramColor(name) }}
+      style={
+        blank || tone === "neutral"
+          ? { backgroundColor: "var(--color-sunken)" }
+          : { backgroundColor: monogramColor(name) }
+      }
     >
-      {blank ? null : <span style={{ color: "rgba(255,255,255,0.92)" }}>{initials}</span>}
+      {blank ? null : (
+        <span style={{ color: tone === "neutral" ? "var(--ink-muted)" : "rgba(255,255,255,0.92)" }}>
+          {initials}
+        </span>
+      )}
     </span>
   );
 }
