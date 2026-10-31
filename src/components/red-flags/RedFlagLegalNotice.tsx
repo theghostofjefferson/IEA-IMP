@@ -9,12 +9,8 @@ export function RedFlagLegalNotice() {
     <details className="group my-6 border border-gold/40 bg-ink/45 backdrop-blur-sm">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 sm:px-6 [&::-webkit-details-marker]:hidden">
         <span className="flex min-w-0 flex-col gap-1">
-          <span className="type-label text-gold">Institutional review initiative · Reader notice</span>
           <span className="type-heading text-ink-inverse">
             Legal notice &amp; disclaimer
-          </span>
-          <span className="type-caption text-ink-inverse/70">
-            Third-party reports and research classification
           </span>
         </span>
         <span
