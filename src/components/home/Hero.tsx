@@ -100,7 +100,7 @@ export function Hero() {
       </Reveal>
 
       <Reveal className="min-w-0 mt-8" delayMs={90}>
-        <details className="group overflow-hidden rounded-sm border border-claret/60 bg-ink text-ink-inverse transition-[background-color,border-color,box-shadow] duration-500 group-open:border-[#cf4650] group-open:bg-[#1b0b11] group-open:shadow-[0_0_36px_rgba(181,28,42,0.28)]">
+        <details className="group overflow-hidden rounded-sm border border-claret/60 bg-ink text-ink-inverse transition-[background-color,border-color,box-shadow] duration-500 open:border-[#cf4650] open:bg-[#1b0b11] open:shadow-[0_0_36px_rgba(181,28,42,0.28)]">
           <summary className="flex cursor-pointer list-none items-center gap-4 px-5 py-5 sm:px-7 sm:py-6 [&::-webkit-details-marker]:hidden">
             <span
               aria-hidden="true"
@@ -161,7 +161,16 @@ export function Hero() {
                 >
                   Contemporary reporting
                 </a>{" "}
-                records the events and the stated police explanation. Separately, major social
+                records the events and the stated police explanation.{" "}
+                <a
+                  href="https://thehimalayantimes.com/kathmandu/police-raid-newsrooms-and-detain-journalists-in-capital-before-their-swift-release"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-gold underline underline-offset-4"
+                >
+                  Follow-up coverage
+                </a>{" "}
+                reported that all detained journalists were released. Separately, major social
                 media platforms were blocked in September 2025 and the restrictions were later
                 withdrawn, as documented by the{" "}
                 <a
