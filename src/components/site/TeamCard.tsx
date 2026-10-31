@@ -24,9 +24,13 @@ export function TeamCard({
     <div className="flex flex-col items-center group">
       {/* Portrait — circular with animated gradient border. */}
       <div className={cn(
-        "relative size-24 sm:size-36 rounded-full bg-canvas flex items-center justify-center transition-all duration-500 ease-brand",
-        featured &&
-          "relative size-32 sm:size-40 border-2 border-letter bg-letter-wash group-hover:border-letter group-hover:shadow-[0_0_40px_rgb(47_93_124_0.2)]",
+        "relative size-24 sm:size-36 rounded-full flex items-center justify-center transition-all duration-500 ease-brand",
+        photo ? "bg-canvas" : "bg-sunken",
+        featured && "relative size-32 sm:size-40 border-2",
+        featured && photo &&
+          "border-letter bg-letter-wash group-hover:border-letter group-hover:shadow-[0_0_40px_rgb(47_93_124_0.2)]",
+        featured && !photo &&
+          "border-rule-soft bg-sunken group-hover:border-bronze group-hover:shadow-[0_0_24px_rgb(138_106_53_0.12)]",
         !featured &&
           "border border-rule-soft group-hover:border-bronze group-hover:shadow-[0_0_24px_rgb(138_106_53_0.12)]",
       )}>
@@ -38,7 +42,7 @@ export function TeamCard({
           />
         ) : (
           <div className="flex items-center justify-center h-full w-full text-ink-faint font-serif text-[0.9375rem] font-bold tracking-[0.05em]">
-            <Monogram name={name} size="md" />
+            <Monogram name={name} size={featured ? "xl" : "md"} tone="neutral" />
           </div>
         )}
       </div>
