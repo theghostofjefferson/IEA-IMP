@@ -120,12 +120,13 @@ export function MethodologyPage() {
                 }
               />
               <FaqItem
-                question="Where we got the numbers from"
+                question="Survey data and provenance"
                 answer={
                   <dl className="flex flex-col gap-3">
                     <Datum term="Published" value={formatDate(meta.publicationDate)} iso={meta.publicationDate} />
                     <Datum term="Source" value={meta.source} />
-                    <Datum term="Scope" value="Kathmandu Valley: +2/ A levels/ IB schools" />
+                    <Datum term="Respondent identities" value="Known to IEA; held confidentially and not disclosed publicly." />
+                    <Datum term="Scope" value="Kathmandu Valley; +2, A-level, and IB schools" />
                     <Datum term="Responses" value={formatCountPlus(meta.totalResponses)} />
                   </dl>
                 }
