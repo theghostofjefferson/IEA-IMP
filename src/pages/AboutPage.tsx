@@ -201,6 +201,8 @@ export function AboutPage() {
             </div>
           </section>
 
+          <div aria-hidden="true" className="my-10 h-px w-full bg-bronze/35 md:my-12" />
+
           {/* Leadership — Aarohan, Tikaram, Prajjwal */}
           <section className="mb-14 md:mb-20">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10 items-start justify-items-center">
@@ -209,6 +211,8 @@ export function AboutPage() {
               <TeamCard name="Prajjwal Dhakal" role="Co-Founder" photo={photoByName.get("Prajjwal Dhakal")} />
             </div>
           </section>
+
+          <div aria-hidden="true" className="my-10 h-px w-full bg-bronze/35 md:my-12" />
 
           {/* Research Executive */}
           <section className="mb-14 md:mb-20">
@@ -221,6 +225,8 @@ export function AboutPage() {
               <TeamCard name="Ashmit Pandey" role="Managing Editor and Associate Researcher" photo={photoByName.get("Ashmit Pandey")} />
             </div>
           </section>
+
+          <div aria-hidden="true" className="my-10 h-px w-full bg-bronze/35 md:my-12" />
 
           {/* Research Analyst */}
           <section className="mb-14 md:mb-20">
