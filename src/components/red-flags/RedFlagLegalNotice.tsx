@@ -139,6 +139,32 @@ export function RedFlagLegalNotice() {
         </section>
 
         <section className="border-t border-gold/25 pt-6">
+          <h3 className="type-label text-gold">IEA&apos;s publication position</h3>
+          <p className="type-body measure mt-3 text-ink-inverse/90">
+            <strong>
+              IEA regrets that it cannot publish every report it receives concerning alleged abuse,
+              including sexual abuse and assault. Concerns about the adequacy of protections for
+              students and sources, together with confidentiality, verification, and applicable-law
+              obligations, can limit what the Institute can responsibly publish. After receiving
+              threats, and following
+              {" "}
+              <a
+                href="https://kathmandupost.com/national/2026/10/31/police-action-in-newsrooms-revives-memories-of-gyanendra-era-media-crackdown"
+                target="_blank"
+                rel="noreferrer"
+                className="underline underline-offset-4"
+              >
+                public reporting on 31 October 2026 about journalists detained during newsroom visits
+                in Kathmandu
+              </a>
+              , IEA substantially revised this page. The Institute continues its work. Its founder
+              remains committed to liberty and to holding institutions accountable through
+              evidence-based, lawful research.
+            </strong>
+          </p>
+        </section>
+
+        <section className="border-t border-gold/25 pt-6">
           <h3 className="type-label text-gold">Institutional declaration</h3>
           <p className="type-body measure mt-3 text-ink-inverse/85">
             IEA does not purport to exercise judicial authority, determine criminal guilt, or
