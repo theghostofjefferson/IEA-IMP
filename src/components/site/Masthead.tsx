@@ -191,26 +191,24 @@ export function Masthead() {
                   aria-haspopup="dialog"
                   aria-expanded={searchOpen}
                   aria-label="Open site search"
-                  className="group inline-flex h-11 items-center gap-2.5 rounded-full border border-bronze/45 bg-surface py-1 pl-1 pr-1 text-ink shadow-[inset_0_0_0_1px_rgba(255,255,255,0.5)] transition-all duration-300 hover:border-bronze hover:bg-bronze-wash hover:shadow-[0_6px_18px_-8px_rgba(19,26,44,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bronze/60 sm:pr-4"
+                  className="group inline-flex h-10 items-center gap-2.5 rounded-sm border border-rule-soft bg-surface px-3.5 text-ink transition-colors duration-200 hover:border-bronze hover:bg-bronze-wash focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bronze/60"
                 >
-                  <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-ink text-ink-inverse transition-colors duration-300 group-hover:bg-bronze-ink">
-                    <svg
-                      aria-hidden="true"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="shrink-0 transition-transform duration-300 group-hover:scale-110"
-                    >
-                      <circle cx="11" cy="11" r="7.5" />
-                      <path d="m20.5 20.5-4.2-4.2" />
-                    </svg>
-                  </span>
-                  <span className="hidden font-sans text-[0.8125rem] font-bold uppercase tracking-[0.2em] sm:inline">
+                  <svg
+                    aria-hidden="true"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="shrink-0 text-ink-muted transition-colors duration-200 group-hover:text-ink"
+                  >
+                    <circle cx="11" cy="11" r="7.5" />
+                    <path d="m20.5 20.5-4.2-4.2" />
+                  </svg>
+                  <span className="hidden font-sans text-[0.8125rem] font-semibold uppercase tracking-[0.14em] sm:inline">
                     Search
                   </span>
                 </button>
