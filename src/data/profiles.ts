@@ -13,7 +13,8 @@ import type { Contributor } from "@/lib/types";
  *   bio       paragraphs. Inline **bold** and *italic* are supported.
  *   focus     short lines for "Areas of work"
  *   contact   [{ label, value, href? }]  e.g. { label: "Email", value: "a@b.org", href: "mailto:a@b.org" }
- *   showPhoto false hides the portrait on the page (and in "More from the team")
+ *   showPhoto false keeps the portrait frame but shows initials instead of the photo
+ *   (the first bio paragraph is set as a larger lead-in, so make it the key sentence)
  *
  * The founder's and president's letters are NOT repeated on their profile pages;
  * they stay on the About page ("Message from..." buttons) and the home page.
@@ -26,7 +27,7 @@ export type MemberProfile = {
   bio?: string[];
   focus?: string[];
   contact?: { label: string; value: string; href?: string }[];
-  /** Set to false to leave the portrait off this person's page. */
+  /** Set to false to show initials in the portrait frame instead of the photo. */
   showPhoto?: boolean;
 };
 
@@ -44,11 +45,21 @@ export const PROFILE_IDS: readonly string[] = [
 export const profiles: Record<string, MemberProfile> = {
   "eron-subedi": {
     summary: "Founded the Institute and leads its investigations.",
-    focus: ["Investigations", "Institutional accountability"],
+    bio: [
+      "Eron Subedi serves as the Founder, Executive Director, and Chief of Investigations at the Institute for Educational Accountability.",
+      "He provides the Institute’s overall vision and institutional direction, oversees its strategic development and operations, and leads its investigative initiatives.",
+      "His longstanding engagement with constitutional law informs IEA’s legal strategy, including the development of legal challenges and the application of constitutional principles to questions of institutional accountability and students’ rights.",
+    ],
+    focus: [
+      "Vision and institutional direction",
+      "Strategy and operations",
+      "Investigations",
+      "Constitutional law and legal strategy",
+    ],
     contact: [
       { label: "Institute enquiries", value: "founder@ieainstitute.org", href: "mailto:founder@ieainstitute.org" },
     ],
-    // No portrait on this page for now.
+    // Initials in the portrait frame for now; remove this line to show his photo.
     showPhoto: false,
   },
   "yogeshwor-sharma": {
