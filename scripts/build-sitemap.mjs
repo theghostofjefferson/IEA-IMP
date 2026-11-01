@@ -118,6 +118,10 @@ const STATIC_ROUTES = [
     "prajjwal-dhakal",
     "aishani-rai",
     "ashmit-pandey",
+    "abhinash-poudel",
+    "kaustuv-rimal",
+    "nischal-ghimire",
+    "aaditya-jha",
   ].map((id) => ({ path: `/team/${id}`, priority: "0.4", changefreq: "monthly" })),
 ];
 

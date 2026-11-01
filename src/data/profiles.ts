@@ -2,7 +2,7 @@ import { contributors } from "@/data/contributors";
 import type { Contributor } from "@/lib/types";
 
 /**
- * PROFILE PAGES - one per listed member (researchers are not given one).
+ * PROFILE PAGES - one per listed member, except Research Analysts.
  * ---------------------------------------------------------------------------
  * Each person below has a page at `/team/<id>`, linked from the About page and
  * from site search. THIS FILE IS WHERE THEIR WORDS GO: fill in any field and it
@@ -40,6 +40,10 @@ export const PROFILE_IDS: readonly string[] = [
   "prajjwal-dhakal",
   "aishani-rai",
   "ashmit-pandey",
+  "abhinash-poudel",
+  "kaustuv-rimal",
+  "nischal-ghimire",
+  "aaditya-jha",
 ];
 
 export const profiles: Record<string, MemberProfile> = {
@@ -71,6 +75,10 @@ export const profiles: Record<string, MemberProfile> = {
   "prajjwal-dhakal": {},
   "aishani-rai": {},
   "ashmit-pandey": {},
+  "abhinash-poudel": {},
+  "kaustuv-rimal": {},
+  "nischal-ghimire": {},
+  "aaditya-jha": {},
 };
 
 /* -------------------------------------------------------------------------- */
