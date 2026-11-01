@@ -13,9 +13,10 @@ import type { Contributor } from "@/lib/types";
  *   bio       paragraphs. Inline **bold** and *italic* are supported.
  *   focus     short lines for "Areas of work"
  *   contact   [{ label, value, href? }]  e.g. { label: "Email", value: "a@b.org", href: "mailto:a@b.org" }
+ *   showPhoto false hides the portrait on the page (and in "More from the team")
  *
- * The founder and the president also show their full signed letter on their
- * page; that text lives in `data/messages.ts`.
+ * The founder's and president's letters are NOT repeated on their profile pages;
+ * they stay on the About page ("Message from..." buttons) and the home page.
  *
  * To give someone ELSE a page, add their contributor `id` to PROFILE_IDS.
  */
@@ -25,6 +26,8 @@ export type MemberProfile = {
   bio?: string[];
   focus?: string[];
   contact?: { label: string; value: string; href?: string }[];
+  /** Set to false to leave the portrait off this person's page. */
+  showPhoto?: boolean;
 };
 
 /** Who has a page, in the order they appear in "More from the team". */
@@ -38,27 +41,18 @@ export const PROFILE_IDS: readonly string[] = [
   "ashmit-pandey",
 ];
 
-/** The two principals get the full-width feature layout. */
-export const PRINCIPAL_IDS: readonly string[] = ["eron-subedi", "yogeshwor-sharma"];
-
 export const profiles: Record<string, MemberProfile> = {
   "eron-subedi": {
-    summary:
-      "Founded the Institute in the belief that institutions entrusted with responsibility should answer for how they exercise it.",
-    quote: {
-      text: "We are not content to stand still by the will of God.",
-      source: "31 October 2026",
-    },
-    focus: ["Investigations", "Institutional accountability", "Public statements and legal action"],
+    summary: "Founded the Institute and leads its investigations.",
+    focus: ["Investigations", "Institutional accountability"],
     contact: [
       { label: "Institute enquiries", value: "founder@ieainstitute.org", href: "mailto:founder@ieainstitute.org" },
     ],
+    // No portrait on this page for now.
+    showPhoto: false,
   },
   "yogeshwor-sharma": {
     summary: "Leads the Institute's operations and its day-to-day work as President.",
-    quote: {
-      text: "Sometimes, it starts with recognizing that something can be better and being willing to put in the work to make it so.",
-    },
     focus: ["Operations", "Organisation and coordination"],
   },
   "aarohan-baral": {},
@@ -89,4 +83,9 @@ export function profilePath(id: string): string | undefined {
 export function profilePathByName(name: string): string | undefined {
   const c = byName.get(name);
   return c ? profilePath(c.id) : undefined;
+}
+
+/** The portrait to show for a member on their own page and in listings. */
+export function memberPhoto(c: Contributor): string | undefined {
+  return profiles[c.id]?.showPhoto === false ? undefined : c.photo;
 }
