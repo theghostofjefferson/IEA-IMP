@@ -91,26 +91,23 @@ function MemberDetail({ member }: { member: Contributor }) {
 
 function StandardHeader({ member, profile }: { member: Contributor; profile: MemberProfile }) {
   const photo = memberPhoto(member);
-  const showPortrait = profile.showPhoto !== false;
   return (
     <header className="pt-10 md:pt-16">
       <Link to="/about" className="type-caption text-bronze-ink underline underline-offset-4 hover:decoration-2">
         &larr; The team
       </Link>
-      <div className={cn("mt-8 grid items-start gap-8", showPortrait && "sm:grid-cols-[auto_1fr] sm:gap-12")}>
-        {showPortrait ? (
-          <div className="w-44 sm:w-56">
-            <div className="aspect-[4/5] overflow-hidden rounded-sm border border-rule-soft bg-sunken">
-              {photo ? (
-                <img src={photo} alt={member.name} className="size-full object-cover object-[50%_25%]" />
-              ) : (
-                <div className="flex size-full items-center justify-center">
-                  <Monogram name={member.name} size="xl" tone="neutral" />
-                </div>
-              )}
-            </div>
+      <div className="mt-8 grid items-start gap-6 sm:grid-cols-[auto_1fr] sm:gap-10">
+        <div className="w-28 sm:w-36">
+          <div className="aspect-[4/5] overflow-hidden rounded-sm border border-rule-soft bg-sunken">
+            {photo ? (
+              <img src={photo} alt={member.name} className="size-full object-cover object-[50%_25%]" />
+            ) : (
+              <div className="flex size-full items-center justify-center">
+                <Monogram name={member.name} size="xl" tone="neutral" />
+              </div>
+            )}
           </div>
-        ) : null}
+        </div>
         <div className="min-w-0">
           <p className="type-label text-bronze-ink">{member.role}</p>
           <h1 tabIndex={-1} className="type-title mt-3 text-ink outline-none">
@@ -147,9 +144,16 @@ function Details({ member, profile }: { member: Contributor; profile: MemberProf
             {hasBio ? (
               <>
                 <h2 className="type-label text-bronze-ink">About {member.name.split(" ")[0]}</h2>
-                <div className="mt-5 flex max-w-[42rem] flex-col gap-4">
+                <div className="mt-5 max-w-[42rem] border-l-2 border-bronze/60 pl-5 md:pl-6">
                   {profile.bio!.map((para, i) => (
-                    <p key={i} className="type-body-lg text-ink">
+                    <p
+                      key={i}
+                      className={
+                        i === 0
+                          ? "font-serif text-xl font-semibold leading-snug text-ink md:text-[1.375rem]"
+                          : "type-body-lg mt-4 text-ink-muted"
+                      }
+                    >
                       {inline(para)}
                     </p>
                   ))}
