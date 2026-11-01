@@ -46,7 +46,7 @@ export const profiles: Record<string, MemberProfile> = {
   "eron-subedi": {
     summary: "Founded the Institute and leads its investigations.",
     bio: [
-      "Eron Subedi serves as the Founder, Executive Director, and Chief of Investigations at the Institute for Educational Accountability.",
+      "Eron Subedi serves as the Founder, Executive Chairman, and Chief of Investigations at the Institute for Educational Accountability.",
       "He provides the Institute’s overall vision and institutional direction, oversees its strategic development and operations, and leads its investigative initiatives.",
       "His longstanding engagement with constitutional law informs IEA’s legal strategy, including the development of legal challenges and the application of constitutional principles to questions of institutional accountability and students’ rights.",
     ],
