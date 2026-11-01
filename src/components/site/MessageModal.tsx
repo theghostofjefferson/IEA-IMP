@@ -344,7 +344,7 @@ export function MessageModal({
  * Deliberately tiny — the letters need exactly these two emphases and nothing
  * more. Unmatched markers are rendered literally rather than swallowed.
  */
-function inline(text: string): ReactNode[] {
+export function inline(text: string): ReactNode[] {
   return text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).map((part, i) => {
     if (part.startsWith("**") && part.endsWith("**")) {
       return (

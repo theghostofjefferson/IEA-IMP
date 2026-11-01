@@ -109,6 +109,16 @@ const STATIC_ROUTES = [
   { path: "/methodology", priority: "0.7", changefreq: "monthly" },
   { path: "/reports", priority: "0.5", changefreq: "monthly" },
   { path: "/about", priority: "0.5", changefreq: "monthly" },
+  // Team profile pages. Keep in step with PROFILE_IDS in src/data/profiles.ts.
+  ...[
+    "eron-subedi",
+    "yogeshwor-sharma",
+    "aarohan-baral",
+    "tikaram-sharma",
+    "prajjwal-dhakal",
+    "aishani-rai",
+    "ashmit-pandey",
+  ].map((id) => ({ path: `/team/${id}`, priority: "0.4", changefreq: "monthly" })),
 ];
 
 const xmlEscape = (s) =>

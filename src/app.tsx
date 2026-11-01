@@ -27,6 +27,7 @@ const RankingsPage = lazy(() =>
 
 const SchoolPage = lazy(() => import("@/pages/SchoolPage").then((m) => ({ default: m.SchoolPage })));
 const AboutPage = lazy(() => import("@/pages/AboutPage").then((m) => ({ default: m.AboutPage })));
+const TeamMemberPage = lazy(() => import("@/pages/TeamMemberPage").then((m) => ({ default: m.TeamMemberPage })));
 const MethodologyPage = lazy(() => import("@/pages/MethodologyPage").then((m) => ({ default: m.MethodologyPage })));
 const AnnualReportPage = lazy(() => import("@/pages/AnnualReportPage").then((m) => ({ default: m.AnnualReportPage })));
 const RedFlagPage = lazy(() => import("@/pages/RedFlagPage").then((m) => ({ default: m.RedFlagPage })));
@@ -68,6 +69,7 @@ function Shell() {
           <Route path="/methodology" element={<MethodologyPage />} />
           <Route path="/reports" element={<AnnualReportPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/team/:id" element={<TeamMemberPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>

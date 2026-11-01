@@ -1,6 +1,6 @@
 import { totalSchools } from "@/lib/data";
 import { formatCount } from "@/lib/format";
-import type { RedFlag, School } from "@/lib/types";
+import type { Contributor, RedFlag, School } from "@/lib/types";
 
 /**
  * Per-route document title, meta description and canonical URL.
@@ -101,6 +101,16 @@ export function schoolSeo(school: School): Seo {
   return {
     title: `${school.name} — rank ${school.rank}, ${school.overallScore.toFixed(1)}/100`,
     description: `${school.name} ranks ${school.rank} of ${totalSchools} in the IEA Institute survey with an overall score of ${school.overallScore.toFixed(1)} out of 100. ${where}`,
+  };
+}
+
+/** Per-member SEO for the `/team/:id` profile pages. */
+export function memberSeo(member: Contributor, summary?: string): Seo {
+  return {
+    title: `${member.name}, ${member.role} - ${SUFFIX}`,
+    description:
+      summary ??
+      `${member.name} is ${member.role} at the Institute for Educational Accountability (IEA), an independent examination of Nepali schools.`,
   };
 }
 

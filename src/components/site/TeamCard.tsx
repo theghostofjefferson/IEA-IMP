@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 import { cn } from "@/lib/utils";
 import { Monogram } from "@/components/data-display/Monogram";
 
@@ -14,14 +16,17 @@ export function TeamCard({
   role,
   photo,
   featured = false,
+  to,
 }: {
   name: string;
   role: string;
   photo?: string;
   featured?: boolean;
+  /** When set, the whole card links to this profile page. */
+  to?: string;
 }) {
-  return (
-    <div className="flex flex-col items-center group">
+  const content = (
+    <>
       {/* Portrait — circular with animated gradient border. */}
       <div className={cn(
         "relative size-24 sm:size-36 rounded-full flex items-center justify-center transition-all duration-500 ease-brand",
@@ -63,6 +68,24 @@ export function TeamCard({
           {role}
         </p>
       </div>
-    </div>
+      {to ? (
+        <span className="mt-2 font-sans text-[0.6875rem] font-semibold uppercase tracking-[0.16em] text-bronze-ink opacity-75 transition-opacity duration-300 group-hover:opacity-100">
+          View profile &rarr;
+        </span>
+      ) : null}
+    </>
+  );
+
+  const rootClass = "flex flex-col items-center group";
+  return to ? (
+    <Link
+      to={to}
+      aria-label={`${name}, ${role} - view profile`}
+      className={cn(rootClass, "rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bronze")}
+    >
+      {content}
+    </Link>
+  ) : (
+    <div className={rootClass}>{content}</div>
   );
 }

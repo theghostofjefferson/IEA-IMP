@@ -12,6 +12,7 @@ import { FaqItem } from "@/components/site/FaqItem";
 import { MessageModal } from "@/components/site/MessageModal";
 import { founderMessage, presidentMessage } from "@/data/messages";
 import { contributors } from "@/data/contributors";
+import { profilePathByName } from "@/data/profiles";
 import { SEO, applySeo } from "@/lib/seo";
 import { bandCounts, meanResponses, meta, totalSchools } from "@/lib/data";
 import { formatCount, formatCountPlus, formatDate } from "@/lib/format";
@@ -173,7 +174,7 @@ export function AboutPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
               <div className="founder-profile-card founder-profile-card--liberte md:col-start-1">
                 <TeamCard
-                  name="Eron Subedi"
+                  name="Eron Subedi" to={profilePathByName("Eron Subedi")}
                   role="Founder, Executive Chairman & Chief of Investigations"
                   featured
                 />
@@ -201,7 +202,7 @@ export function AboutPage() {
               </div>
               <div className="founder-profile-card founder-profile-card--president md:col-start-2">
                 <TeamCard
-                  name="Yogeshwor Sharma"
+                  name="Yogeshwor Sharma" to={profilePathByName("Yogeshwor Sharma")}
                   role="Co-Founder, President, & Head of Operations"
                   featured
                   photo={photoByName.get("Yogeshwor Sharma")}
@@ -221,9 +222,9 @@ export function AboutPage() {
           {/* Leadership — Aarohan, Tikaram, Prajjwal */}
           <section className="mb-14 md:mb-20">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10 items-start justify-items-center">
-              <TeamCard name="Aarohan Baral" role="Founding Member & Lead Developer" photo={photoByName.get("Aarohan Baral")} />
-              <TeamCard name="Tikaram Sharma" role="Co-Founder & Statistical Analyst" photo={photoByName.get("Tikaram Sharma")} />
-              <TeamCard name="Prajjwal Dhakal" role="Founding Member" photo={photoByName.get("Prajjwal Dhakal")} />
+              <TeamCard name="Aarohan Baral" to={profilePathByName("Aarohan Baral")} role="Founding Member & Lead Developer" photo={photoByName.get("Aarohan Baral")} />
+              <TeamCard name="Tikaram Sharma" to={profilePathByName("Tikaram Sharma")} role="Co-Founder & Statistical Analyst" photo={photoByName.get("Tikaram Sharma")} />
+              <TeamCard name="Prajjwal Dhakal" to={profilePathByName("Prajjwal Dhakal")} role="Founding Member" photo={photoByName.get("Prajjwal Dhakal")} />
             </div>
           </section>
 
@@ -232,12 +233,12 @@ export function AboutPage() {
           {/* Research Executive */}
           <section className="mb-14 md:mb-20">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8 justify-items-center">
-              <TeamCard name="Abinash Poudel" role="Lead of Online Research" photo={photoByName.get("Abinash Poudel")} />
-              <TeamCard name="Nischal Ghimire" role="Research Executive" photo={photoByName.get("Nischal Ghimire")} />
-              <TeamCard name="Kaustuv Rimal" role="Research Executive" />
-              <TeamCard name="Aaditya Jha" role="Research Executive" photo={photoByName.get("Aaditya Jha")} />
-              <TeamCard name="Aishani Rai" role="Editorial Lead" photo={photoByName.get("Aishani Rai")} />
-              <TeamCard name="Ashmit Pandey" role="Managing Editor and Associate Researcher" photo={photoByName.get("Ashmit Pandey")} />
+              <TeamCard name="Abinash Poudel" to={profilePathByName("Abinash Poudel")} role="Lead of Online Research" photo={photoByName.get("Abinash Poudel")} />
+              <TeamCard name="Nischal Ghimire" to={profilePathByName("Nischal Ghimire")} role="Research Executive" photo={photoByName.get("Nischal Ghimire")} />
+              <TeamCard name="Kaustuv Rimal" to={profilePathByName("Kaustuv Rimal")} role="Research Executive" />
+              <TeamCard name="Aaditya Jha" to={profilePathByName("Aaditya Jha")} role="Research Executive" photo={photoByName.get("Aaditya Jha")} />
+              <TeamCard name="Aishani Rai" to={profilePathByName("Aishani Rai")} role="Editorial Lead" photo={photoByName.get("Aishani Rai")} />
+              <TeamCard name="Ashmit Pandey" to={profilePathByName("Ashmit Pandey")} role="Managing Editor and Associate Researcher" photo={photoByName.get("Ashmit Pandey")} />
             </div>
           </section>
 
@@ -246,12 +247,12 @@ export function AboutPage() {
           {/* Research Analyst */}
           <section className="mb-14 md:mb-20">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8 justify-items-center">
-              <TeamCard name="Krinjal Timalsina" role="Research Analyst" photo={photoByName.get("Krinjal Timalsina")} />
-              <TeamCard name="Aadarsha Pandey" role="Research Analyst" />
-              <TeamCard name="Piyush Joshi" role="Research Analyst" photo={photoByName.get("Piyush Joshi")} />
-              <TeamCard name="Pratyush Neupane" role="Research Analyst" photo={photoByName.get("Pratyush Neupane")} />
-              <TeamCard name="Sambriddhi Bhattarai" role="Research Analyst" photo={photoByName.get("Sambriddhi Bhattarai")} />
-              <TeamCard name="Kashyap Shrestha" role="Research Analyst" photo={photoByName.get("Kashyap Shrestha")} />
+              <TeamCard name="Krinjal Timalsina" to={profilePathByName("Krinjal Timalsina")} role="Research Analyst" photo={photoByName.get("Krinjal Timalsina")} />
+              <TeamCard name="Aadarsha Pandey" to={profilePathByName("Aadarsha Pandey")} role="Research Analyst" />
+              <TeamCard name="Piyush Joshi" to={profilePathByName("Piyush Joshi")} role="Research Analyst" photo={photoByName.get("Piyush Joshi")} />
+              <TeamCard name="Pratyush Neupane" to={profilePathByName("Pratyush Neupane")} role="Research Analyst" photo={photoByName.get("Pratyush Neupane")} />
+              <TeamCard name="Sambriddhi Bhattarai" to={profilePathByName("Sambriddhi Bhattarai")} role="Research Analyst" photo={photoByName.get("Sambriddhi Bhattarai")} />
+              <TeamCard name="Kashyap Shrestha" to={profilePathByName("Kashyap Shrestha")} role="Research Analyst" photo={photoByName.get("Kashyap Shrestha")} />
             </div>
           </section>
         </Reveal>

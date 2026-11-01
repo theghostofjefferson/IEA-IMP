@@ -1,4 +1,5 @@
 import { contributors } from "@/data/contributors";
+import { profilePath } from "@/data/profiles";
 import { redFlags, schools } from "@/lib/data";
 
 /**
@@ -126,8 +127,8 @@ export function searchIndex(): SearchEntry[] {
     kind: "person",
     title: c.name,
     subtitle: c.role,
-    to: "/about",
-    keywords: `${c.role} team member`,
+    to: profilePath(c.id) ?? "/about",
+    keywords: `${c.role} team member profile`,
   }));
 
   cache = [...schoolEntries, ...reviewEntries, ...peopleEntries, ...PAGES];
