@@ -1,13 +1,11 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router";
 
 
 import { Container } from "@/components/site/Container";
 import { Wordmark } from "@/components/site/Wordmark";
-import { Monogram } from "@/components/data-display/Monogram";
+import { SearchPalette } from "@/components/site/SearchPalette";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { bandColor } from "@/lib/scoring";
-import { schools } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 /**
@@ -39,7 +37,6 @@ export function Masthead() {
 
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const [scrollY, setScrollY] = useState(0);
   const [stuck, setStuck] = useState(false);
   const [revealed, setRevealed] = useState(false);
@@ -47,8 +44,6 @@ export function Masthead() {
   const navigate = useNavigate();
   const triggerRef = useRef<HTMLButtonElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
-  const searchInputRef = useRef<HTMLInputElement>(null);
-  const searchPanelRef = useRef<HTMLDivElement>(null);
   const searchButtonRef = useRef<HTMLButtonElement>(null);
   const prevOpen = useRef(false);
 
@@ -98,47 +93,21 @@ export function Masthead() {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setOpen(false);
     setSearchOpen(false);
-    setSearchQuery("");
   }, [pathname]);
 
-  const searchResults = useMemo(() => {
-    const q = searchQuery.trim().toLowerCase();
-    if (q.length < 1) return [];
-    return schools
-      .filter(
-        (s) =>
-          s.name.toLowerCase().includes(q) ||
-          s.shortName.toLowerCase().includes(q) ||
-          s.location.toLowerCase().includes(q),
-      )
-      .slice(0, 8);
-  }, [searchQuery]);
-
+  // Open site search with Ctrl/Cmd+K, or "/" when not typing in a field.
   useEffect(() => {
-    if (searchOpen) {
-      const id = requestAnimationFrame(() => searchInputRef.current?.focus());
-      return () => cancelAnimationFrame(id);
-    }
-  }, [searchOpen]);
-
-  useEffect(() => {
-    if (!searchOpen) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setSearchOpen(false);
-    };
-    const onPointer = (e: PointerEvent) => {
-      const target = e.target as Node;
-      if (searchPanelRef.current?.contains(target)) return;
-      if (searchButtonRef.current?.contains(target)) return;
-      setSearchOpen(false);
+      const t = e.target as HTMLElement | null;
+      const typing = !!t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName));
+      if ((e.key === "k" && (e.metaKey || e.ctrlKey)) || (e.key === "/" && !typing && !e.metaKey && !e.ctrlKey)) {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
     };
     document.addEventListener("keydown", onKey);
-    document.addEventListener("pointerdown", onPointer);
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.removeEventListener("pointerdown", onPointer);
-    };
-  }, [searchOpen]);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []);
 
   // ESC to close.
   useEffect(() => {
@@ -219,8 +188,8 @@ export function Masthead() {
                   ref={searchButtonRef}
                   type="button"
                   onClick={() => setSearchOpen((v) => !v)}
+                  aria-haspopup="dialog"
                   aria-expanded={searchOpen}
-                  aria-controls="site-search"
                   aria-label="Open site search"
                   className="group inline-flex h-11 items-center gap-2.5 rounded-full border border-bronze/45 bg-surface py-1 pl-1 pr-1 text-ink shadow-[inset_0_0_0_1px_rgba(255,255,255,0.5)] transition-all duration-300 hover:border-bronze hover:bg-bronze-wash hover:shadow-[0_6px_18px_-8px_rgba(19,26,44,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bronze/60 sm:pr-4"
                 >
@@ -276,141 +245,14 @@ export function Masthead() {
           </Container>
         </div>
 
-        {/* Backdrop to dim the rest of the site while searching. */}
-        {searchOpen ? (
-          <div
-            aria-hidden="true"
-            onClick={() => setSearchOpen(false)}
-            className="fixed inset-0 z-30 bg-ink/40 backdrop-blur-[2px]"
-          />
-        ) : null}
-
-        {/* Search panel — drops below the brand bar. */}
-        <div
-          id="site-search"
-          ref={searchPanelRef}
-          aria-hidden={!searchOpen}
-          className={cn(
-            "absolute inset-x-0 top-full z-40 border-b border-rule-soft bg-surface shadow-float transition-[opacity,transform] ease-brand",
-            searchOpen
-              ? "translate-y-0 opacity-100"
-              : "pointer-events-none -translate-y-2 opacity-0",
-          )}
-        >
-          <Container>
-            <div className="py-4 md:py-6">
-              <div className="group/search relative">
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute left-2 top-1/2 inline-flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-ink text-ink-inverse transition-colors duration-300 group-focus-within/search:bg-bronze-ink"
-                >
-                  <svg
-                    className="size-[18px]"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <circle cx="11" cy="11" r="7.5" />
-                    <path d="m20.5 20.5-4.2-4.2" />
-                  </svg>
-                </span>
-                <input
-                  ref={searchInputRef}
-                  type="search"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" && searchResults.length > 0) {
-                      navigate(`/school/${searchResults[0]!.id}`);
-                      setSearchOpen(false);
-                    }
-                  }}
-                  placeholder="Search schools by name or location"
-                  aria-label="Search schools by name or location"
-                  className="h-14 w-full rounded-full border border-bronze/45 bg-canvas pl-14 pr-28 font-serif text-lg text-ink shadow-[inset_0_1px_2px_rgba(19,26,44,0.06)] transition-[border-color,box-shadow] duration-300 placeholder:font-serif placeholder:italic placeholder:text-ink-faint focus:border-bronze focus:outline-none focus:shadow-[0_0_0_4px_var(--bronze-soft)] [&::-webkit-search-cancel-button]:appearance-none"
-                />
-                <div className="absolute right-3 top-1/2 flex -translate-y-1/2 items-center gap-2">
-                  {searchQuery.length > 0 ? (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setSearchQuery("");
-                        searchInputRef.current?.focus();
-                      }}
-                      aria-label="Clear search"
-                      className="inline-flex size-7 items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-bronze-soft hover:text-ink"
-                    >
-                      <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
-                        <path d="M6 6l12 12M18 6 6 18" />
-                      </svg>
-                    </button>
-                  ) : null}
-                  <kbd className="hidden rounded-sm border border-bronze/40 bg-surface px-2 py-1 font-sans text-[0.625rem] font-bold uppercase tracking-[0.16em] text-ink-muted sm:inline-block">
-                    Esc
-                  </kbd>
-                </div>
-              </div>
-
-              {searchQuery.trim().length === 0 ? (
-                <p className="mt-3 px-2 font-sans text-[0.6875rem] uppercase tracking-[0.18em] text-ink-faint">
-                  Type a school or district &middot; Enter opens the top result
-                </p>
-              ) : null}
-
-              {searchQuery.trim().length > 0 ? (
-                <div className="mt-4">
-                  {searchResults.length === 0 ? (
-                    <p className="type-caption text-ink-faint">
-                      No schools match “{searchQuery}”.
-                    </p>
-                  ) : (
-                    <ul className="flex flex-col divide-y divide-rule-soft">
-                      {searchResults.map((school) => (
-                        <li key={school.id}>
-                          <button
-                            type="button"
-                            onClick={() => {
-                              navigate(`/school/${school.id}`);
-                              setSearchOpen(false);
-                            }}
-                            className="flex w-full items-center gap-3 py-3 text-left transition-colors hover:bg-bronze-wash"
-                          >
-                            <Monogram
-                              name={school.name}
-                              label={school.initials}
-                              size="sm"
-                            />
-                            <span className="flex min-w-0 flex-1 flex-col">
-                              <span className="truncate font-serif text-[0.9375rem] font-bold text-ink">
-                                {school.name}
-                              </span>
-                              <span className="truncate type-caption text-ink-faint">
-                                {school.shortName} · {school.location}
-                              </span>
-                            </span>
-                            <span
-                              className={`type-numeric-sm ${bandColor(school.overallScore)}`}
-                            >
-                              {school.overallScore.toFixed(1)}
-                            </span>
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              ) : (
-                <p className="mt-3 type-caption text-ink-faint">
-                  Type a school name, short name, or location.
-                </p>
-              )}
-            </div>
-          </Container>
-        </div>
       </header>
+
+      {/* Outside <header>: the header slides with transforms, which would trap a fixed dialog. */}
+      <SearchPalette
+        open={searchOpen}
+        onClose={() => setSearchOpen(false)}
+        returnFocusRef={searchButtonRef}
+      />
 
       {/* Full-screen overlay nav — always mounted so the exit animation runs. */}
       <div
