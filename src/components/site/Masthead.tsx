@@ -222,24 +222,26 @@ export function Masthead() {
                   aria-expanded={searchOpen}
                   aria-controls="site-search"
                   aria-label="Open site search"
-                  className="inline-flex h-10 items-center gap-2 rounded-full border border-rule-soft bg-surface px-4 text-ink transition-colors hover:bg-bronze-wash"
+                  className="group inline-flex h-11 items-center gap-2.5 rounded-full border border-bronze/45 bg-surface py-1 pl-1 pr-1 text-ink shadow-[inset_0_0_0_1px_rgba(255,255,255,0.5)] transition-all duration-300 hover:border-bronze hover:bg-bronze-wash hover:shadow-[0_6px_18px_-8px_rgba(19,26,44,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bronze/60 sm:pr-4"
                 >
-                  <svg
-                    aria-hidden="true"
-                    width="22"
-                    height="22"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="shrink-0"
-                  >
-                    <circle cx="11" cy="11" r="8" />
-                    <path d="m21 21-4.35-4.35" />
-                  </svg>
-                  <span className="hidden font-sans text-sm font-bold uppercase tracking-[0.14em] sm:inline">
+                  <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-ink text-ink-inverse transition-colors duration-300 group-hover:bg-bronze-ink">
+                    <svg
+                      aria-hidden="true"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="shrink-0 transition-transform duration-300 group-hover:scale-110"
+                    >
+                      <circle cx="11" cy="11" r="7.5" />
+                      <path d="m20.5 20.5-4.2-4.2" />
+                    </svg>
+                  </span>
+                  <span className="hidden font-sans text-[0.8125rem] font-bold uppercase tracking-[0.2em] sm:inline">
                     Search
                   </span>
                 </button>
@@ -297,20 +299,24 @@ export function Masthead() {
         >
           <Container>
             <div className="py-4 md:py-6">
-              <div className="relative">
-                <svg
+              <div className="group/search relative">
+                <span
                   aria-hidden="true"
-                  className="pointer-events-none absolute left-3 top-1/2 size-5 -translate-y-1/2 text-ink-muted"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                  className="pointer-events-none absolute left-2 top-1/2 inline-flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-ink text-ink-inverse transition-colors duration-300 group-focus-within/search:bg-bronze-ink"
                 >
-                  <circle cx="11" cy="11" r="8" />
-                  <path d="m21 21-4.35-4.35" />
-                </svg>
+                  <svg
+                    className="size-[18px]"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="11" cy="11" r="7.5" />
+                    <path d="m20.5 20.5-4.2-4.2" />
+                  </svg>
+                </span>
                 <input
                   ref={searchInputRef}
                   type="search"
@@ -324,9 +330,35 @@ export function Masthead() {
                   }}
                   placeholder="Search schools by name or location"
                   aria-label="Search schools by name or location"
-                  className="w-full rounded-sm border border-rule-soft bg-canvas py-3 pl-11 pr-4 font-sans text-base text-ink placeholder:text-ink-faint focus:border-bronze focus:outline-none"
+                  className="h-14 w-full rounded-full border border-bronze/45 bg-canvas pl-14 pr-28 font-serif text-lg text-ink shadow-[inset_0_1px_2px_rgba(19,26,44,0.06)] transition-[border-color,box-shadow] duration-300 placeholder:font-serif placeholder:italic placeholder:text-ink-faint focus:border-bronze focus:outline-none focus:shadow-[0_0_0_4px_var(--bronze-soft)] [&::-webkit-search-cancel-button]:appearance-none"
                 />
+                <div className="absolute right-3 top-1/2 flex -translate-y-1/2 items-center gap-2">
+                  {searchQuery.length > 0 ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSearchQuery("");
+                        searchInputRef.current?.focus();
+                      }}
+                      aria-label="Clear search"
+                      className="inline-flex size-7 items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-bronze-soft hover:text-ink"
+                    >
+                      <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
+                        <path d="M6 6l12 12M18 6 6 18" />
+                      </svg>
+                    </button>
+                  ) : null}
+                  <kbd className="hidden rounded-sm border border-bronze/40 bg-surface px-2 py-1 font-sans text-[0.625rem] font-bold uppercase tracking-[0.16em] text-ink-muted sm:inline-block">
+                    Esc
+                  </kbd>
+                </div>
               </div>
+
+              {searchQuery.trim().length === 0 ? (
+                <p className="mt-3 px-2 font-sans text-[0.6875rem] uppercase tracking-[0.18em] text-ink-faint">
+                  Type a school or district &middot; Enter opens the top result
+                </p>
+              ) : null}
 
               {searchQuery.trim().length > 0 ? (
                 <div className="mt-4">
