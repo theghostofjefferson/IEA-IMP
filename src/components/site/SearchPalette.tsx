@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { Monogram } from "@/components/data-display/Monogram";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { bandColor } from "@/lib/scoring";
-import { KIND_LABEL, PAGES, runSearch, type SearchEntry } from "@/lib/siteSearch";
+import { KIND_LABEL, runSearch, type SearchEntry } from "@/lib/siteSearch";
 import { cn } from "@/lib/utils";
 
 /**
@@ -30,18 +30,12 @@ export function SearchPalette({
   const reduced = useReducedMotion();
   const uid = useId();
   const inputRef = useRef<HTMLInputElement>(null);
-  const listRef = useRef<HTMLDivElement>(null);
 
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(0);
 
   const groups = useMemo(() => runSearch(query), [query]);
-  // With no query, offer the pages as quick links.
-  const suggestions = useMemo(() => PAGES.slice(0, 5), []);
-  const flat: SearchEntry[] = useMemo(
-    () => (query.trim() ? groups.flatMap((g) => g.items) : suggestions),
-    [groups, query, suggestions],
-  );
+  const flat: SearchEntry[] = useMemo(() => groups.flatMap((g) => g.items), [groups]);
 
   const optionId = (i: number) => `${uid}-opt-${i}`;
   const hasQuery = query.trim().length > 0;
@@ -110,27 +104,25 @@ export function SearchPalette({
           onMouseMove={() => setActive(i)}
           onClick={() => go(e)}
           className={cn(
-            "flex w-full items-center gap-3 rounded-sm px-3 py-2.5 text-left transition-colors",
+            "relative flex w-full items-center gap-3 rounded-[3px] px-3 py-2.5 text-left transition-colors duration-150",
             isActive ? "bg-bronze-wash" : "bg-transparent",
           )}
         >
+          <span
+            aria-hidden="true"
+            className={cn(
+              "absolute inset-y-2 left-0 w-0.5 rounded-full bg-bronze transition-opacity duration-150",
+              isActive ? "opacity-100" : "opacity-0",
+            )}
+          />
           <RowIcon entry={e} />
           <span className="flex min-w-0 flex-1 flex-col">
-            <span className="truncate font-serif text-[0.9375rem] font-bold text-ink">{e.title}</span>
+            <span className="truncate font-sans text-[0.9375rem] font-semibold text-ink">{e.title}</span>
             <span className="truncate font-sans text-xs text-ink-muted">{e.subtitle}</span>
           </span>
           {e.kind === "school" && e.score !== undefined ? (
             <span className={`type-numeric-sm ${bandColor(e.score)}`}>{e.score.toFixed(1)}</span>
           ) : null}
-          <span
-            aria-hidden="true"
-            className={cn(
-              "font-sans text-[0.625rem] font-bold uppercase tracking-[0.16em] text-bronze-ink transition-opacity",
-              isActive ? "opacity-100" : "opacity-0",
-            )}
-          >
-            Open &crarr;
-          </span>
         </button>
       </li>
     );
@@ -141,7 +133,7 @@ export function SearchPalette({
       aria-hidden={!open}
       inert={!open}
       className={cn(
-        "fixed inset-0 z-50 flex items-start justify-center px-4 pt-[10vh] sm:pt-[12vh]",
+        "fixed inset-0 z-50 flex items-start justify-center px-4 pt-[12vh] sm:pt-[14vh]",
         open ? "" : "pointer-events-none",
       )}
     >
@@ -150,7 +142,7 @@ export function SearchPalette({
         onClick={onClose}
         aria-hidden="true"
         className={cn(
-          "absolute inset-0 bg-ink/55 backdrop-blur-sm transition-opacity",
+          "absolute inset-0 bg-ink/35 backdrop-blur-[3px] transition-opacity",
           reduced ? "duration-0" : "duration-200",
           open ? "opacity-100" : "opacity-0",
         )}
@@ -163,23 +155,20 @@ export function SearchPalette({
         aria-label="Search the Institute"
         onKeyDown={onKeyDown}
         className={cn(
-          "relative flex max-h-[min(34rem,78vh)] w-full max-w-2xl flex-col overflow-hidden rounded-md border border-bronze/50 bg-surface shadow-[0_24px_60px_-20px_rgba(19,26,44,0.6)] transition-[opacity,transform] ease-brand",
+          "relative flex w-full max-w-xl flex-col overflow-hidden rounded-md border border-rule-soft bg-surface shadow-[0_20px_50px_-24px_rgba(19,26,44,0.55)] transition-[opacity,transform] ease-brand",
           reduced ? "duration-0" : "duration-200",
-          open ? "translate-y-0 scale-100 opacity-100" : "-translate-y-3 scale-[0.98] opacity-0",
+          open ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0",
         )}
       >
-        {/* Brass hairline along the top edge */}
-        <div aria-hidden="true" className="h-0.5 w-full bg-gradient-to-r from-transparent via-bronze to-transparent" />
-
         {/* Input row */}
-        <div className="flex items-center gap-3 border-b border-rule-soft px-4 py-3 sm:px-5">
+        <div className="flex items-center gap-3 px-4 sm:px-5">
           <svg
             aria-hidden="true"
-            className="size-5 shrink-0 text-bronze-ink"
+            className="size-[18px] shrink-0 text-ink-muted"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth="2.2"
+            strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           >
@@ -190,7 +179,7 @@ export function SearchPalette({
             ref={inputRef}
             type="text"
             role="combobox"
-            aria-expanded={open}
+            aria-expanded={open && hasQuery}
             aria-controls={`${uid}-list`}
             aria-activedescendant={flat.length ? optionId(active) : undefined}
             aria-autocomplete="list"
@@ -202,9 +191,9 @@ export function SearchPalette({
               setQuery(e.target.value);
               setActive(0);
             }}
-            placeholder="Search schools, institutions, people, pages…"
+            placeholder="Search schools, people and pages"
             aria-label="Search the Institute"
-            className="min-w-0 flex-1 bg-transparent py-2 font-serif text-lg text-ink placeholder:font-serif placeholder:italic placeholder:text-ink-faint focus:outline-none"
+            className="h-14 min-w-0 flex-1 bg-transparent font-sans text-base text-ink placeholder:text-ink-faint focus:outline-none"
           />
           {hasQuery ? (
             <button
@@ -215,9 +204,9 @@ export function SearchPalette({
                 inputRef.current?.focus();
               }}
               aria-label="Clear search"
-              className="inline-flex size-7 shrink-0 items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-bronze-soft hover:text-ink"
+              className="inline-flex size-7 shrink-0 items-center justify-center rounded-sm text-ink-muted transition-colors hover:bg-bronze-wash hover:text-ink"
             >
-              <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
+              <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
                 <path d="M6 6l12 12M18 6 6 18" />
               </svg>
             </button>
@@ -226,50 +215,56 @@ export function SearchPalette({
             type="button"
             onClick={onClose}
             aria-label="Close search"
-            className="shrink-0 rounded-sm border border-bronze/40 bg-canvas px-2 py-1 font-sans text-[0.625rem] font-bold uppercase tracking-[0.16em] text-ink-muted transition-colors hover:border-bronze hover:text-ink"
+            className="shrink-0 rounded-sm border border-rule-soft px-1.5 py-0.5 font-sans text-[0.625rem] font-semibold uppercase tracking-[0.12em] text-ink-faint transition-colors hover:text-ink"
           >
             Esc
           </button>
         </div>
 
-        {/* Results */}
-        <div ref={listRef} id={`${uid}-list`} role="listbox" aria-label="Search results" className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-2">
-          {!hasQuery ? (
-            <section aria-labelledby={`${uid}-sugg`}>
-              <h2 id={`${uid}-sugg`} className="px-3 pb-1 pt-2 font-sans text-[0.6875rem] font-bold uppercase tracking-[0.18em] text-ink-faint">
-                Quick links
-              </h2>
-              <ul role="presentation">{suggestions.map(renderRow)}</ul>
-            </section>
-          ) : groups.length === 0 ? (
-            <div className="px-4 py-10 text-center">
-              <p className="font-serif text-base font-bold text-ink">No results for &ldquo;{query.trim()}&rdquo;</p>
-              <p className="mt-1 font-sans text-sm text-ink-muted">
-                Try a school name, a district, a team member, or a page such as &ldquo;methodology&rdquo;.
-              </p>
-            </div>
-          ) : (
-            groups.map((g) => (
-              <section key={g.kind} aria-label={KIND_LABEL[g.kind]} className="mb-1">
-                <h2 className="px-3 pb-1 pt-3 font-sans text-[0.6875rem] font-bold uppercase tracking-[0.18em] text-ink-faint">
-                  {KIND_LABEL[g.kind]}
-                </h2>
-                <ul role="presentation">{g.items.map(renderRow)}</ul>
-              </section>
-            ))
+        {/* Results: the panel grows open only once there is something to show. */}
+        <div
+          className={cn(
+            "grid transition-[grid-template-rows] ease-brand",
+            reduced ? "duration-0" : "duration-200",
+            hasQuery ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
           )}
-        </div>
-
-        {/* Footer hints */}
-        <div className="hidden items-center justify-between border-t border-rule-soft bg-canvas px-5 py-2.5 font-sans text-[0.6875rem] uppercase tracking-[0.14em] text-ink-faint sm:flex">
-          <span>
-            <kbd className="font-bold text-ink-muted">&uarr;&darr;</kbd> Navigate
-            <span className="mx-3 text-rule">|</span>
-            <kbd className="font-bold text-ink-muted">&crarr;</kbd> Open
-            <span className="mx-3 text-rule">|</span>
-            <kbd className="font-bold text-ink-muted">Esc</kbd> Close
-          </span>
-          <span aria-live="polite">{hasQuery ? `${flat.length} result${flat.length === 1 ? "" : "s"}` : "Search the Institute"}</span>
+        >
+          <div className="min-h-0 overflow-hidden">
+            <div className="border-t border-rule-soft">
+              <div
+                id={`${uid}-list`}
+                role="listbox"
+                aria-label="Search results"
+                className="max-h-[min(24rem,56vh)] overflow-y-auto overscroll-contain p-1.5"
+              >
+                {hasQuery && groups.length === 0 ? (
+                  <div className="px-4 py-8 text-center">
+                    <p className="font-sans text-sm font-semibold text-ink">No results for &ldquo;{query.trim()}&rdquo;</p>
+                    <p className="mt-1 font-sans text-xs text-ink-muted">
+                      Check the spelling, or try a school, district, person or page.
+                    </p>
+                  </div>
+                ) : (
+                  groups.map((g) => (
+                    <section key={g.kind} aria-label={KIND_LABEL[g.kind]} className="mb-1">
+                      <h2 className="px-3 pb-1 pt-2.5 font-sans text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-ink-faint">
+                        {KIND_LABEL[g.kind]}
+                      </h2>
+                      <ul role="presentation">{g.items.map(renderRow)}</ul>
+                    </section>
+                  ))
+                )}
+              </div>
+              <div className="hidden items-center justify-between border-t border-rule-soft px-4 py-2 font-sans text-[0.6875rem] text-ink-faint sm:flex">
+                <span>
+                  <kbd className="font-semibold text-ink-muted">&uarr;&darr;</kbd> to navigate
+                  <span className="mx-2 text-ink-faint">&middot;</span>
+                  <kbd className="font-semibold text-ink-muted">Enter</kbd> to open
+                </span>
+                <span aria-live="polite">{flat.length ? `${flat.length} result${flat.length === 1 ? "" : "s"}` : ""}</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -280,16 +275,15 @@ function RowIcon({ entry }: { entry: SearchEntry }) {
   if (entry.kind === "school" || entry.kind === "person") {
     return <Monogram name={entry.title} label={entry.initials} size="sm" tone={entry.kind === "person" ? "neutral" : "brand"} />;
   }
-  const glyph = entry.kind === "review" ? "!" : "↗";
   return (
     <span
       aria-hidden="true"
       className={cn(
-        "inline-flex size-8 shrink-0 items-center justify-center rounded-full border font-serif text-sm font-bold",
-        entry.kind === "review" ? "border-claret/60 text-claret" : "border-bronze/50 text-bronze-ink",
+        "inline-flex size-8 shrink-0 items-center justify-center rounded-full border font-sans text-xs font-semibold",
+        entry.kind === "review" ? "border-claret/50 text-claret" : "border-rule-soft text-ink-muted",
       )}
     >
-      {glyph}
+      {entry.kind === "review" ? "!" : "\u2192"}
     </span>
   );
 }
