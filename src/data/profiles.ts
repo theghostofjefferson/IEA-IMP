@@ -12,7 +12,8 @@ import type { Contributor } from "@/lib/types";
  *   quote     a pull quote:  { text: "...", source: "..." }  (source optional)
  *   bio       paragraphs. Inline **bold** and *italic* are supported.
  *   focus     short lines for "Areas of work"
- *   contact   [{ label, value, href? }]  e.g. { label: "Email", value: "a@b.org", href: "mailto:a@b.org" }
+ *   contact   optional override. By default everyone but the founder shows firstname@ieainstitute.org
+ *             [{ label, value, href? }]  e.g. { label: "Email", value: "a@b.org", href: "mailto:a@b.org" }
  *   showPhoto false keeps the portrait frame but shows initials instead of the photo
  *   (the first bio paragraph is set as a larger lead-in, so make it the key sentence)
  *
@@ -107,4 +108,18 @@ export function profilePathByName(name: string): string | undefined {
 /** The portrait to show for a member on their own page and in listings. */
 export function memberPhoto(c: Contributor): string | undefined {
   return profiles[c.id]?.showPhoto === false ? undefined : c.photo;
+}
+
+/**
+ * Contact lines for a member's page.
+ *
+ * Anything written under `contact` in `profiles` wins (the founder uses his own
+ * address). Everyone else gets the Institute's standard `firstname@ieainstitute.org`.
+ */
+export function memberContact(c: Contributor): NonNullable<MemberProfile["contact"]> {
+  const explicit = profiles[c.id]?.contact;
+  if (explicit?.length) return explicit;
+  const first = c.name.split(/\s+/)[0]!.toLowerCase().replace(/[^a-z]/g, "");
+  const email = `${first}@ieainstitute.org`;
+  return [{ label: "Email", value: email, href: `mailto:${email}` }];
 }
