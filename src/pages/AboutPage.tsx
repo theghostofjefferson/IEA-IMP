@@ -252,35 +252,37 @@ export function AboutPage() {
 
           <div aria-hidden="true" className="my-10 h-px w-full bg-bronze/35 md:my-12" />
 
-          {/* Editorial and research leadership, in three tiers of two. */}
+          {/* Editorial and research leadership: editors, then the research leads. */}
           <section className="mb-14 md:mb-20">
             <div className="mx-auto flex max-w-3xl flex-col gap-10 md:gap-14">
               <div className="grid grid-cols-2 items-start justify-items-center gap-4 sm:gap-8 md:gap-12">
                 <TeamCard name="Aishani Rai" to={profilePathByName("Aishani Rai")} role="Editorial Lead" photo={photoByName.get("Aishani Rai")} />
                 <TeamCard name="Ashmit Pandey" to={profilePathByName("Ashmit Pandey")} role="Managing Editor and Associate Researcher" photo={photoByName.get("Ashmit Pandey")} />
               </div>
-              <div className="grid grid-cols-2 items-start justify-items-center gap-4 sm:gap-8 md:gap-12">
+              <div className="grid grid-cols-3 items-start justify-items-center gap-3 sm:gap-8 md:gap-10">
                 <TeamCard name="Abinash Poudel" to={profilePathByName("Abinash Poudel")} role="Lead of Online Research" photo={photoByName.get("Abinash Poudel")} />
-                <TeamCard name="Kaustuv Rimal" to={profilePathByName("Kaustuv Rimal")} role="Research Executive" />
-              </div>
-              <div className="grid grid-cols-2 items-start justify-items-center gap-4 sm:gap-8 md:gap-12">
-                <TeamCard name="Nischal Ghimire" to={profilePathByName("Nischal Ghimire")} role="Research Executive" photo={photoByName.get("Nischal Ghimire")} />
-                <TeamCard name="Aaditya Jha" to={profilePathByName("Aaditya Jha")} role="Research Executive" photo={photoByName.get("Aaditya Jha")} />
+                <TeamCard name="Kaustuv Rimal" to={profilePathByName("Kaustuv Rimal")} role="Lead Researcher" />
+                <TeamCard name="Krinjal Timalsina" to={profilePathByName("Krinjal Timalsina")} role="Lead Researcher" photo={photoByName.get("Krinjal Timalsina")} />
               </div>
             </div>
           </section>
 
           <div aria-hidden="true" className="my-10 h-px w-full bg-bronze/35 md:my-12" />
 
-          {/* Research Analyst */}
+          {/* Research Executives lead off the analysts' section, then the analysts. */}
           <section className="mb-14 md:mb-20">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8 justify-items-center">
-              <TeamCard name="Krinjal Timalsina" to={profilePathByName("Krinjal Timalsina")} role="Research Analyst" photo={photoByName.get("Krinjal Timalsina")} />
-              <TeamCard name="Aadarsha Pandey" to={profilePathByName("Aadarsha Pandey")} role="Research Analyst" />
-              <TeamCard name="Piyush Joshi" to={profilePathByName("Piyush Joshi")} role="Research Analyst" photo={photoByName.get("Piyush Joshi")} />
-              <TeamCard name="Pratyush Neupane" to={profilePathByName("Pratyush Neupane")} role="Research Analyst" photo={photoByName.get("Pratyush Neupane")} />
-              <TeamCard name="Sambriddhi Bhattarai" to={profilePathByName("Sambriddhi Bhattarai")} role="Research Analyst" photo={photoByName.get("Sambriddhi Bhattarai")} />
-              <TeamCard name="Kashyap Shrestha" to={profilePathByName("Kashyap Shrestha")} role="Research Analyst" photo={photoByName.get("Kashyap Shrestha")} />
+            <div className="mx-auto flex flex-col gap-10 md:gap-14">
+              <div className="mx-auto grid w-full max-w-lg grid-cols-2 items-start justify-items-center gap-4 sm:gap-8 md:gap-12">
+                <TeamCard name="Nischal Ghimire" to={profilePathByName("Nischal Ghimire")} role="Research Executive" photo={photoByName.get("Nischal Ghimire")} />
+                <TeamCard name="Aaditya Jha" to={profilePathByName("Aaditya Jha")} role="Research Executive" photo={photoByName.get("Aaditya Jha")} />
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 justify-items-center">
+                <TeamCard name="Aadarsha Pandey" to={profilePathByName("Aadarsha Pandey")} role="Research Analyst" />
+                <TeamCard name="Piyush Joshi" to={profilePathByName("Piyush Joshi")} role="Research Analyst" photo={photoByName.get("Piyush Joshi")} />
+                <TeamCard name="Pratyush Neupane" to={profilePathByName("Pratyush Neupane")} role="Research Analyst" photo={photoByName.get("Pratyush Neupane")} />
+                <TeamCard name="Sambriddhi Bhattarai" to={profilePathByName("Sambriddhi Bhattarai")} role="Research Analyst" photo={photoByName.get("Sambriddhi Bhattarai")} />
+                <TeamCard name="Kashyap Shrestha" to={profilePathByName("Kashyap Shrestha")} role="Research Analyst" photo={photoByName.get("Kashyap Shrestha")} />
+              </div>
             </div>
           </section>
         </Reveal>
