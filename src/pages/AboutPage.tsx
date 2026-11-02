@@ -272,8 +272,8 @@ export function AboutPage() {
               bracketed panel so the reporting line reads at a glance. */}
           <section className="mb-14 md:mb-20" aria-label="Research Executives and the Research Analysts working under them">
             <div className="mx-auto grid max-w-3xl grid-cols-3 items-start justify-items-center gap-3 sm:gap-8 md:gap-10">
-              <TeamCard name="Kaustuv Rimal" to={profilePathByName("Kaustuv Rimal")} role="Research Executive" />
               <TeamCard name="Nischal Ghimire" to={profilePathByName("Nischal Ghimire")} role="Research Executive" photo={photoByName.get("Nischal Ghimire")} />
+              <TeamCard name="Kaustuv Rimal" to={profilePathByName("Kaustuv Rimal")} role="Research Executive" emphasis />
               <TeamCard name="Aaditya Jha" to={profilePathByName("Aaditya Jha")} role="Research Executive" photo={photoByName.get("Aaditya Jha")} />
             </div>
 

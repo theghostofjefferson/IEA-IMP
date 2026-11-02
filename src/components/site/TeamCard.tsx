@@ -16,12 +16,15 @@ export function TeamCard({
   role,
   photo,
   featured = false,
+  emphasis = false,
   to,
 }: {
   name: string;
   role: string;
   photo?: string;
   featured?: boolean;
+  /** A quiet step up in standing: bolder, slightly larger name and a bronze ring on the portrait. */
+  emphasis?: boolean;
   /** When set, the whole card links to this profile page. */
   to?: string;
 }) {
@@ -38,6 +41,7 @@ export function TeamCard({
           "border-rule-soft bg-sunken group-hover:border-bronze group-hover:shadow-[0_0_24px_rgb(138_106_53_0.12)]",
         !featured &&
           "border border-rule-soft group-hover:border-bronze group-hover:shadow-[0_0_24px_rgb(138_106_53_0.12)]",
+        emphasis && "border-bronze/70 ring-2 ring-bronze/30 ring-offset-2 ring-offset-canvas",
       )}>
         {photo ? (
           <img
@@ -57,7 +61,9 @@ export function TeamCard({
           "font-serif font-bold text-ink leading-tight text-center transition-colors duration-300 ease-brand group-hover:text-bronze",
           featured
             ? "min-w-[14rem] px-2 py-1 text-[1rem] sm:text-[1.125rem]"
-            : "text-[0.9375rem] sm:text-[1rem]",
+            : emphasis
+              ? "font-black text-[1rem] sm:text-[1.125rem]"
+              : "text-[0.9375rem] sm:text-[1rem]",
         )}>
           {name}
         </p>
