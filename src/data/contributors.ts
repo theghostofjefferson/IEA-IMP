@@ -32,12 +32,12 @@ export const contributors: Contributor[] = [
   { id: "aaditya-jha", name: "Aaditya Jha", role: "Research Executive", photo: "/people/aaditya-jha.jpg" },
   { id: "aishani-rai", name: "Aishani Rai", role: "Editorial Lead", photo: "/people/aishani-rai.jpg" },
   { id: "ashmit-pandey", name: "Ashmit Pandey", role: "Managing Editor and Associate Researcher" },
-  { id: "krinjal-timalsina", name: "Krinjal Timalsina", role: "Research Analyst", photo: "/people/krinjal-timalsina.jpeg" },
-  { id: "aadarsha-pandey", name: "Aadarsha Pandey", role: "Research Analyst" },
-  { id: "piyush-joshi", name: "Piyush Joshi", role: "Research Analyst", photo: "/people/piyush-joshi.jpg" },
-  { id: "pratyush-neupane", name: "Pratyush Neupane", role: "Research Analyst", photo: "/people/pratyush-neupane.jpeg" },
-  { id: "sambriddhi-bhattarai", name: "Sambriddhi Bhattarai", role: "Research Analyst", photo: "/people/sambriddhi-bhattarai.jpg" },
-  { id: "kashyap-shrestha", name: "Kashyap Shrestha", role: "Research Analyst", photo: "/people/kashyap-shrestha.jpeg" },
+  { id: "krinjal-timalsina", name: "Krinjal Timalsina", role: "Research Associate", photo: "/people/krinjal-timalsina.jpeg" },
+  { id: "aadarsha-pandey", name: "Aadarsha Pandey", role: "Research Associate" },
+  { id: "piyush-joshi", name: "Piyush Joshi", role: "Research Associate", photo: "/people/piyush-joshi.jpg" },
+  { id: "pratyush-neupane", name: "Pratyush Neupane", role: "Research Associate", photo: "/people/pratyush-neupane.jpeg" },
+  { id: "sambriddhi-bhattarai", name: "Sambriddhi Bhattarai", role: "Research Associate", photo: "/people/sambriddhi-bhattarai.jpg" },
+  { id: "kashyap-shrestha", name: "Kashyap Shrestha", role: "Research Associate", photo: "/people/kashyap-shrestha.jpeg" },
 ];
 
 /**
