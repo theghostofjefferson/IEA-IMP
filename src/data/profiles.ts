@@ -37,6 +37,7 @@ export const PROFILE_IDS: readonly string[] = [
   "eron-subedi",
   "yogeshwor-sharma",
   "aarohan-baral",
+  "s-lamichhane",
   "tikaram-sharma",
   "prajjwal-dhakal",
   "aishani-rai",
@@ -54,7 +55,7 @@ export const profiles: Record<string, MemberProfile> = {
     bio: [
       "Eron Subedi serves as the Founder, Executive Chairman, and Chief of Investigations at the Institute for Educational Accountability.",
       "He provides the Institute’s overall vision and institutional direction, oversees its strategic development and operations, and leads its investigative initiatives.",
-      "His longstanding engagement with constitutional law informs IEA’s legal strategy, including the development of legal challenges and the application of constitutional principles to questions of institutional accountability and students’ rights.",
+      "His longstanding engagement with constitutional law informs IEA’s legal strategy, including the development of legal challenges and the application of constitutional principles to questions of educational accountability.",
     ],
     focus: [
       "Vision and institutional direction",
@@ -73,7 +74,7 @@ export const profiles: Record<string, MemberProfile> = {
     bio: [
       "Yogeshwor Sharma joined the Institute for Educational Accountability in 2026 as a Co-Founder and was subsequently unanimously elected President in the months that followed.",
       "He oversees the Institute’s membership, directs its organisational and operational activities, and coordinates its day-to-day work.",
-      "In addition to managing internal operations and member engagement, he provides strategic insights that inform the Institute’s priorities, organisational development, and execution of its initiatives.",
+      "In addition to managing internal operations and member engagement, he provides strategic insights that inform the Institute’s priorities, organisational development, and execution of its work.",
     ],
     focus: [
       "Membership and member engagement",
@@ -84,7 +85,7 @@ export const profiles: Record<string, MemberProfile> = {
   },
   "aarohan-baral": {
     bio: [
-      "Aarohan Baral joined the Institute for Educational Accountability in 2026 and, in late 2026, was designated a Founding Member at the direct recommendation of the Founder, in recognition of his contributions to the Institute’s development.",
+      "Aarohan Baral joined the Institute for Educational Accountability in 2026 and, in late 2026, was designated a Founding Member at the direct recommendation of the Founder, in recognition of his contribution to the Institute’s founding work.",
       "He plays a major role in the development and maintenance of IEA’s websites, alongside overseeing key technological functions and supporting the Institute’s broader digital infrastructure.",
       "His work contributes to the development of the Institute’s technological capabilities and its operational presence.",
     ],
@@ -94,11 +95,21 @@ export const profiles: Record<string, MemberProfile> = {
       "Digital infrastructure",
     ],
   },
+  "s-lamichhane": {
+    bio: [
+      "S. Lamichhane joined the Institute for Educational Accountability in 2025 and has since established herself as one of its most versatile and dependable members.",
+      "Demonstrating remarkable adaptability and initiative, she has repeatedly taken on responsibilities across different areas of the Institute, at times independently completing projects originally intended for entire teams.",
+      "Her ability to work across disciplines, deliver consistently, and take ownership of complex assignments has made her an invaluable contributor to IEA’s work. She remains one of the Institute’s most trusted and indispensable members.",
+    ],
+    contact: [
+      { label: "Email", value: "coo@ieainstitute.org", href: "mailto:coo@ieainstitute.org" },
+    ],
+  },
   "tikaram-sharma": {
     bio: [
       "Tikaram Sharma joined the Institute for Educational Accountability in the first quarter of 2026 as a Statistical Analyst.",
       "In the months that followed, he was named a Co-Founder in recognition of his substantial contributions to the Institute’s data analysis and statistical work.",
-      "His analytical contributions have been particularly instrumental in the development and execution of IEA’s survey initiatives, one of the Institute’s major undertakings, helping inform the collection, interpretation, and presentation of survey findings.",
+      "His analytical contributions have been particularly instrumental in the development and execution of IEA’s survey initiatives, one of the Institute’s major undertakings, helping inform the Institute’s evidence base and public reporting.",
     ],
     focus: [
       "Data analysis and statistics",
@@ -108,7 +119,7 @@ export const profiles: Record<string, MemberProfile> = {
   },
   "prajjwal-dhakal": {
     bio: [
-      "Prajjwal Dhakal was associated with the Institute for Educational Accountability from the earliest stages of its establishment and was designated a Founding Member in recognition of his substantial contributions to the Institute’s initial financial support.",
+      "Prajjwal Dhakal was associated with the Institute for Educational Accountability from the earliest stages of its establishment and was designated a Founding Member in recognition of his substantial support.",
       "His early commitment and financial assistance helped provide the resources necessary for the organisation to establish its initial operations and pursue its institutional objectives.",
     ],
   },
@@ -116,7 +127,7 @@ export const profiles: Record<string, MemberProfile> = {
     bio: [
       "Aishani Rai joined the Institute for Educational Accountability in mid-2026 as a volunteer and was subsequently appointed Research Analyst.",
       "Within months of her initial appointment, she was named Editorial Lead in recognition of her contributions to the Institute’s leadership, organisational management, and editorial work.",
-      "Since then, she has played a significant role in developing and reviewing IEA’s reports, particularly those concerning human rights abuses, helping shape the presentation, clarity, and consistency of the Institute’s research findings.",
+      "Since then, she has played a significant role in developing and reviewing IEA’s reports, particularly those concerning human rights abuses, helping shape the presentation, clarity, and credibility of the Institute’s work.",
     ],
     focus: [
       "Editorial leadership",
@@ -128,7 +139,7 @@ export const profiles: Record<string, MemberProfile> = {
   "abhinash-poudel": {
     bio: [
       "Abinash Poudel joined the Institute for Educational Accountability in late 2026 as a Research Analyst.",
-      "Within weeks of his appointment, he distinguished himself through sustained dedication to online research, making substantial contributions to the Institute’s identification and documentation of serious human rights abuses.",
+      "Within weeks of his appointment, he distinguished himself through sustained dedication to online research, making substantial contributions to the Institute’s identification and documentation of relevant incidents and evidence.",
       "His work has been particularly significant in uncovering instances of reported violations through extensive digital research, source examination, and the identification of relevant evidence.",
       "He subsequently assumed responsibility for leading IEA’s online research efforts.",
     ],
@@ -143,7 +154,7 @@ export const profiles: Record<string, MemberProfile> = {
     bio: [
       "Nischal Ghimire joined the Institute for Educational Accountability in the first quarter of 2026, initially contributing to the Institute’s development work before transitioning into a research role.",
       "During IEA’s survey initiatives, he demonstrated considerable dedication and made substantial contributions to the research process.",
-      "In recognition of his work and commitment, he was subsequently appointed Research Executive, where he contributes to the Institute’s research activities and broader investigative efforts.",
+      "In recognition of his work and commitment, he was subsequently appointed Research Executive, where he contributes to the Institute’s research activities and wider investigative efforts.",
     ],
     focus: [
       "Research activities",

@@ -194,12 +194,12 @@ export function AboutPage() {
                 <Link
                   to="/#statement"
                   aria-label="Read the IEA statement of 31 October 2026 on the assault on freedom of expression in Nepal"
-                  className="group relative mx-auto mt-6 block w-full max-w-[20rem] rounded-2xl border border-bronze/30 bg-gradient-to-b from-surface to-bronze-wash px-7 pb-5 pt-9 text-center shadow-[0_10px_30px_-18px_rgba(19,26,44,0.35)] transition-[border-color,box-shadow,transform] duration-300 ease-brand hover:-translate-y-0.5 hover:border-bronze/60 hover:shadow-[0_16px_36px_-18px_rgba(19,26,44,0.45)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bronze"
+                  className="group relative mx-auto mt-6 block w-full max-w-[20rem] rounded-2xl border border-bronze/30 bg-gradient-to-b from-surface to-bronze-wash px-7 pb-5 pt-9 text-center shadow-[0_12px_30px_rgba(19,26,44,0.08)]"
                 >
                   {/* Opening quotation mark, set into the top edge of the card. */}
                   <span
                     aria-hidden="true"
-                    className="absolute left-1/2 top-0 flex size-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-bronze/30 bg-surface font-serif text-2xl leading-none text-bronze-ink"
+                    className="absolute left-1/2 top-0 flex size-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-bronze/30 bg-surface font-serif text-2xl text-bronze-ink"
                   >
                     <span className="translate-y-[3px]">&ldquo;</span>
                   </span>
@@ -241,10 +241,11 @@ export function AboutPage() {
 
           <div aria-hidden="true" className="my-10 h-px w-full bg-bronze/35 md:my-12" />
 
-          {/* Leadership — Aarohan, Tikaram, Prajjwal */}
+          {/* Leadership — Aarohan, S. Lamichhane, Tikaram, Prajjwal */}
           <section className="mb-14 md:mb-20">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10 items-start justify-items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 items-start justify-items-center">
               <TeamCard name="Aarohan Baral" to={profilePathByName("Aarohan Baral")} role="Founding Member & Lead Developer" photo={photoByName.get("Aarohan Baral")} />
+              <TeamCard name="S. Lamichhane" to={profilePathByName("S. Lamichhane")} role="Founding Member & COO" photo={photoByName.get("S. Lamichhane")} />
               <TeamCard name="Tikaram Sharma" to={profilePathByName("Tikaram Sharma")} role="Co-Founder & Statistical Analyst" photo={photoByName.get("Tikaram Sharma")} />
               <TeamCard name="Prajjwal Dhakal" to={profilePathByName("Prajjwal Dhakal")} role="Founding Member" photo={photoByName.get("Prajjwal Dhakal")} />
             </div>
@@ -389,13 +390,13 @@ export function AboutPage() {
 
                 <div className="legal-position-copy flex flex-col gap-5">
                   <p className="type-body-lg text-ink-inverse/90">
-                    The Institute for Educational Accountability (IEA) generally seeks to address systemic failures in educational accountability rather than single out individual schools. Our work is guided by evidence, institutional reform, and the public interest.
+                    The Institute for Educational Accountability (IEA) generally seeks to address systemic failures in educational accountability rather than single out individual schools. Our work is guided by a desire to improve institutional accountability and ensure ethical standards in the education sector.
                   </p>
                   <p className="type-body-lg text-ink-inverse/90">
-                    However, this approach should not be mistaken for a relinquishment of our legal rights. Where an individual school initiates legal proceedings against IEA, engages in unlawful conduct against the Institute, or otherwise seeks to obstruct its legitimate activities, IEA reserves the right to pursue appropriate individualized legal remedies, including counterclaims and independent legal proceedings where justified by the facts and applicable law.
+                    However, this approach should not be mistaken for a relinquishment of our legal rights. Where an individual school initiates legal proceedings against IEA, engages in unlawful conduct, or seeks to suppress lawful reporting, we remain prepared to respond through appropriate legal means.
                   </p>
                   <p className="type-body-lg text-ink-inverse/90">
-                    Where relevant and legally permissible, such proceedings may include the presentation of documented evidence and student accounts concerning the school&rsquo;s conduct. Evidence collected through our research may be submitted to the competent judicial authorities when appropriate, subject to applicable evidentiary rules, confidentiality obligations, and the protection of students&rsquo; identities where required.
+                    Where relevant and legally permissible, such proceedings may include the presentation of documented evidence and student accounts concerning the school&rsquo;s conduct. Evidence remains a critical tool for preserving accountability and promoting transparency.
                   </p>
                   <p className="type-body-lg text-ink-inverse/90">
                     IEA remains committed to the rule of law. Our preference for systemic reform does not preclude pursuing accountability against individual institutions when circumstances warrant it.
@@ -517,5 +518,3 @@ export function AboutPage() {
     </Container>
   );
 }
-
-
