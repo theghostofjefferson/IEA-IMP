@@ -45,6 +45,7 @@ export const PROFILE_IDS: readonly string[] = [
   "kaustuv-rimal",
   "nischal-ghimire",
   "aaditya-jha",
+  "krinjal-timalsina",
 ];
 
 export const profiles: Record<string, MemberProfile> = {
@@ -151,6 +152,7 @@ export const profiles: Record<string, MemberProfile> = {
     ],
   },
   "aaditya-jha": {},
+  "krinjal-timalsina": {},
 };
 
 /* -------------------------------------------------------------------------- */
