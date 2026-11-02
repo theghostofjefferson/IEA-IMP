@@ -37,6 +37,8 @@ export function SiteFooter() {
             <ul className="mt-4 space-y-2">
               <FooterLink to="/">Home</FooterLink>
               <FooterLink to="/rankings">Ranking</FooterLink>
+              <FooterLink to="/methodology">Methodology</FooterLink>
+              <FooterLink to="/reports">Annual report</FooterLink>
               <FooterLink to="/about">About</FooterLink>
             </ul>
           </nav>
@@ -106,9 +108,26 @@ export function SiteFooter() {
 
         <Rule className="bg-ink-inverse/15" />
 
-        <p className="type-caption measure pt-6 text-gold">
-          &ldquo;If men were angels, no government would be necessary.&rdquo; James Madison,
-          Federalist No. 51
+        <div className="grid gap-6 py-8 md:grid-cols-[1fr_auto] md:items-start md:gap-12">
+          <p className="type-caption measure text-gold">
+            &ldquo;If men were angels, no government would be necessary.&rdquo; James Madison,
+            Federalist No. 51
+          </p>
+          <p className="type-caption max-w-md border-l border-gold/50 pl-4 text-ink-inverse/60">
+            IEA is independent and accepts no foreign funding. Communications with the Institute
+            may be disclosed.{" "}
+            <Link
+              to="/about#notices"
+              className="text-ink-inverse/85 underline decoration-1 underline-offset-4 transition-colors hover:text-ink-inverse hover:decoration-bronze"
+            >
+              Read the notices
+            </Link>
+            .
+          </p>
+        </div>
+
+        <p className="type-caption border-t border-ink-inverse/10 py-5 text-ink-inverse/45">
+          &copy; {new Date().getFullYear()} Institute for Educational Accountability
         </p>
 
       </Container>

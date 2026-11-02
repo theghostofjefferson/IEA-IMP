@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
 import { ScoreBar } from "@/components/data-display/ScoreBar";
+import { SectionHeader } from "@/components/data-display/SectionHeader";
 import { StatBlock } from "@/components/data-display/StatBlock";
 import { bandColor } from "@/lib/scoring";
 import { formatCount, formatCountPlus, formatDate } from "@/lib/format";
@@ -114,7 +115,12 @@ export function Hero() {
       </Reveal>
 
       <Reveal className="min-w-0 mt-8" delayMs={90}>
-        <details id="statement" ref={statementRef} className="group scroll-mt-24 overflow-hidden rounded-sm border border-claret/60 bg-ink text-ink-inverse transition-[background-color,border-color,box-shadow] duration-500 open:border-[#cf4650] open:bg-[#1b0b11] open:shadow-[0_0_36px_rgba(181,28,42,0.28)]">
+        <details
+          id="statement"
+          ref={statementRef}
+          style={{ borderLeft: "4px solid var(--claret)" }}
+          className="group scroll-mt-24 overflow-hidden rounded-md border border-ink-inverse/10 bg-ink text-ink-inverse shadow-[0_18px_40px_-28px_rgba(19,26,44,0.6)] transition-shadow duration-500 open:shadow-[0_26px_55px_-28px_rgba(19,26,44,0.8)]"
+        >
           <summary className="flex cursor-pointer list-none items-center gap-4 px-5 py-5 sm:px-7 sm:py-6 [&::-webkit-details-marker]:hidden">
             <span
               aria-hidden="true"
@@ -252,9 +258,17 @@ export function Hero() {
         </details>
       </Reveal>
 
-      {/* Red-flag spotlight + top of the table, side by side. */}
-      <div className="grid gap-12 pt-10 md:grid-cols-2 md:gap-16">
-        <Reveal className="min-w-0" delayMs={120}>
+      {/* The findings: what students reported first, then what is under review. */}
+      <Reveal className="mt-14 md:mt-20" delayMs={100}>
+        <SectionHeader
+          eyebrow="The findings"
+          title="What students reported"
+          lede="Every school is scored from what its own students told us. Below are the highest-rated schools, and the institutions we have selected for review."
+        />
+      </Reveal>
+
+      <div className="grid gap-12 pt-8 md:grid-cols-2 md:gap-16">
+        <Reveal className="order-2 min-w-0" delayMs={120}>
           <div className="red-flag-panel min-w-0 px-5 py-6 md:px-7">
             <h2 className="type-label text-gold">
               <Link
@@ -298,7 +312,7 @@ export function Hero() {
           </div>
         </Reveal>
 
-        <Reveal className="min-w-0" delayMs={180}>
+        <Reveal className="order-1 min-w-0" delayMs={180}>
           <aside className="top-table-panel min-w-0">
             <h2 className="type-heading font-bold">
               <Link
@@ -344,6 +358,30 @@ export function Hero() {
           </aside>
         </Reveal>
       </div>
+
+      {/* Where to go next: the three pages that explain the numbers. */}
+      <Reveal className="mt-16 md:mt-24" delayMs={60}>
+        <SectionHeader eyebrow="Continue reading" title="The work behind the numbers" />
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {[
+            { to: "/methodology", kicker: "Methodology", text: "How the survey, the weights and the scores were built." },
+            { to: "/reports", kicker: "Annual report", text: "The 2026 survey: its instrument, response rates and limitations." },
+            { to: "/about", kicker: "About the Institute", text: "Who we are, how we work, and what we answer for." },
+          ].map((c) => (
+            <Link
+              key={c.to}
+              to={c.to}
+              className="group flex flex-col rounded-md border border-rule-soft bg-surface/70 p-5 transition-[border-color,background-color,transform] duration-300 ease-brand hover:-translate-y-0.5 hover:border-bronze hover:bg-bronze-wash"
+            >
+              <span className="type-label text-bronze-ink">{c.kicker}</span>
+              <span className="type-body mt-2 text-ink-muted">{c.text}</span>
+              <span aria-hidden="true" className="mt-4 font-sans text-sm text-bronze-ink transition-transform duration-300 group-hover:translate-x-1">
+                &rarr;
+              </span>
+            </Link>
+          ))}
+        </div>
+      </Reveal>
     </section>
   );
 }
