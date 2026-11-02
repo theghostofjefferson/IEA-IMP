@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router";
 
-
 import { Container } from "@/components/site/Container";
 import { Wordmark } from "@/components/site/Wordmark";
 import { SearchPalette } from "@/components/site/SearchPalette";
@@ -17,6 +16,7 @@ const LINKS = [
   { to: "/methodology", label: "Methodology" },
   { to: "/reports", label: "Reports" },
   { to: "/rankings", label: "Ranking" },
+  { to: "/report-a-concern", label: "Report a Concern" },
   { to: "/about", label: "About" },
 ] as const;
 
@@ -191,7 +191,7 @@ export function Masthead() {
                   aria-haspopup="dialog"
                   aria-expanded={searchOpen}
                   aria-label="Open site search"
-                  className="group inline-flex h-10 items-center gap-2.5 rounded-sm border border-rule-soft bg-surface px-3.5 text-ink transition-colors duration-200 hover:border-bronze hover:bg-bronze-wash focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bronze/60"
+                  className="group inline-flex h-10 items-center gap-2.5 rounded-sm border border-rule-soft bg-surface px-3.5 text-ink transition-colors duration-200 hover:border-bronze hover:bg-bronze-wash"
                 >
                   <svg
                     aria-hidden="true"
@@ -242,7 +242,6 @@ export function Masthead() {
             </div>
           </Container>
         </div>
-
       </header>
 
       {/* Outside <header>: the header slides with transforms, which would trap a fixed dialog. */}
@@ -263,9 +262,7 @@ export function Masthead() {
           "fixed inset-0 z-50 flex flex-col bg-ink text-ink-inverse",
           "transition-[transform,opacity] ease-brand",
           reducedMotion ? "duration-0" : "duration-[400ms]",
-          open
-            ? "translate-y-0 opacity-100"
-            : "-translate-y-full opacity-0 pointer-events-none",
+          open ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none",
         )}
       >
         {/* Overlay top bar */}
@@ -308,10 +305,7 @@ export function Masthead() {
         </div>
 
         {/* Nav list */}
-        <nav
-          aria-label="Main"
-          className="flex-1 overflow-y-auto px-4 pb-12 pt-8 md:px-8 md:pt-16"
-        >
+        <nav aria-label="Main" className="flex-1 overflow-y-auto px-4 pb-12 pt-8 md:px-8 md:pt-16">
           <ul className="flex flex-col gap-1 md:gap-2">
             {LINKS.map((link, i) => (
               <li
@@ -322,9 +316,7 @@ export function Masthead() {
                 className={cn(
                   "transition-[opacity,transform] ease-brand",
                   reducedMotion ? "duration-0" : "duration-500",
-                  open
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-4 opacity-0",
+                  open ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
                 )}
               >
                 <NavLink
@@ -338,9 +330,7 @@ export function Masthead() {
                   className={({ isActive }) =>
                     cn(
                       "group relative inline-flex items-baseline font-serif text-[2.25rem] font-bold leading-[1.1] tracking-[-0.02em] transition-colors md:text-[3rem] xl:text-[3.5rem]",
-                      isActive
-                        ? "text-ink-inverse"
-                        : "text-ink-inverse/70 hover:text-ink-inverse",
+                      isActive ? "text-ink-inverse" : "text-ink-inverse/70 hover:text-ink-inverse",
                     )
                   }
                 >

@@ -91,12 +91,12 @@ export function resolveOrigin(argv = process.argv, env = process.env) {
       : productionCanonical
         ? "production canonical"
       : env.IEA_ORIGIN
-        ? "IEA_ORIGIN"
-        : env.VERCEL_PROJECT_PRODUCTION_URL
-          ? "VERCEL_PROJECT_PRODUCTION_URL"
-          : env.VERCEL_URL
-            ? "VERCEL_URL"
-            : "placeholder",
+          ? "IEA_ORIGIN"
+          : env.VERCEL_PROJECT_PRODUCTION_URL
+            ? "VERCEL_PROJECT_PRODUCTION_URL"
+            : env.VERCEL_URL
+              ? "VERCEL_URL"
+              : "placeholder",
   };
 }
 
@@ -109,6 +109,7 @@ const STATIC_ROUTES = [
   { path: "/methodology", priority: "0.7", changefreq: "monthly" },
   { path: "/reports", priority: "0.5", changefreq: "monthly" },
   { path: "/about", priority: "0.5", changefreq: "monthly" },
+  { path: "/report-a-concern", priority: "0.5", changefreq: "monthly" },
   // Team profile pages. Keep in step with PROFILE_IDS in src/data/profiles.ts.
   ...[
     "eron-subedi",

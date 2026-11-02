@@ -39,6 +39,7 @@ export function SiteFooter() {
               <FooterLink to="/rankings">Ranking</FooterLink>
               <FooterLink to="/methodology">Methodology</FooterLink>
               <FooterLink to="/reports">Annual report</FooterLink>
+              <FooterLink to="/report-a-concern">Report a concern</FooterLink>
               <FooterLink to="/about">About</FooterLink>
             </ul>
           </nav>
@@ -115,7 +116,7 @@ export function SiteFooter() {
           </p>
           <p className="type-caption max-w-md border-l border-gold/50 pl-4 text-ink-inverse/60">
             IEA is independent and accepts no foreign funding. Communications with the Institute
-            may be disclosed.{" "}
+            may be disclosed. {" "}
             <Link
               to="/about#notices"
               className="text-ink-inverse/85 underline decoration-1 underline-offset-4 transition-colors hover:text-ink-inverse hover:decoration-bronze"
@@ -129,7 +130,6 @@ export function SiteFooter() {
         <p className="type-caption border-t border-ink-inverse/10 py-5 text-ink-inverse/45">
           &copy; {new Date().getFullYear()} Institute for Educational Accountability
         </p>
-
       </Container>
     </footer>
   );
