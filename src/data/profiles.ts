@@ -178,8 +178,6 @@ export const profiles: Record<string, MemberProfile> = {
     ],
     contact: [
       { label: "Email", value: "krinjal@ieainstitute.org", href: "mailto:krinjal@ieainstitute.org" },
-      { label: "Role", value: "Lead Researcher" },
-      { label: "Institution", value: "Institute for Educational Accountability" },
     ],
   },
 };
