@@ -28,7 +28,7 @@ export const contributors: Contributor[] = [
   { id: "prajjwal-dhakal", name: "Prajjwal Dhakal", role: "Founding Member", photo: "/people/prajjwal-dhakal.jpeg" },
   { id: "abhinash-poudel", name: "Abinash Poudel", role: "Lead Online Research", photo: "/people/abinash-poudel.jpg" },
   { id: "nischal-ghimire", name: "Nischal Ghimire", role: "Research Executive", photo: "/people/nischal-ghimire.JPG" },
-  { id: "kaustuv-rimal", name: "Kaustuv Rimal", role: "Lead Researcher" },
+  { id: "kaustuv-rimal", name: "Kaustuv Rimal", role: "Research Executive" },
   { id: "aaditya-jha", name: "Aaditya Jha", role: "Research Executive", photo: "/people/aaditya-jha.jpg" },
   { id: "aishani-rai", name: "Aishani Rai", role: "Editorial Lead", photo: "/people/aishani-rai.jpg" },
   { id: "ashmit-pandey", name: "Ashmit Pandey", role: "Managing Editor and Associate Researcher" },
