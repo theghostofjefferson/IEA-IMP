@@ -87,6 +87,14 @@ export const PAGES: SearchEntry[] = [
     keywords: "about iea team members founders mission who we are contact",
   },
   {
+    key: "page:report",
+    kind: "page",
+    title: "Report a Violation",
+    subtitle: "Whistleblower and public interest disclosure",
+    to: "/report-a-concern",
+    keywords: "report concern whistleblower disclosure complaint abuse violation tip submit",
+  },
+  {
     key: "page:statement",
     kind: "page",
     title: "IEA statement, 31 October 2026",

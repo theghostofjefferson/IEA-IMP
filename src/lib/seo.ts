@@ -78,6 +78,10 @@ export const SEO = {
     "About",
     `The Institute for Educational Accountability (IEA) advances transparency and accountability in education through field research, school investigations, student surveys, and evidence-based analysis.`,
   ),
+  reportConcern: build(
+    "Whistleblower & Public Interest Disclosure",
+    "Report a violation or a concern about an educational institution to the Institute for Educational Accountability. Providing identifying information is optional.",
+  ),
   notFound: build(
     "Page not found",
     "That page does not exist. Browse all 42 schools in the IEA Institute rankings, or read how the rankings were built.",

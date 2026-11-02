@@ -18,6 +18,7 @@ const LINKS = [
   { to: "/reports", label: "Reports" },
   { to: "/rankings", label: "Ranking" },
   { to: "/about", label: "About" },
+  { to: "/report-a-concern", label: "Report a Violation" },
 ] as const;
 
 /**
