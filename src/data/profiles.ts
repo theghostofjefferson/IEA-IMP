@@ -124,9 +124,32 @@ export const profiles: Record<string, MemberProfile> = {
     ],
   },
   "ashmit-pandey": {},
-  "abhinash-poudel": {},
+  "abhinash-poudel": {
+    bio: [
+      "Abinash Poudel joined the Institute for Educational Accountability in late 2026 as a Research Analyst.",
+      "Within weeks of his appointment, he distinguished himself through sustained dedication to online research, making substantial contributions to the Institute’s identification and documentation of serious human rights abuses.",
+      "His work has been particularly significant in uncovering instances of reported violations through extensive digital research, source examination, and the identification of relevant evidence.",
+      "He subsequently assumed responsibility for leading IEA’s online research efforts.",
+    ],
+    focus: [
+      "Online research",
+      "Identification and documentation of reported abuses",
+      "Source examination and evidence",
+    ],
+  },
   "kaustuv-rimal": {},
-  "nischal-ghimire": {},
+  "nischal-ghimire": {
+    bio: [
+      "Nischal Ghimire joined the Institute for Educational Accountability in the first quarter of 2026, initially contributing to the Institute’s development work before transitioning into a research role.",
+      "During IEA’s survey initiatives, he demonstrated considerable dedication and made substantial contributions to the research process.",
+      "In recognition of his work and commitment, he was subsequently appointed Research Executive, where he contributes to the Institute’s research activities and broader investigative efforts.",
+    ],
+    focus: [
+      "Research activities",
+      "Survey research",
+      "Investigative efforts",
+    ],
+  },
   "aaditya-jha": {},
 };
 
