@@ -39,7 +39,6 @@ export const contributors: Contributor[] = [
   { id: "pratyush-neupane", name: "Pratyush Neupane", role: "Research Analyst", photo: "/people/pratyush-neupane.jpeg" },
   { id: "sambriddhi-bhattarai", name: "Sambriddhi Bhattarai", role: "Research Analyst", photo: "/people/sambriddhi-bhattarai.jpg" },
   { id: "kashyap-shrestha", name: "Kashyap Shrestha", role: "Research Analyst", photo: "/people/kashyap-shrestha.jpeg" },
-  { id: "ibrahim-ansari", name: "I. Ansari", role: "Research Analyst" },
 ];
 
 /**
