@@ -296,6 +296,16 @@ export function AboutPage() {
                 <TeamCard name="Kashyap Shrestha" to={profilePathByName("Kashyap Shrestha")} role="Research Analyst" photo={photoByName.get("Kashyap Shrestha")} />
               </div>
             </div>
+
+            {/* A second, matching panel for analysts outside the research team. */}
+            <div className="relative mt-12 rounded-2xl border border-bronze/30 bg-bronze-wash/40 px-4 pb-10 pt-12 md:px-10">
+              <span className="type-label absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-bronze/40 bg-surface px-4 py-1.5 text-bronze-ink">
+                Other Analysts
+              </span>
+              <div className="flex justify-center">
+                <TeamCard name="Noaime G." role="Statistical Analyst" />
+              </div>
+            </div>
           </section>
         </Reveal>
 
