@@ -9,6 +9,7 @@ import { inline } from "@/components/site/MessageModal";
 import { Monogram } from "@/components/data-display/Monogram";
 import {
   getProfileMember,
+  memberContact,
   memberPhoto,
   profileMembers,
   profilePath,
@@ -132,8 +133,9 @@ function StandardHeader({ member, profile }: { member: Contributor; profile: Mem
 function Details({ member, profile }: { member: Contributor; profile: MemberProfile }) {
   const hasBio = !!profile.bio?.length;
   const hasFocus = !!profile.focus?.length;
-  const hasContact = !!profile.contact?.length;
-  const empty = !hasBio && !hasFocus && !hasContact;
+  const contact = memberContact(member);
+  const hasContact = contact.length > 0;
+  const empty = !hasBio && !hasFocus;
 
   return (
     <>
@@ -184,7 +186,7 @@ function Details({ member, profile }: { member: Contributor; profile: MemberProf
               <div>
                 <h2 className="type-label text-ink-faint">Contact</h2>
                 <ul className="mt-2 flex flex-col gap-2">
-                  {profile.contact!.map((c) => (
+                  {contact.map((c) => (
                     <li key={c.value}>
                       <span className="type-caption block text-ink-faint">{c.label}</span>
                       {c.href ? (
