@@ -310,6 +310,11 @@ export function AboutPage() {
           </section>
         </Reveal>
 
+        <Notice tone="info" label="A note on names" className="mt-6 max-w-[46rem]">
+          Some names on this page are shown in part rather than in full. This
+          is done to protect members who might otherwise be put at risk.
+        </Notice>
+
         <Notice tone="info" label="With thanks" className="mt-6 max-w-[46rem]">
           We want to show our gratitude to all those who answered the surveys
           honestly and made this possible. Their names and individual
