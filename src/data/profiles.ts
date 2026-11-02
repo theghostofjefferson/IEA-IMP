@@ -69,7 +69,17 @@ export const profiles: Record<string, MemberProfile> = {
   },
   "yogeshwor-sharma": {
     summary: "Leads the Institute's operations and its day-to-day work as President.",
-    focus: ["Operations", "Organisation and coordination"],
+    bio: [
+      "Yogeshwor Sharma joined the Institute for Educational Accountability in 2026 as a Co-Founder and was subsequently unanimously elected President in the months that followed.",
+      "He oversees the Institute’s membership, directs its organisational and operational activities, and coordinates its day-to-day work.",
+      "In addition to managing internal operations and member engagement, he provides strategic insights that inform the Institute’s priorities, organisational development, and execution of its initiatives.",
+    ],
+    focus: [
+      "Membership and member engagement",
+      "Organisational and operational activities",
+      "Day-to-day coordination",
+      "Strategic insight and priorities",
+    ],
   },
   "aarohan-baral": {},
   "tikaram-sharma": {},
