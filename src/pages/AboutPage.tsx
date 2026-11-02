@@ -294,6 +294,7 @@ export function AboutPage() {
                 <TeamCard name="Pratyush Neupane" to={profilePathByName("Pratyush Neupane")} role="Research Analyst" photo={photoByName.get("Pratyush Neupane")} />
                 <TeamCard name="Sambriddhi Bhattarai" to={profilePathByName("Sambriddhi Bhattarai")} role="Research Analyst" photo={photoByName.get("Sambriddhi Bhattarai")} />
                 <TeamCard name="Kashyap Shrestha" to={profilePathByName("Kashyap Shrestha")} role="Research Analyst" photo={photoByName.get("Kashyap Shrestha")} />
+                <TeamCard name="Ibrahim Ansari" to={profilePathByName("Ibrahim Ansari")} role="Data Analyst" />
               </div>
             </div>
           </section>
