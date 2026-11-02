@@ -302,8 +302,9 @@ export function AboutPage() {
               <span className="type-label absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-bronze/40 bg-surface px-4 py-1.5 text-bronze-ink">
                 Other Analysts
               </span>
-              <div className="flex justify-center">
+              <div className="grid grid-cols-2 items-start justify-items-center gap-4 sm:gap-8 md:gap-12">
                 <TeamCard name="Noaime G." role="Statistical Analyst" />
+                <TeamCard name="E. Baskota" role="Data Analyst" />
               </div>
             </div>
           </section>
