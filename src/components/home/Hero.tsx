@@ -139,8 +139,8 @@ export function Hero() {
           <article className="border-t border-claret/50 px-5 py-6 sm:px-7 md:py-8">
             <div className="mx-auto flex max-w-4xl flex-col gap-6">
               <p className="type-body-lg measure">
-                We are deeply alarmed by what we regard as a serious assault on freedom of expression
-                in Nepal. We are particularly concerned by broad or uncertain applications of defamation and
+                IEA is deeply alarmed by what we regard as a serious assault on freedom of expression
+                in Nepal. Of particular concern are broad or uncertain applications of defamation and
                 cybercrime provisions to expression. Press-freedom organizations have documented
                 concerns about the use of the Electronic Transactions Act in cases involving
                 journalists and online speech, including in{" "}
@@ -212,7 +212,7 @@ export function Hero() {
               </p>
 
               <p className="type-body-lg measure">
-                We are exploring lawful avenues to preserve, document, and bring these reports to
+                IEA is exploring lawful avenues to preserve, document, and bring these reports to
                 public attention, and our founder is personally leading the effort to develop
                 those avenues. We remain
                 committed to institutional accountability and intend to pursue it through lawful
