@@ -81,10 +81,48 @@ export const profiles: Record<string, MemberProfile> = {
       "Strategic insight and priorities",
     ],
   },
-  "aarohan-baral": {},
-  "tikaram-sharma": {},
-  "prajjwal-dhakal": {},
-  "aishani-rai": {},
+  "aarohan-baral": {
+    bio: [
+      "Aarohan Baral joined the Institute for Educational Accountability in 2026 and, in late 2026, was designated a Founding Member at the direct recommendation of the Founder, in recognition of his contributions to the Institute’s development.",
+      "He plays a major role in the development and maintenance of IEA’s websites, alongside overseeing key technological functions and supporting the Institute’s broader digital infrastructure.",
+      "His work contributes to the development of the Institute’s technological capabilities and its operational presence.",
+    ],
+    focus: [
+      "Website development and maintenance",
+      "Key technological functions",
+      "Digital infrastructure",
+    ],
+  },
+  "tikaram-sharma": {
+    bio: [
+      "Tikaram Sharma joined the Institute for Educational Accountability in the first quarter of 2026 as a Statistical Analyst.",
+      "In the months that followed, he was named a Co-Founder in recognition of his substantial contributions to the Institute’s data analysis and statistical work.",
+      "His analytical contributions have been particularly instrumental in the development and execution of IEA’s survey initiatives, one of the Institute’s major undertakings, helping inform the collection, interpretation, and presentation of survey findings.",
+    ],
+    focus: [
+      "Data analysis and statistics",
+      "Survey initiatives",
+      "Interpretation and presentation of findings",
+    ],
+  },
+  "prajjwal-dhakal": {
+    bio: [
+      "Prajjwal Dhakal was associated with the Institute for Educational Accountability from the earliest stages of its establishment and was designated a Founding Member in recognition of his substantial contributions to the Institute’s initial financial support.",
+      "His early commitment and financial assistance helped provide the resources necessary for the organisation to establish its initial operations and pursue its institutional objectives.",
+    ],
+  },
+  "aishani-rai": {
+    bio: [
+      "Aishani Rai joined the Institute for Educational Accountability in mid-2026 as a volunteer and was subsequently appointed Research Analyst.",
+      "Within months of her initial appointment, she was named Editorial Lead in recognition of her contributions to the Institute’s leadership, organisational management, and editorial work.",
+      "Since then, she has played a significant role in developing and reviewing IEA’s reports, particularly those concerning human rights abuses, helping shape the presentation, clarity, and consistency of the Institute’s research findings.",
+    ],
+    focus: [
+      "Editorial leadership",
+      "Development and review of reports",
+      "Organisational management",
+    ],
+  },
   "ashmit-pandey": {},
   "abhinash-poudel": {},
   "kaustuv-rimal": {},
