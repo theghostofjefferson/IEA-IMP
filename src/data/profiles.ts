@@ -163,7 +163,25 @@ export const profiles: Record<string, MemberProfile> = {
     ],
   },
   "aaditya-jha": {},
-  "krinjal-timalsina": {},
+  "krinjal-timalsina": {
+    summary: "Leads IEA’s research and coordination work.",
+    bio: [
+      "Krinjal Timalsina joined the Institute for Educational Accountability as a volunteer and has since progressed through several research positions, serving successively as a Research Analyst, Research Associate, and Research Executive before assuming her current role as Lead Researcher.",
+      "Throughout her time at IEA, she has demonstrated remarkable initiative, dedication, and versatility. She is particularly distinguished by her willingness to take on responsibilities independently, proactively identify areas requiring attention, and contribute beyond her assigned duties. She has also consistently supported fellow team members, often taking the initiative to assist with their work and coordinate efforts across the Institute.",
+      "In addition to her research responsibilities, she contributes significantly to IEA’s social media and related communications work. Her initiative, collaborative approach, and consistent willingness to take responsibility have made her an important contributor to the Institute’s operations and research activities.",
+    ],
+    focus: [
+      "Research and analysis",
+      "Research coordination and team support",
+      "Social media and digital communications",
+      "Organisational initiatives",
+    ],
+    contact: [
+      { label: "Email", value: "krinjal@ieainstitute.org", href: "mailto:krinjal@ieainstitute.org" },
+      { label: "Role", value: "Lead Researcher" },
+      { label: "Institution", value: "Institute for Educational Accountability" },
+    ],
+  },
 };
 
 /* -------------------------------------------------------------------------- */
