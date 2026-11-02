@@ -40,6 +40,7 @@ export function SiteFooter() {
               <FooterLink to="/methodology">Methodology</FooterLink>
               <FooterLink to="/reports">Annual report</FooterLink>
               <FooterLink to="/about">About</FooterLink>
+              <FooterLink to="/report-a-concern">Report a Violation</FooterLink>
             </ul>
           </nav>
 
