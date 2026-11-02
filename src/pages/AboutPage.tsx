@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
 import { Container } from "@/components/site/Container";
 import { Reveal } from "@/components/site/Reveal";
@@ -8,6 +8,7 @@ import { StatBlock, StatRow } from "@/components/data-display/StatBlock";
 import { SectionHeader } from "@/components/data-display/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { TeamCard } from "@/components/site/TeamCard";
+import { Notice } from "@/components/site/Notice";
 import { FaqItem } from "@/components/site/FaqItem";
 import { MessageModal } from "@/components/site/MessageModal";
 import { founderMessage, presidentMessage } from "@/data/messages";
@@ -31,6 +32,17 @@ export function AboutPage() {
     contributors.map((c) => [c.name, c.photo ?? undefined]),
   );
   useEffect(() => applySeo(SEO.about), []);
+
+  // `/about#notices` (linked from the footer) scrolls to the notices section.
+  const { hash } = useLocation();
+  useEffect(() => {
+    if (hash !== "#notices") return;
+    const id = window.setTimeout(
+      () => document.getElementById("notices")?.scrollIntoView({ behavior: "smooth", block: "center" }),
+      200,
+    );
+    return () => window.clearTimeout(id);
+  }, [hash]);
 
   /** Which founder letter is open: null, "president", or "founder". */
   const [letter, setLetter] = useState<"president" | "founder" | null>(null);
@@ -110,9 +122,10 @@ export function AboutPage() {
             />
           </StatRow>
 
-          <p className="type-body measure mt-8 text-ink-muted">
-            Survey respondents provided their identities to IEA. Those identities are held confidentially and are not disclosed publicly.
-          </p>
+          <Notice tone="info" label="Respondent confidentiality" className="mt-8 max-w-[46rem]">
+            Survey respondents provided their identities to IEA. Those identities are held
+            confidentially and are not disclosed publicly.
+          </Notice>
         </Reveal>
 
         <Rule />
@@ -272,12 +285,12 @@ export function AboutPage() {
           </section>
         </Reveal>
 
-        <p className="type-body measure mt-6 text-ink-muted">
+        <Notice tone="info" label="With thanks" className="mt-6 max-w-[46rem]">
           We want to show our gratitude to all those who answered the surveys
-          honestly and made this possible. Their name and the individual
-          responses, however, won't be published anywhere to maintain their
+          honestly and made this possible. Their names and individual
+          responses, however, will not be published anywhere, to maintain their
           anonymity.
-        </p>
+        </Notice>
 
         <Rule />
 
@@ -296,42 +309,17 @@ export function AboutPage() {
 
         <Rule />
 
-        {/* --- contact and disclosure -------------------------------------- */}
-        <Reveal className="py-8 md:py-10" delayMs={240}>
-          <div className="max-w-[46rem] border-l-2 border-claret/70 pl-4 md:pl-6">
-            <p className="type-label text-claret">Notice to schools · Communications may be disclosed</p>
-            <p className="type-caption measure mt-3 text-ink-faint">
-              Any school that contacts IEA, for any reason, should expect a public, accurate
-              summary of its communication. Calls will be recorded only after participants have
-              been informed and have consented. IEA will publish summaries only as permitted by
-              applicable law.
-            </p>
-          </div>
-        </Reveal>
-
-        <Rule />
-
-        {/* --- provenance --------------------------------------------------- */}
-        <Reveal className="py-12 md:py-16" delayMs={260}>
-          <div className="flex flex-wrap gap-x-6 gap-y-3">
-            <Button asChild variant="outline">
-              <Link to="/rankings">See the rankings</Link>
-            </Button>
-            <Button asChild variant="link">
-              <Link to="/">Back to the home page</Link>
-            </Button>
-          </div>
-        </Reveal>
-
         {/* --- intellectual foundations ------------------------------------
-            Deliberately last and small: context for those who read this far,
-            not a headline. */}
-        <Rule />
+            Follows "Who we answer to": independence says who we answer to, this
+            says what we answer by. Kept quiet - context, not a headline. */}
         <section className="py-10 md:py-12">
-          <span className="type-label text-ink-faint">Intellectual foundations</span>
-          <h2 className="type-subheading mt-3 font-bold text-ink-muted">The Madisonian tradition</h2>
+          <div className="flex items-center gap-3">
+            <AccentRule />
+            <span className="type-label text-bronze-ink">Intellectual foundations</span>
+          </div>
+          <h2 className="type-subheading mt-3 font-bold text-ink">The Madisonian tradition</h2>
           <div className="mt-4 flex flex-col gap-3">
-            <p className="type-caption measure text-ink-faint">
+            <p className="type-body measure text-ink-muted">
               The founder holds that the ideas of James Madison remain central to how
               freedom is understood and protected around the world: that power must be
               checked, that those who hold it must answer to the people it affects, and
@@ -342,6 +330,27 @@ export function AboutPage() {
             </p>
           </div>
         </section>
+
+        <Rule />
+
+        {/* --- notices and legal position ----------------------------------
+            One place for everything the reader should know before relying on, or
+            contacting, the Institute. */}
+        <Reveal className="py-12 md:py-16" delayMs={240}>
+          <SectionHeader
+            eyebrow="Please note"
+            title="Notices and our legal position"
+            lede="How communications with the Institute are handled, and where we stand on legal action."
+          />
+          <div className="mt-8 max-w-[46rem]">
+            <Notice id="notices" tone="legal" label="Notice to schools · Communications may be disclosed">
+              Any school that contacts IEA, for any reason, should expect a public, accurate
+              summary of its communication. Calls will be recorded only after participants have
+              been informed and have consented. IEA will publish summaries only as permitted by
+              applicable law.
+            </Notice>
+          </div>
+        </Reveal>
 
         {/* --- institutional legal position -------------------------------- */}
         <Reveal className="py-12 md:py-16" delayMs={300}>
@@ -460,6 +469,20 @@ export function AboutPage() {
 
             </div>
           </section>
+        </Reveal>
+
+        <Rule />
+
+        {/* --- provenance --------------------------------------------------- */}
+        <Reveal className="py-12 md:py-16" delayMs={260}>
+          <div className="flex flex-wrap gap-x-6 gap-y-3">
+            <Button asChild variant="outline">
+              <Link to="/rankings">See the rankings</Link>
+            </Button>
+            <Button asChild variant="link">
+              <Link to="/">Back to the home page</Link>
+            </Button>
+          </div>
         </Reveal>
 
         {/* --- founder letters --------------------------------------------- */}

@@ -6,10 +6,16 @@
  */
 export function RedFlagLegalNotice() {
   return (
-    <details className="group my-6 border border-gold/40 bg-ink/45 backdrop-blur-sm">
+    <details className="group my-6 overflow-hidden rounded-md border border-gold/35 bg-ink/55 backdrop-blur-sm">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 sm:px-6 [&::-webkit-details-marker]:hidden">
-        <span className="type-heading text-ink-inverse">
-          Legal notice &amp; disclaimer
+        <span className="flex items-center gap-3">
+          <span
+            aria-hidden="true"
+            className="inline-flex size-7 shrink-0 items-center justify-center rounded-full border border-gold/50 font-serif text-sm font-bold text-gold"
+          >
+            §
+          </span>
+          <span className="type-heading text-ink-inverse">Legal notice &amp; disclaimer</span>
         </span>
         <span
           aria-hidden="true"
