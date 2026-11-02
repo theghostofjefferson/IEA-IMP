@@ -260,8 +260,8 @@ export function AboutPage() {
                 <TeamCard name="Ashmit Pandey" to={profilePathByName("Ashmit Pandey")} role="Managing Editor and Associate Researcher" photo={photoByName.get("Ashmit Pandey")} />
               </div>
               <div className="grid grid-cols-3 items-start justify-items-center gap-3 sm:gap-8 md:gap-10">
-                <TeamCard name="Abinash Poudel" to={profilePathByName("Abinash Poudel")} role="Lead of Online Research" photo={photoByName.get("Abinash Poudel")} />
                 <TeamCard name="Kaustuv Rimal" to={profilePathByName("Kaustuv Rimal")} role="Lead Researcher" />
+                <TeamCard name="Abinash Poudel" to={profilePathByName("Abinash Poudel")} role="Lead of Online Research" photo={photoByName.get("Abinash Poudel")} />
                 <TeamCard name="Krinjal Timalsina" to={profilePathByName("Krinjal Timalsina")} role="Lead Researcher" photo={photoByName.get("Krinjal Timalsina")} />
               </div>
             </div>
