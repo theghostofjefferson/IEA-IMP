@@ -2,7 +2,7 @@ import { contributors } from "@/data/contributors";
 import type { Contributor } from "@/lib/types";
 
 /**
- * PROFILE PAGES - one per listed member, except Research Associates.
+ * PROFILE PAGES - one per listed member, except Research Analysts.
  * ---------------------------------------------------------------------------
  * Each person below has a page at `/team/<id>`, linked from the About page and
  * from site search. THIS FILE IS WHERE THEIR WORDS GO: fill in any field and it
