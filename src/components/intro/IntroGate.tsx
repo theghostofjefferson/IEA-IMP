@@ -72,7 +72,7 @@ export function IntroGate({ children }: { children: ReactNode }) {
         data-intro-phase={phase}
         onClick={dismiss}
         className={cn(
-          "fixed inset-0 z-50 flex flex-col items-center justify-between bg-ink px-6 pb-12 pt-10 sm:pt-12",
+          "fixed inset-0 z-50 flex flex-col items-center justify-between bg-canvas px-6 pb-12 pt-10 sm:pt-12",
           // Never interactive. Kept on during the exit too, so a click lands on
           // the page underneath rather than the overlay.
           "pointer-events-none",
@@ -86,7 +86,7 @@ export function IntroGate({ children }: { children: ReactNode }) {
         <div className="intro-frame" aria-hidden="true" />
 
         <img
-          src="/brand/stacked-dark.webp"
+          src="/brand/stacked-light.webp"
           alt=""
           width={900}
           height={381}
@@ -95,14 +95,14 @@ export function IntroGate({ children }: { children: ReactNode }) {
         />
 
         <div className="relative flex w-full flex-col items-center gap-5">
-        <div className="h-px w-full bg-gold/50 my-4 md:my-6" aria-hidden="true" />
+        <div className="h-px w-full bg-bronze/50 my-4 md:my-6" aria-hidden="true" />
 
         <p
-          className="type-caption measure-snug text-center text-gold animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]"
+          className="type-caption measure-snug text-center text-ink animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]"
           style={{ animationDelay: "1600ms" }}
         >
-          &ldquo;If schools were angels, no accountability would be necessary.&rdquo;
-          <span className="mt-1 block text-ink-inverse/45">After James Madison, Federalist No. 51</span>
+          If men were angels, no government would be necessary.
+          <span className="mt-1 block text-ink/60">James Madison, Federalist No. 51</span>
         </p>
         </div>
 
@@ -110,7 +110,7 @@ export function IntroGate({ children }: { children: ReactNode }) {
         <p
           className={cn(
             "absolute inset-x-0 bottom-4 text-center type-caption sm:bottom-6",
-            "px-4 text-ink-inverse/45",
+            "px-4 text-ink/55",
             "animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]",
           )}
           style={{ animationDelay: "1900ms" }}
