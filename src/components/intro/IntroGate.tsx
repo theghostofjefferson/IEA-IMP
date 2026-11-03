@@ -72,7 +72,7 @@ export function IntroGate({ children }: { children: ReactNode }) {
         data-intro-phase={phase}
         onClick={dismiss}
         className={cn(
-          "fixed inset-0 z-50 flex flex-col items-center justify-between bg-canvas px-6 pb-12 pt-10 sm:pt-12",
+          "fixed inset-0 z-50 flex flex-col items-center justify-between bg-[#111111] px-6 pb-12 pt-10 sm:pt-12",
           // Never interactive. Kept on during the exit too, so a click lands on
           // the page underneath rather than the overlay.
           "pointer-events-none",
@@ -86,7 +86,7 @@ export function IntroGate({ children }: { children: ReactNode }) {
         <div className="intro-frame" aria-hidden="true" />
 
         <img
-          src="/brand/stacked-light.webp"
+          src="/brand/stacked-dark.webp"
           alt=""
           width={900}
           height={381}
@@ -95,14 +95,18 @@ export function IntroGate({ children }: { children: ReactNode }) {
         />
 
         <div className="relative flex w-full flex-col items-center gap-5">
-        <div className="h-px w-full bg-bronze/50 my-4 md:my-6" aria-hidden="true" />
+        {/* Holds the height the founder names used to take, so the quote sits
+            where it always has. */}
+        <div aria-hidden="true" className="type-caption invisible">&nbsp;</div>
+
+        <div className="h-px w-full bg-gold/50 my-4 md:my-6" aria-hidden="true" />
 
         <p
-          className="type-caption measure-snug text-center text-ink animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]"
+          className="type-caption measure-snug text-center text-gold animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]"
           style={{ animationDelay: "1600ms" }}
         >
           If men were angels, no government would be necessary.
-          <span className="mt-1 block text-ink/60">James Madison, Federalist No. 51</span>
+          <span className="mt-1 block text-ink-inverse/45">James Madison, Federalist No. 51</span>
         </p>
         </div>
 
@@ -110,7 +114,7 @@ export function IntroGate({ children }: { children: ReactNode }) {
         <p
           className={cn(
             "absolute inset-x-0 bottom-4 text-center type-caption sm:bottom-6",
-            "px-4 text-ink/55",
+            "px-4 text-ink-inverse/45",
             "animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]",
           )}
           style={{ animationDelay: "1900ms" }}
