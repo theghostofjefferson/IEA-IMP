@@ -99,19 +99,14 @@ export function IntroGate({ children }: { children: ReactNode }) {
             where it always has. */}
         <div aria-hidden="true" className="type-caption invisible">&nbsp;</div>
 
-        <div className="my-4 flex w-full items-center gap-3 md:my-6" aria-hidden="true">
-          <span className="h-px flex-1 bg-gold/50" />
-          <span className="size-1.5 rotate-45 border border-gold/80" />
-          <span className="h-px flex-1 bg-gold/50" />
-        </div>
+        <div className="my-4 h-px w-full bg-ink-inverse/20 md:my-6" aria-hidden="true" />
 
         <p
-          className="type-caption measure-snug text-center text-gold animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]"
+          className="type-caption measure-snug text-center text-ink-inverse/90 animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]"
           style={{ animationDelay: "1600ms" }}
         >
           If men were angels, no government would be necessary.
-          <span className="mx-auto mt-3 block h-px w-10 bg-gold/40" aria-hidden="true" />
-          <span className="mt-2 block text-ink-inverse/55 italic">James Madison, Federalist No. 51</span>
+          <span className="mt-3 block text-[0.7rem] uppercase tracking-[0.22em] text-ink-inverse/50">James Madison · Federalist No. 51</span>
         </p>
         </div>
 
