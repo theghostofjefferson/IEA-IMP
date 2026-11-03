@@ -192,7 +192,7 @@ export function AboutPage() {
                   featured
                 />
                 <Link
-                  to="/#statement"
+                  to="/notices#statement"
                   aria-label="Read the IEA statement of 31 October 2026 on the assault on freedom of expression in Nepal"
                   className="group relative mx-auto mt-6 block w-full max-w-[20rem] rounded-2xl border border-bronze/30 bg-gradient-to-b from-surface to-bronze-wash px-7 pb-5 pt-9 text-center shadow-[0_12px_30px_rgba(19,26,44,0.08)]"
                 >
