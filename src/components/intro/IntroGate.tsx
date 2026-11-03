@@ -2,14 +2,7 @@ import { useEffect, type ReactNode } from "react";
 import { useLocation } from "react-router";
 
 import { useIntro } from "@/hooks/useIntro";
-import { contributors } from "@/data/contributors";
 import { cn } from "@/lib/utils";
-
-/** First line of the org chart: the founders (2). */
-const firstLine: typeof contributors = [
-  ...contributors.filter((c) => c.id === "eron-subedi"),
-  ...contributors.filter((c) => c.id === "yogeshwor-sharma"),
-];
 
 /**
  * The splash screen: a short credit sequence, then the site.
@@ -79,7 +72,7 @@ export function IntroGate({ children }: { children: ReactNode }) {
         data-intro-phase={phase}
         onClick={dismiss}
         className={cn(
-          "fixed inset-0 z-50 flex flex-col items-center justify-between bg-ink px-6 pb-12 pt-10 sm:pt-12",
+          "fixed inset-0 z-50 flex flex-col items-center justify-between bg-[#0f1b24] px-6 pb-12 pt-10 sm:pt-12",
           // Never interactive. Kept on during the exit too, so a click lands on
           // the page underneath rather than the overlay.
           "pointer-events-none",
@@ -102,26 +95,10 @@ export function IntroGate({ children }: { children: ReactNode }) {
         />
 
         <div className="relative flex w-full flex-col items-center gap-5">
-        {/* Founders: names only, set small and low in contrast. No portraits —
-            the people are credited, not featured. */}
-        <div
-          className="grid w-full max-w-3xl grid-cols-2 items-center gap-4 type-caption text-ink-inverse/55 tracking-[0.12em] uppercase animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both] sm:tracking-[0.18em]"
-          style={{ animationDelay: "1250ms" }}
-        >
-          {firstLine.map((person, index) => (
-            <span
-              key={person.id}
-              className={index === 0 ? "min-w-0 text-left" : "min-w-0 text-right"}
-            >
-              {person.name}
-            </span>
-          ))}
-        </div>
-
-        <div className="h-px w-full bg-gold/50 my-4 md:my-6" aria-hidden="true" />
+        <div className="h-px w-full bg-ink-inverse/25 my-4 md:my-6" aria-hidden="true" />
 
         <p
-          className="type-caption measure-snug text-center text-gold animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]"
+          className="type-caption measure-snug text-center text-ink-inverse/85 animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]"
           style={{ animationDelay: "1600ms" }}
         >
           &ldquo;If men were angels, no government would be necessary.&rdquo;

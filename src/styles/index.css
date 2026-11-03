@@ -880,13 +880,14 @@ html.intro-active {
   position: absolute;
   inset: 0;
   background: url("/images/madison/profile-silhouette.png") center 55% / auto 62% no-repeat;
-  opacity: 0.14;
+  opacity: 0.1;
+  filter: grayscale(1);
 }
 
 .intro-frame {
   position: absolute;
   inset: 1rem;
-  border: 1px solid rgb(201 164 92 / 0.3);
+  border: 1px solid rgb(244 236 216 / 0.16);
   pointer-events: none;
 }
 
