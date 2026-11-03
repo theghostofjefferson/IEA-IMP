@@ -72,7 +72,7 @@ export function IntroGate({ children }: { children: ReactNode }) {
         data-intro-phase={phase}
         onClick={dismiss}
         className={cn(
-          "fixed inset-0 z-50 flex flex-col items-center justify-between bg-[#17233b] px-6 pb-12 pt-10 sm:pt-12",
+          "fixed inset-0 z-50 flex flex-col items-center justify-between bg-ink px-6 pb-12 pt-10 sm:pt-12",
           // Never interactive. Kept on during the exit too, so a click lands on
           // the page underneath rather than the overlay.
           "pointer-events-none",
@@ -102,7 +102,7 @@ export function IntroGate({ children }: { children: ReactNode }) {
           style={{ animationDelay: "1600ms" }}
         >
           &ldquo;If schools were angels, no accountability would be necessary.&rdquo;
-          <span className="mt-1 block text-ink-inverse/45">After Madison, Federalist No. 51</span>
+          <span className="mt-1 block text-ink-inverse/45">After James Madison, Federalist No. 51</span>
         </p>
         </div>
 
