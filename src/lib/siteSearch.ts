@@ -99,7 +99,7 @@ export const PAGES: SearchEntry[] = [
     kind: "page",
     title: "IEA statement, 31 October 2026",
     subtitle: "On the Assault on Freedom of Expression in Nepal",
-    to: "/#statement",
+    to: "/notices#statement",
     keywords: "statement press freedom expression free speech journalists electronic transactions act",
   },
 ];
