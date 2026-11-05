@@ -241,13 +241,13 @@ export function AboutPage() {
 
           <div aria-hidden="true" className="my-10 h-px w-full bg-bronze/35 md:my-12" />
 
-          {/* Leadership — Aarohan, S. Lamichhane, Tikaram, Prajjwal */}
+          {/* Leadership — Aarohan, S. Lamichhane, Tikaram, Prajjwal (Management Advisor) */}
           <section className="mb-14 md:mb-20">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 items-start justify-items-center">
               <TeamCard name="Aarohan Baral" to={profilePathByName("Aarohan Baral")} role="Founding Member & Lead Developer" photo={photoByName.get("Aarohan Baral")} />
               <TeamCard name="S. Lamichhane" to={profilePathByName("S. Lamichhane")} role="Founding Member & COO" photo={photoByName.get("S. Lamichhane")} />
               <TeamCard name="Tikaram Sharma" to={profilePathByName("Tikaram Sharma")} role="Co-Founder & Statistical Analyst" photo={photoByName.get("Tikaram Sharma")} />
-              <TeamCard name="Prajjwal Dhakal" to={profilePathByName("Prajjwal Dhakal")} role="Founding Member" photo={photoByName.get("Prajjwal Dhakal")} />
+              <TeamCard name="Prajjwal Dhakal" to={profilePathByName("Prajjwal Dhakal")} role="Management Advisor" photo={photoByName.get("Prajjwal Dhakal")} />
             </div>
           </section>
 
@@ -302,9 +302,8 @@ export function AboutPage() {
               <span className="type-label absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-bronze/40 bg-surface px-4 py-1.5 text-bronze-ink">
                 Other Analysts
               </span>
-              <div className="grid grid-cols-2 items-start justify-items-center gap-4 sm:gap-8 md:gap-12">
+              <div className="flex justify-center">
                 <TeamCard name="Noaime G." role="Statistical Analyst" />
-                <TeamCard name="E. Baskota" role="Data Analyst" />
               </div>
             </div>
           </section>
