@@ -119,7 +119,7 @@ export const profiles: Record<string, MemberProfile> = {
   },
   "prajjwal-dhakal": {
     bio: [
-      "Prajjwal Dhakal was associated with the Institute for Educational Accountability from the earliest stages of its establishment and was designated a Founding Member in recognition of his substantial support.",
+      "Prajjwal Dhakal was associated with the Institute for Educational Accountability from the earliest stages of its establishment and serves as Management Advisor in recognition of his substantial support.",
       "His early commitment and financial assistance helped provide the resources necessary for the organisation to establish its initial operations and pursue its institutional objectives.",
     ],
   },
