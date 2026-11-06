@@ -288,11 +288,12 @@ export function AboutPage() {
               <span className="type-label absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-bronze/40 bg-surface px-4 py-1.5 text-bronze-ink">
                 Research Analysts
               </span>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 justify-items-center">
+              <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-6 md:gap-8 justify-items-center">
                 <TeamCard name="Aadarsha Pandey" to={profilePathByName("Aadarsha Pandey")} role="Research Analyst" />
                 <TeamCard name="Piyush Joshi" to={profilePathByName("Piyush Joshi")} role="Research Analyst" photo={photoByName.get("Piyush Joshi")} />
                 <TeamCard name="Pratyush Neupane" to={profilePathByName("Pratyush Neupane")} role="Research Analyst" photo={photoByName.get("Pratyush Neupane")} />
                 <TeamCard name="Sambriddhi Bhattarai" to={profilePathByName("Sambriddhi Bhattarai")} role="Research Analyst" photo={photoByName.get("Sambriddhi Bhattarai")} />
+                <TeamCard name="Paul Thapa" to={profilePathByName("Paul Thapa")} role="Research Analyst" />
                 <TeamCard name="Kashyap Shrestha" to={profilePathByName("Kashyap Shrestha")} role="Research Analyst" photo={photoByName.get("Kashyap Shrestha")} />
               </div>
             </div>
