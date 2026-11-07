@@ -1,9 +1,10 @@
-import { Suspense, lazy, useEffect, useLayoutEffect, useRef, type ReactNode } from "react";
-import { BrowserRouter, Route, Routes, useLocation, useNavigationType } from "react-router";
+import { Suspense, lazy, useEffect, type ReactNode } from "react";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router";
 
 import { ErrorBoundary } from "@/components/site/ErrorBoundary";
 import { IntroGate } from "@/components/intro/IntroGate";
 import { Masthead } from "@/components/site/Masthead";
+import { ScrollManager } from "@/components/site/ScrollManager";
 import { SiteFooter } from "@/components/site/SiteFooter";
 
 import { HomePage } from "@/pages/HomePage";
@@ -103,6 +104,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
 
   return (
     <IntroGate>
+      <ScrollManager />
       <ScrollReset pathname={pathname} />
 
       {/* First tab stop. A table-heavy site needs this. */}
@@ -139,73 +141,14 @@ function PageFallback() {
 }
 
 /**
- * Scroll and focus management for route changes.
+ * Focus management for route changes. (Scroll position is owned by
+ * `ScrollManager`.)
  *
- * Scroll: reset to top on PUSH/REPLACE, leave POP alone so the browser's own
- * back/forward restoration works. `behavior: "instant"`, never "smooth" — a
- * smooth scroll on navigation fights the route transition and reads as lag.
- *
- * Focus: move to the new page's `<h1>` so a screen-reader user is told the page
+ * Move focus to the new page's `<h1>` so a screen-reader user is told the page
  * changed. Without it, focus stays on the link they clicked and the next Tab
  * lands somewhere mid-page. Every `<h1>` therefore carries `tabIndex={-1}`.
  */
 function ScrollReset({ pathname }: { pathname: string }) {
-  const navType = useNavigationType();
-  const { search } = useLocation();
-  // The rankings page switches between "rankings" and "under review" via `?view=`
-  // on the same pathname, so that param counts as a page change too.
-  const view = new URLSearchParams(search).get("view") ?? "";
-  const isFirstRender = useRef(true);
-
-  // Scroll to the top before the browser paints the new route, so a reader
-  // never sees the new page at the old page's offset, not even for a frame.
-  useLayoutEffect(() => {
-    if (isFirstRender.current || navType === "POP" || window.location.hash) return;
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-  }, [pathname, view, navType]);
-
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-    if (navType === "POP") return;
-    // Deep links such as `/#statement` scroll themselves into view; one reset
-    // only, so the hold below never fights them.
-    if (window.location.hash) {
-      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-      return;
-    }
-    // Hold the page at the top for a short window instead of scrolling once.
-    // On a first visit the lazy route chunk and fonts arrive after this effect,
-    // and on phones the page height changes underneath us (collapsing to the
-    // placeholder, then growing), so a single scroll gets undone and the new
-    // page opens at the previous page's offset. Re-applying every frame until
-    // the content settles - and stopping the instant the reader touches,
-    // scrolls or presses a key - avoids that without ever fighting them.
-    let stopped = false;
-    let raf = 0;
-    const started = performance.now();
-    const HOLD_MS = 2000;
-    const stop = () => {
-      stopped = true;
-      cancelAnimationFrame(raf);
-    };
-    const tick = () => {
-      if (stopped) return;
-      if (window.scrollY !== 0) window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-      if (performance.now() - started < HOLD_MS) raf = requestAnimationFrame(tick);
-    };
-    const events = ["touchstart", "wheel", "keydown", "mousedown"] as const;
-    for (const e of events) window.addEventListener(e, stop, { passive: true, once: true });
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-    raf = requestAnimationFrame(tick);
-    return () => {
-      stop();
-      for (const e of events) window.removeEventListener(e, stop);
-    };
-  }, [pathname, view, navType]);
-
   useEffect(() => {
     // Wait a frame so the new page's heading is in the DOM.
     const id = requestAnimationFrame(() => {
