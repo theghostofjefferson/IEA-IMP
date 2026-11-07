@@ -245,7 +245,7 @@ export function AboutPage() {
           <section className="mb-14 md:mb-20">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 items-start justify-items-center">
               <TeamCard name="Aarohan Baral" to={profilePathByName("Aarohan Baral")} role="Founding Member & Lead Developer" photo={photoByName.get("Aarohan Baral")} />
-              <TeamCard name="S. Lamichhane" to={profilePathByName("S. Lamichhane")} role="Founding Member & COO" photo={photoByName.get("S. Lamichhane")} />
+              <TeamCard name="S. Lamichhane" to={profilePathByName("S. Lamichhane")} role="Founding Member & Vice President" photo={photoByName.get("S. Lamichhane")} />
               <TeamCard name="Tikaram Sharma" to={profilePathByName("Tikaram Sharma")} role="Co-Founder & Statistical Analyst" photo={photoByName.get("Tikaram Sharma")} />
               <TeamCard name="Prajjwal Dhakal" to={profilePathByName("Prajjwal Dhakal")} role="Management Advisor" photo={photoByName.get("Prajjwal Dhakal")} />
             </div>
