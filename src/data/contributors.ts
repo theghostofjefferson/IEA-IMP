@@ -24,7 +24,7 @@ export const contributors: Contributor[] = [
   { id: "yogeshwor-sharma", name: "Yogeshwor Sharma", role: "Co-Founder, President, & Head of Operations", photo: "/people/yogeshwor-sharma.jpg" },
   { id: "eron-subedi", name: "Eron Subedi", role: "Founder, Executive Chairman & Chief of Investigations", photo: "/people/eron-subedi.jpeg" },
   { id: "aarohan-baral", name: "Aarohan Baral", role: "Founding Member & Lead Developer", },
-  { id: "s-lamichhane", name: "S. Lamichhane", role: "Founding Member & COO", },
+  { id: "s-lamichhane", name: "S. Lamichhane", role: "Founding Member & Vice President", },
   { id: "tikaram-sharma", name: "Tikaram Sharma", role: "Co-Founder & Statistical Analyst", photo: "/people/tikaram-sharma.jpg" },
   { id: "prajjwal-dhakal", name: "Prajjwal Dhakal", role: "Management Advisor", photo: "/people/prajjwal-dhakal.jpeg" },
   { id: "abhinash-poudel", name: "Abinash Poudel", role: "Lead Online Research", photo: "/people/abinash-poudel.jpg" },
