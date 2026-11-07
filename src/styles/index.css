@@ -1401,3 +1401,13 @@ html.intro-active {
 .founder-profile-card .group > div > p:first-child {
   color: var(--bronze-ink);
 }
+
+/* Scroll anchoring lets Chrome on Android shift the scroll position when the
+   page height changes under it, which is exactly what happens while a route
+   swaps from the old page to the placeholder to the new page. That made new
+   pages open part-way down. The route change sets the scroll position itself,
+   so the browser's adjustment is switched off. */
+html,
+body {
+  overflow-anchor: none;
+}

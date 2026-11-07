@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useRef, type ReactNode } from "react";
+import { Suspense, lazy, useEffect, useLayoutEffect, useRef, type ReactNode } from "react";
 import { BrowserRouter, Route, Routes, useLocation, useNavigationType } from "react-router";
 
 import { ErrorBoundary } from "@/components/site/ErrorBoundary";
@@ -157,6 +157,13 @@ function ScrollReset({ pathname }: { pathname: string }) {
   const view = new URLSearchParams(search).get("view") ?? "";
   const isFirstRender = useRef(true);
 
+  // Scroll to the top before the browser paints the new route, so a reader
+  // never sees the new page at the old page's offset, not even for a frame.
+  useLayoutEffect(() => {
+    if (isFirstRender.current || navType === "POP" || window.location.hash) return;
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [pathname, view, navType]);
+
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
@@ -179,7 +186,7 @@ function ScrollReset({ pathname }: { pathname: string }) {
     let stopped = false;
     let raf = 0;
     const started = performance.now();
-    const HOLD_MS = 900;
+    const HOLD_MS = 2000;
     const stop = () => {
       stopped = true;
       cancelAnimationFrame(raf);
