@@ -28,6 +28,11 @@ export type Seo = {
    * so the links out of the page still pass authority to the schools.
    */
   noindex?: boolean;
+  /**
+   * With `noindex`, emit `robots: noindex, nofollow` instead. Used by the
+   * unlisted `/forms` page, whose links should not be followed either.
+   */
+  nofollow?: boolean;
   /** Social-share title when it should differ from the document title. */
   ogTitle?: string;
 };
@@ -81,6 +86,11 @@ export const SEO = {
   notices: build(
     "Notices & Publications",
     "Statements issued by the Institute for Educational Accountability, with its annual report and methodology.",
+  ),
+  forms: build(
+    "Student Experiences and Educational Equity",
+    "A confidential form collecting student experiences of educational treatment.",
+    { noindex: true, nofollow: true },
   ),
   reportConcern: build(
     "Whistleblower & Public Interest Disclosure",
@@ -206,7 +216,7 @@ export function headTags(seo: Seo, path: string, origin: string): HeadTag[] {
   }
 
   if (seo.noindex) {
-    tags.push({ tag: "meta", attr: "name", key: "robots", content: "noindex, follow" });
+    tags.push({ tag: "meta", attr: "name", key: "robots", content: seo.nofollow ? "noindex, nofollow" : "noindex, follow" });
   }
 
   return tags;
