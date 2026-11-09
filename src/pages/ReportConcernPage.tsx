@@ -4,7 +4,7 @@ import { Container } from "@/components/site/Container";
 import { Notice } from "@/components/site/Notice";
 import { Reveal } from "@/components/site/Reveal";
 import { Rule, AccentRule } from "@/components/site/Rule";
-import { useTallyEmbed } from "@/hooks/useTallyEmbed";
+import { TallyEmbed } from "@/components/site/TallyEmbed";
 import { SEO, applySeo } from "@/lib/seo";
 
 /** The Tally form. `dynamicHeight=1` lets Tally resize the iframe to fit. */
@@ -40,11 +40,10 @@ const TERMS = [
  *
  * A page the reader may reach in a difficult moment, so it is deliberately
  * plain: what we accept, what we cannot promise, what not to send, then the
- * form. The form itself is Tally's, embedded; see `hooks/useTallyEmbed.ts`.
+ * form. The form itself is Tally's, embedded; see `components/site/TallyEmbed.tsx`.
  */
 export function ReportConcernPage() {
   useEffect(() => applySeo(SEO.reportConcern), []);
-  useTallyEmbed();
 
   return (
     <Container>
@@ -99,23 +98,7 @@ export function ReportConcernPage() {
               Submit a disclosure
             </h2>
             <div className="mt-6 rounded-md border border-rule-soft bg-surface/70 px-3 py-4 sm:px-6 sm:py-6 md:px-8">
-              <iframe
-                data-tally-src={FORM_SRC}
-                loading="lazy"
-                width="100%"
-                height="620"
-                title="Whistleblower and Public Interest Disclosure form"
-                className="block w-full border-0"
-              />
-              <noscript>
-                <p className="type-body text-ink-muted">
-                  The form needs JavaScript. You can also open it directly:{" "}
-                  <a href={FORM_SRC} className="underline underline-offset-4">
-                    Whistleblower &amp; Public Interest Disclosure form
-                  </a>
-                  .
-                </p>
-              </noscript>
+              <TallyEmbed src={FORM_SRC} title="Whistleblower and Public Interest Disclosure form" />
             </div>
           </section>
         </Reveal>
