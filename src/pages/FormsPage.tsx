@@ -49,7 +49,7 @@ const COPY: Record<
 };
 
 const CHOICES: { lang: Lang; name: string; hint: string; hintLang: Lang }[] = [
-  { lang: "en", name: "English", hint: "Fill in the survey in English", hintLang: "en" },
+  { lang: "en", name: "English", hint: "Take the survey in English", hintLang: "en" },
   { lang: "ne", name: "नेपाली", hint: "सर्वेक्षण नेपालीमा भर्नुहोस्", hintLang: "ne" },
 ];
 
@@ -104,10 +104,10 @@ export function FormsPage() {
           <Reveal className="py-10 md:py-14" delayMs={60}>
             <section aria-labelledby="choose-language">
               <h2 id="choose-language" className="type-heading measure text-ink">
-                Would you like to fill in this survey in English or Nepali?
+                Which language would you like to use for this survey?
               </h2>
               <p lang="ne" className="type-body-lg measure mt-2 text-ink-muted">
-                तपाईं यो सर्वेक्षण अंग्रेजीमा भर्न चाहनुहुन्छ कि नेपालीमा?
+                तपाईं यो सर्वेक्षणका लागि कुन भाषा प्रयोग गर्न चाहनुहुन्छ?
               </p>
 
               <ul className="mt-8 grid gap-4 sm:grid-cols-2 md:gap-6">
