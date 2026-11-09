@@ -4,7 +4,7 @@ import { Container } from "@/components/site/Container";
 import { Notice } from "@/components/site/Notice";
 import { Reveal } from "@/components/site/Reveal";
 import { Rule, AccentRule } from "@/components/site/Rule";
-import { useTallyEmbed } from "@/hooks/useTallyEmbed";
+import { TallyEmbed } from "@/components/site/TallyEmbed";
 import { SEO, applySeo } from "@/lib/seo";
 
 /** The Tally form. `dynamicHeight=1` lets Tally resize the iframe to fit. */
@@ -17,11 +17,10 @@ const FORM_SRC =
  * in an `X-Robots-Tag` header). It is not access-controlled; anyone with the
  * link can open it.
  *
- * The form is Tally's, embedded unchanged; see `hooks/useTallyEmbed.ts`.
+ * The form is Tally's, embedded unchanged; see `components/site/TallyEmbed.tsx`.
  */
 export function FormsPage() {
   useEffect(() => applySeo(SEO.forms), []);
-  useTallyEmbed();
 
   return (
     <Container>
@@ -54,26 +53,7 @@ export function FormsPage() {
         </Reveal>
 
         <Reveal className="pb-14 md:pb-20" delayMs={90}>
-          <iframe
-            data-tally-src={FORM_SRC}
-            loading="lazy"
-            width="100%"
-            height="200"
-            frameBorder="0"
-            marginHeight={0}
-            marginWidth={0}
-            title="Student Experiences and Educational Equity"
-            className="block w-full"
-          />
-          <noscript>
-            <p className="type-body text-ink-muted">
-              The form needs JavaScript. You can also open it directly:{" "}
-              <a href={FORM_SRC} className="underline underline-offset-4">
-                Student Experiences and Educational Equity form
-              </a>
-              .
-            </p>
-          </noscript>
+          <TallyEmbed src={FORM_SRC} title="Student Experiences and Educational Equity" eager />
         </Reveal>
       </div>
     </Container>
