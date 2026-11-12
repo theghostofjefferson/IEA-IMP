@@ -1,4 +1,13 @@
-import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent, type RefObject } from "react";
+import {
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+  type KeyboardEvent,
+  type RefObject,
+} from "react";
 import { useNavigate } from "react-router";
 
 import { Monogram } from "@/components/data-display/Monogram";
@@ -8,7 +17,13 @@ import { KIND_LABEL, runSearch, type SearchEntry } from "@/lib/siteSearch";
 import { cn } from "@/lib/utils";
 
 /**
- * Site search, as a centred dialog.
+ * Site search: a centred dialog on larger screens, a full-height sheet on phones.
+ *
+ * On a phone the on-screen keyboard covers half the screen, so a floating box
+ * with a blurred page behind it looks broken and its results hide under the
+ * keys. The sheet instead fills the screen with a solid background, follows the
+ * visual viewport (so it ends exactly where the keyboard begins), and swaps the
+ * keyboard-only "Esc" hint for a plain "Cancel".
  *
  * Searches schools, institutions under review, the people behind the Institute
  * and the site's own pages (see `lib/siteSearch.ts`). Fully keyboard driven:
@@ -33,6 +48,8 @@ export function SearchPalette({
 
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(0);
+  // Height of what is actually visible (shrinks when the keyboard opens).
+  const [visibleHeight, setVisibleHeight] = useState<number | null>(null);
 
   const groups = useMemo(() => runSearch(query), [query]);
   const flat: SearchEntry[] = useMemo(() => groups.flatMap((g) => g.items), [groups]);
@@ -56,6 +73,19 @@ export function SearchPalette({
       trigger?.focus();
     };
   }, [open, returnFocusRef]);
+
+  // Follow the visual viewport so the phone sheet stops above the keyboard.
+  useEffect(() => {
+    if (!open) return;
+    const vv = window.visualViewport;
+    if (!vv) return;
+    const update = () => setVisibleHeight(Math.round(vv.height));
+    vv.addEventListener("resize", update);
+    return () => {
+      vv.removeEventListener("resize", update);
+      setVisibleHeight(null);
+    };
+  }, [open]);
 
   // Keep the highlighted row in view while arrowing.
   useEffect(() => {
@@ -133,7 +163,7 @@ export function SearchPalette({
       aria-hidden={!open}
       inert={!open}
       className={cn(
-        "fixed inset-0 z-50 flex items-start justify-center px-4 pt-[12vh] sm:pt-[14vh]",
+        "fixed inset-0 z-50 flex items-start justify-center sm:px-4 sm:pt-[14vh]",
         open ? "" : "pointer-events-none",
       )}
     >
@@ -154,14 +184,16 @@ export function SearchPalette({
         aria-modal="true"
         aria-label="Search the Institute"
         onKeyDown={onKeyDown}
+        style={{ "--vvh": visibleHeight ? `${visibleHeight}px` : "100dvh" } as CSSProperties}
         className={cn(
-          "relative flex w-full max-w-xl flex-col overflow-hidden rounded-md border border-rule-soft bg-surface shadow-[0_20px_50px_-24px_rgba(19,26,44,0.55)] transition-[opacity,transform] ease-brand",
+          "relative flex h-[var(--vvh)] w-full flex-col overflow-hidden bg-surface transition-[opacity,transform] ease-brand",
+          "sm:h-auto sm:max-w-xl sm:rounded-md sm:border sm:border-rule-soft sm:shadow-[0_20px_50px_-24px_rgba(19,26,44,0.55)]",
           reduced ? "duration-0" : "duration-200",
           open ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0",
         )}
       >
         {/* Input row */}
-        <div className="flex items-center gap-3 px-4 sm:px-5">
+        <div className="flex items-center gap-3 border-b border-rule-soft px-4 sm:border-b-0 sm:px-5">
           <svg
             aria-hidden="true"
             className="size-[18px] shrink-0 text-ink-muted"
@@ -193,7 +225,7 @@ export function SearchPalette({
             }}
             placeholder="Search schools, people and pages"
             aria-label="Search the Institute"
-            className="h-14 min-w-0 flex-1 bg-transparent font-sans text-base text-ink placeholder:text-ink-faint focus:outline-none"
+            className="h-16 min-w-0 flex-1 bg-transparent sm:h-14 font-sans text-base text-ink placeholder:text-ink-faint focus:outline-none"
           />
           {hasQuery ? (
             <button
@@ -215,27 +247,42 @@ export function SearchPalette({
             type="button"
             onClick={onClose}
             aria-label="Close search"
-            className="shrink-0 rounded-sm border border-rule-soft px-1.5 py-0.5 font-sans text-[0.625rem] font-semibold uppercase tracking-[0.12em] text-ink-faint transition-colors hover:text-ink"
+            className="hidden shrink-0 rounded-sm border border-rule-soft px-1.5 py-0.5 font-sans text-[0.625rem] font-semibold uppercase tracking-[0.12em] text-ink-faint transition-colors hover:text-ink sm:inline-block"
           >
             Esc
           </button>
+          <button
+            type="button"
+            onClick={onClose}
+            className="shrink-0 py-2 pl-1 font-sans text-[0.9375rem] font-semibold text-bronze-ink sm:hidden"
+          >
+            Cancel
+          </button>
         </div>
 
-        {/* Results: the panel grows open only once there is something to show. */}
+        {/* Phone only: a calm line in place of an empty sheet. */}
+        {!hasQuery ? (
+          <p className="px-5 pt-6 font-sans text-sm leading-relaxed text-ink-muted sm:hidden">
+            Search for a school, a district, a member of the Institute, or a page of this site.
+          </p>
+        ) : null}
+
+        {/* Results. On larger screens the panel grows open only once there is something to show. */}
         <div
           className={cn(
-            "grid transition-[grid-template-rows] ease-brand",
-            reduced ? "duration-0" : "duration-200",
-            hasQuery ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+            "min-h-0 flex-1 overflow-hidden sm:grid sm:flex-none sm:transition-[grid-template-rows] sm:ease-brand",
+            !hasQuery && "max-sm:hidden",
+            reduced ? "sm:duration-0" : "sm:duration-200",
+            hasQuery ? "sm:grid-rows-[1fr]" : "sm:grid-rows-[0fr]",
           )}
         >
-          <div className="min-h-0 overflow-hidden">
-            <div className="border-t border-rule-soft">
+          <div className="h-full min-h-0 overflow-hidden sm:h-auto">
+            <div className="flex h-full flex-col sm:block sm:h-auto sm:border-t sm:border-rule-soft">
               <div
                 id={`${uid}-list`}
                 role="listbox"
                 aria-label="Search results"
-                className="max-h-[min(24rem,56vh)] overflow-y-auto overscroll-contain p-1.5"
+                className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-2 sm:max-h-[min(24rem,56vh)] sm:flex-none sm:p-1.5"
               >
                 {hasQuery && groups.length === 0 ? (
                   <div className="px-4 py-8 text-center">
