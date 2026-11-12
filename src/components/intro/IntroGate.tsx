@@ -21,8 +21,8 @@ import { cn } from "@/lib/utils";
  *
  *   - the page is live and interactive from the first frame, so there is never
    *     a blank screen and a throttled timer cannot produce a broken site
-   *   - the overlay starts at `opacity: 0` AND `pointer-events: none`, so it
-   *     costs nothing until it fades in and can never swallow a click
+   *   - the overlay catches taps from the first frame, so the tap that closes it
+   *     is spent on closing it and cannot reach a link or card underneath
    *   - the exit can REVEAL the page (a clip-path wipe upward) instead of
    *     cross-fading two things, which reads as a designed transition
  *
@@ -73,9 +73,11 @@ export function IntroGate({ children }: { children: ReactNode }) {
         onClick={dismiss}
         className={cn(
           "fixed inset-0 z-50 flex flex-col items-center justify-between bg-ink px-6 pb-12 pt-10 sm:pt-12",
-          // Never interactive. Kept on during the exit too, so a click lands on
-          // the page underneath rather than the overlay.
-          "pointer-events-none",
+          // Catches every tap while it is up, including during the 400ms exit, so a
+          // tap meant to dismiss never lands on the page beneath it. It is removed
+          // from the DOM when the exit finishes. `touch-manipulation` removes the
+          // double-tap-zoom delay on phones.
+          "cursor-pointer touch-manipulation",
           exiting
             ? "animate-[intro-overlay-out_400ms_cubic-bezier(0.65,0,0.35,1)_both]"
             : "animate-[intro-overlay-in_300ms_cubic-bezier(0.16,1,0.3,1)_both]",

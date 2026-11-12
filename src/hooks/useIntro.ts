@@ -93,11 +93,16 @@ export function useIntro(enabled: boolean) {
    */
   const effective: IntroPhase = reduced || !enabled ? "done" : phase;
 
-  /** Jump to the exit, or straight to done if already leaving. */
+  /**
+   * Jump to the exit. The exit animation takes 400ms, after which the overlay is
+   * unmounted. (Dismissing clears the scheduled timeline, so the unmount has to
+   * be scheduled here, or the overlay would stay mounted, invisible, forever.)
+   */
   const dismiss = useCallback(() => {
     timers.current.forEach(clearTimeout);
     timers.current = [];
     setPhase((current) => (current === "exiting" || current === "done" ? current : "exiting"));
+    timers.current.push(window.setTimeout(() => setPhase("done"), INTRO.total - INTRO.hold + 20));
   }, []);
 
   useEffect(() => {
@@ -119,19 +124,16 @@ export function useIntro(enabled: boolean) {
     };
   }, [enabled, reduced, phase]);
 
-  // Any interaction dismisses. `once` because the first one is all that
-  // matters; `passive` because we never call preventDefault. A reader who is
-  // already reaching for something should not be made to wait two seconds.
+  // A key press dismisses. Pointer input does NOT go through here: the overlay
+  // itself receives the click (see `IntroGate`), so that tap is spent on closing
+  // the splash and never reaches the page underneath. Listening on `window` for
+  // `pointerdown` instead closed the splash but let the same tap fall through to
+  // whatever link or card was beneath the reader's finger.
   useEffect(() => {
     if (effective === "done" || effective === "exiting") return;
-    const opts = { passive: true, once: true } as const;
-    const onDismiss = () => dismiss();
-    window.addEventListener("pointerdown", onDismiss, opts);
-    window.addEventListener("keydown", onDismiss, opts);
-    return () => {
-      window.removeEventListener("pointerdown", onDismiss);
-      window.removeEventListener("keydown", onDismiss);
-    };
+    const onKey = () => dismiss();
+    window.addEventListener("keydown", onKey, { passive: true, once: true });
+    return () => window.removeEventListener("keydown", onKey);
   }, [effective, dismiss]);
 
   return {
