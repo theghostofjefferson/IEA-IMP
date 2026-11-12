@@ -14,8 +14,8 @@ export function SiteFooter() {
   return (
     <footer className="madison-foot mt-16 border-t-4 border-double border-gold bg-ink text-ink-inverse md:mt-24">
       <Container>
-        <div className="grid gap-10 py-12 md:grid-cols-2 md:gap-12 md:py-16 xl:grid-cols-4">
-          <div>
+        <div className="grid gap-x-12 gap-y-12 py-14 md:grid-cols-2 md:py-20 xl:grid-cols-[1.35fr_0.8fr_0.85fr_1.2fr] xl:gap-x-14">
+          <div className="md:col-span-2 xl:col-span-1">
             <img
               src="/brand/horizontal-dark.webp"
               alt="The Institute for Educational Accountability"
@@ -25,7 +25,7 @@ export function SiteFooter() {
               decoding="async"
               className="h-auto w-full max-w-[22rem]"
             />
-            <p className="type-body mt-5 measure-snug text-ink-inverse/70">
+            <p className="type-body mt-6 max-w-[26rem] text-ink-inverse/70">
               An independent examination of Nepali schools, grounded in verified student
               testimony, field inquiry, and credible public sources, undertaken to illuminate
               the institutions entrusted with educating the next generation.
@@ -33,8 +33,8 @@ export function SiteFooter() {
           </div>
 
           <nav aria-label="Footer">
-            <h2 className="type-label text-ink-inverse/50">Pages</h2>
-            <ul className="mt-4 space-y-2">
+            <FooterHeading>Pages</FooterHeading>
+            <ul className="mt-5 space-y-3">
               <FooterLink to="/">Home</FooterLink>
               <FooterLink to="/rankings">Ranking</FooterLink>
               <FooterLink to="/methodology">Methodology</FooterLink>
@@ -46,8 +46,8 @@ export function SiteFooter() {
           </nav>
 
           <div>
-            <h2 className="type-label text-ink-inverse/50">Data</h2>
-            <dl className="mt-4 space-y-2">
+            <FooterHeading>Data</FooterHeading>
+            <dl className="mt-5 divide-y divide-ink-inverse/10 border-y border-ink-inverse/10">
               <Datum term="Schools" value={formatCount(totalSchools)} />
               <Datum term="Responses" value={formatCountPlus(meta.totalResponses)} />
               <Datum term="Published" value={formatDate(meta.publicationDate)} />
@@ -55,10 +55,8 @@ export function SiteFooter() {
           </div>
 
           <section aria-labelledby="footer-contact-heading">
-            <h2 id="footer-contact-heading" className="type-label text-ink-inverse/50">
-              Contact us
-            </h2>
-            <address className="mt-4 space-y-3 not-italic">
+            <FooterHeading id="footer-contact-heading">Contact us</FooterHeading>
+            <address className="mt-5 space-y-4 not-italic">
               <ContactLine label="General enquiries" email="info@ieainstitute.org" />
               <ContactLine label="Founder enquiries" email="founder@ieainstitute.org" />
             </address>
@@ -110,28 +108,22 @@ export function SiteFooter() {
 
         <Rule className="bg-ink-inverse/15" />
 
-        <div className="grid gap-6 py-8 md:grid-cols-[1fr_auto] md:items-start md:gap-12">
-          <p className="type-caption measure text-gold">
-            &ldquo;If men were angels, no government would be necessary.&rdquo; James Madison,
-            Federalist No. 51
-          </p>
-          <p className="type-caption max-w-md border-l border-gold/50 pl-4 text-ink-inverse/60">
+        <div className="flex flex-col gap-5 py-8 md:flex-row md:items-center md:justify-between md:gap-12">
+          <p className="type-caption max-w-xl border-l border-gold/50 pl-4 text-ink-inverse/60">
             IEA is independent and accepts no foreign funding. Communications with the Institute
             may be disclosed.{" "}
             <Link
               to="/about#notices"
-              className="text-ink-inverse/85 underline decoration-1 underline-offset-4 transition-colors hover:text-ink-inverse hover:decoration-bronze"
+              className="text-ink-inverse/85 underline decoration-1 underline-offset-4 transition-colors hover:text-ink-inverse hover:decoration-gold"
             >
               Read the notices
             </Link>
             .
           </p>
+          <p className="type-caption text-ink-inverse/45">
+            &copy; {new Date().getFullYear()} Institute for Educational Accountability
+          </p>
         </div>
-
-        <p className="type-caption border-t border-ink-inverse/10 py-5 text-ink-inverse/45">
-          &copy; {new Date().getFullYear()} Institute for Educational Accountability
-        </p>
-
       </Container>
     </footer>
   );
@@ -142,7 +134,7 @@ function FooterLink({ to, children }: { to: string; children: React.ReactNode })
     <li>
       <Link
         to={to}
-        className="type-ui text-ink-inverse/80 underline decoration-1 underline-offset-4 transition-colors hover:text-ink-inverse hover:decoration-bronze"
+        className="type-ui text-ink-inverse/80 underline decoration-transparent decoration-1 underline-offset-4 transition-colors hover:text-ink-inverse hover:decoration-gold"
       >
         {children}
       </Link>
@@ -152,7 +144,7 @@ function FooterLink({ to, children }: { to: string; children: React.ReactNode })
 
 function Datum({ term, value }: { term: string; value: string }) {
   return (
-    <div className="flex items-baseline justify-between gap-4">
+    <div className="flex items-baseline justify-between gap-4 py-2.5">
       <dt className="type-caption text-ink-inverse/50">{term}</dt>
       <dd className="type-numeric-sm text-ink-inverse/80">{value}</dd>
     </div>
@@ -170,5 +162,17 @@ function ContactLine({ label, email }: { label: string; email: string }) {
         {email}
       </a>
     </p>
+  );
+}
+
+/** A column heading with a short gold rule beneath it. */
+function FooterHeading({ children, id }: { children: React.ReactNode; id?: string }) {
+  return (
+    <div>
+      <h2 id={id} className="type-label text-ink-inverse/70">
+        {children}
+      </h2>
+      <span aria-hidden="true" className="mt-2 block h-px w-8 bg-gold/70" />
+    </div>
   );
 }
