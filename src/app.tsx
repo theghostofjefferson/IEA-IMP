@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes, useLocation } from "react-router";
 import { ErrorBoundary } from "@/components/site/ErrorBoundary";
 import { IntroGate } from "@/components/intro/IntroGate";
 import { Masthead } from "@/components/site/Masthead";
+import { BackToTop } from "@/components/site/BackToTop";
 import { ScrollManager } from "@/components/site/ScrollManager";
 import { SiteFooter } from "@/components/site/SiteFooter";
 
@@ -123,6 +124,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
         </main>
         <SiteFooter />
       </div>
+      <BackToTop />
     </IntroGate>
   );
 }
