@@ -17,13 +17,13 @@ export function SiteFooter() {
         <div className="grid gap-10 py-12 md:grid-cols-2 md:gap-12 md:py-16 xl:grid-cols-4">
           <div>
             <img
-              src="/brand/stacked-dark.webp"
-              alt="The Institute for Educational Accountability: Evidence, Transparency, Accountability"
-              width={900}
-              height={381}
+              src="/brand/horizontal-dark.webp"
+              alt="The Institute for Educational Accountability"
+              width={1000}
+              height={136}
               loading="lazy"
               decoding="async"
-              className="h-auto w-64 max-w-full"
+              className="h-auto w-full max-w-[22rem]"
             />
             <p className="type-body mt-5 measure-snug text-ink-inverse/70">
               An independent examination of Nepali schools, grounded in verified student
