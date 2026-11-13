@@ -498,6 +498,21 @@
   }
 }
 
+/* A shard of the splash falling away (see ShatterExit). */
+@keyframes intro-shard-out {
+  0% {
+    transform: none;
+    opacity: 1;
+  }
+  65% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+
 @keyframes intro-overlay-out {
   from {
     clip-path: inset(0 0 0 0);

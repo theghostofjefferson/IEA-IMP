@@ -41,6 +41,9 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 /** Only a `?skipIntro=1` in the URL suppresses it. Dev and screenshot use. */
 const SKIP_PARAM = "skipIntro";
 
+/** How long the splash takes to break apart (see `ShatterExit`). */
+export const SHATTER_MS = 1350;
+
 export const INTRO = {
   /** Overlay begins fading in. */
   start: 0,
@@ -94,7 +97,7 @@ export function useIntro(enabled: boolean) {
   const effective: IntroPhase = reduced || !enabled ? "done" : phase;
 
   /**
-   * Jump to the exit. The exit animation takes 400ms, after which the overlay is
+   * Jump to the exit. The exit (the splash breaking apart) takes about 1.3s, after which the overlay is
    * unmounted. (Dismissing clears the scheduled timeline, so the unmount has to
    * be scheduled here, or the overlay would stay mounted, invisible, forever.)
    */
@@ -102,7 +105,7 @@ export function useIntro(enabled: boolean) {
     timers.current.forEach(clearTimeout);
     timers.current = [];
     setPhase((current) => (current === "exiting" || current === "done" ? current : "exiting"));
-    timers.current.push(window.setTimeout(() => setPhase("done"), INTRO.total - INTRO.hold + 20));
+    timers.current.push(window.setTimeout(() => setPhase("done"), SHATTER_MS + 50));
   }, []);
 
   useEffect(() => {
