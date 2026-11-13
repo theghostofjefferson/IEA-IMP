@@ -17,8 +17,8 @@ import { cn } from "@/lib/utils";
  * motion collapses every transition to instant.
  */
 const LEAD =
-  "“The accumulation of all powers, legislative, executive, and judiciary, in the same hands, whether of one, a few, or many, and whether hereditary, self-appointed, or elective, may justly be pronounced";
-const EMPHASIS = "the very definition of tyranny";
+  "“The accumulation of all powers, legislative, executive, and judiciary, in the same hands [schools], whether of one, a few, or many, and whether hereditary, self-appointed, or elective, may justly be pronounced";
+const EMPHASIS = "the very definition of tyranny [oppression]";
 const TAIL = ".”";
 
 const LEAD_WORDS = LEAD.split(" ");
