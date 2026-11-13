@@ -29,10 +29,12 @@ function Words({ words, offset, className }: { words: string[]; offset: number; 
   return (
     <>
       {words.map((w, k) => (
-        <span key={k} aria-hidden="true" className={cn("quote-word", className)} style={{ "--i": offset + k } as CSSProperties}>
-          {w}
-          {k < words.length - 1 ? " " : ""}
-        </span>
+        <Fragment key={k}>
+          <span aria-hidden="true" className={cn("quote-word", className)} style={{ "--i": offset + k } as CSSProperties}>
+            {w}
+          </span>
+          {k < words.length - 1 ? " " : null}
+        </Fragment>
       ))}
     </>
   );
