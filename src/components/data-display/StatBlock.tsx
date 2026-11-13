@@ -12,7 +12,7 @@ export function StatBlock({
   sublabel,
   className,
 }: {
-  value: string | number;
+  value: React.ReactNode;
   label: string;
   sublabel?: string;
   className?: string;

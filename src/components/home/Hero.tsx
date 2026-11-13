@@ -2,12 +2,13 @@ import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 
 import { Button } from "@/components/ui/button";
+import { CountUp } from "@/components/site/CountUp";
 import { Reveal } from "@/components/site/Reveal";
 import { ScoreBar } from "@/components/data-display/ScoreBar";
 import { SectionHeader } from "@/components/data-display/SectionHeader";
 import { StatBlock } from "@/components/data-display/StatBlock";
 import { bandColor } from "@/lib/scoring";
-import { formatCount, formatCountPlus, formatDate } from "@/lib/format";
+import { formatDate } from "@/lib/format";
 import { meta, redFlags, schools, totalSchools } from "@/lib/data";
 
 /**
@@ -64,7 +65,9 @@ export function Hero() {
               of top high schools.
             </h1>
 
-            <p className="type-body measure-snug mt-6 text-ink-muted">
+            <span aria-hidden="true" className="hero-rule mt-6 block h-px w-28 bg-gold md:w-40" />
+
+            <p className="type-body measure-snug mt-5 text-ink-muted">
               Highlighting the reality of high schools in Nepal beyond what they advertise.
             </p>
           </div>
@@ -103,9 +106,9 @@ export function Hero() {
       {/* Stats as a ruled row. */}
       <Reveal className="min-w-0" delayMs={60}>
         <div className="mt-8 grid grid-cols-2 gap-0 border-y border-rule-soft md:grid-cols-4">
-          <StatCell value={formatCount(totalSchools)} label="schools rated" />
-          <StatCell value={formatCountPlus(meta.totalResponses)} label="responses" border />
-          <StatCell value={formatCount(redFlags.length)} label="under review" border />
+          <StatCell value={<CountUp to={totalSchools} />} label="schools rated" />
+          <StatCell value={<CountUp to={meta.totalResponses} suffix="+" delayMs={120} />} label="responses" border />
+          <StatCell value={<CountUp to={redFlags.length} delayMs={240} />} label="under review" border />
           <StatCell value={formatDate(meta.publicationDate)} label="published" border />
         </div>
       </Reveal>
@@ -243,7 +246,7 @@ function StatCell({
   label,
   border = false,
 }: {
-  value: string;
+  value: React.ReactNode;
   label: string;
   border?: boolean;
 }) {

@@ -1426,3 +1426,89 @@ html,
 body {
   overflow-anchor: none;
 }
+
+/* ==========================================================================
+   Hero rule + Madison quote
+
+   The hairline under the home headline draws left to right once, after the
+   intro (if any) has cleared. Transform only.
+   ========================================================================== */
+
+@keyframes hero-rule-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.hero-rule {
+  transform-origin: left center;
+  animation: hero-rule-draw 1100ms var(--ease-brand) both;
+  animation-delay: calc(var(--intro-reveal-delay) + 350ms);
+}
+
+/* The quote's ornament: hairlines draw outward from the diamond. */
+.quote-line {
+  transform: scaleX(0);
+  transition: transform 1000ms var(--ease-brand);
+}
+.quote-line-l {
+  transform-origin: right center;
+}
+.quote-line-r {
+  transform-origin: left center;
+}
+.quote-on .quote-line {
+  transform: none;
+}
+
+.quote-diamond {
+  opacity: 0;
+  transform: rotate(45deg) scale(0.2);
+  transition:
+    opacity 600ms var(--ease-brand),
+    transform 700ms var(--ease-brand);
+}
+.quote-on .quote-diamond {
+  opacity: 1;
+  transform: rotate(45deg) scale(1);
+}
+
+/* Words arrive one after another. Each word is its own inline-block so it can
+   rise; `--i` is its index and sets the stagger. */
+.quote-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.45em);
+  transition:
+    opacity 700ms var(--ease-brand),
+    transform 700ms var(--ease-brand);
+  transition-delay: calc(450ms + var(--i) * 38ms);
+}
+.quote-on .quote-word {
+  opacity: 1;
+  transform: none;
+}
+
+.quote-cite {
+  opacity: 0;
+  transition: opacity 900ms var(--ease-brand);
+  transition-delay: calc(450ms + var(--n) * 38ms + 200ms);
+}
+.quote-on .quote-cite {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quote-word,
+  .quote-cite,
+  .quote-line,
+  .quote-diamond {
+    transition-delay: 0ms !important;
+  }
+  .hero-rule {
+    animation-delay: 0ms !important;
+  }
+}
