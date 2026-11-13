@@ -12,7 +12,7 @@ red-flag list.
 `weights`, `categories[]` (`{key, label, blurb}`).
 
 `totalResponses` is a **floor, not a census** — the survey collected at least
-that many, so it is displayed as "200+" via `formatCountPlus` (`src/lib/format.ts`).
+that many, so it is displayed as "250+" via `formatCountPlus` (`src/lib/format.ts`).
 The per-school `responses` counts scale to `attributedResponses`, so
 `meanResponses` stays consistent with the headline.
 
