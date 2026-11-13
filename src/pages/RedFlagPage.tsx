@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from "react";
+import { useEffect, type CSSProperties, type ReactNode } from "react";
 import { Link, useParams } from "react-router";
 
 import { Container } from "@/components/site/Container";
@@ -7,6 +7,8 @@ import { Rule } from "@/components/site/Rule";
 import { SectionHeader } from "@/components/data-display/SectionHeader";
 import { Monogram } from "@/components/data-display/Monogram";
 import { NotFoundPage } from "@/pages/NotFoundPage";
+import { useReveal } from "@/hooks/useReveal";
+import { cn } from "@/lib/utils";
 import { applySeo, redFlagSeo } from "@/lib/seo";
 import { getRedFlag, schools } from "@/lib/data";
 import { meta } from "@/lib/data";
@@ -78,7 +80,7 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
               {/* Rotated stamp. */}
               <span
                 aria-hidden="true"
-                className="absolute right-0 top-0 hidden -rotate-6 select-none border-2 border-gold/70 px-3 py-1 font-sans text-xs font-bold uppercase tracking-[0.2em] text-gold md:inline-block"
+                className="rf-stamp absolute right-0 top-0 hidden -rotate-6 select-none border-2 border-gold/70 px-3 py-1 font-sans text-xs font-bold uppercase tracking-[0.2em] text-gold md:inline-block"
               >
                 Under review
               </span>
@@ -157,8 +159,9 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
           ) : (
             <ol className="red-flag-reason-list flex flex-col">
               {redFlag.reasons.map((reason, i) => (
-                <li
+                <ReasonItem
                   key={reason}
+                  index={i}
                   className="grid gap-x-6 gap-y-2 border-b border-claret/20 py-6 last:border-b-0 md:grid-cols-[3.5rem_minmax(0,1fr)]"
                 >
                   <span
@@ -170,7 +173,7 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
                   <p className="type-body-lg measure-snug font-bold text-ink">
                     {reason}
                   </p>
-                </li>
+                </ReasonItem>
               ))}
             </ol>
           )}
@@ -224,6 +227,15 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
         </Container>
       </div>
     </>
+  );
+}
+
+function ReasonItem({ index, className, children }: { index: number; className?: string; children: ReactNode }) {
+  const { ref, visible } = useReveal<HTMLLIElement>();
+  return (
+    <li ref={ref} className={cn("rf-reveal", visible && "rf-reveal-on", className)} style={{ "--d": Math.min(index, 3) } as CSSProperties}>
+      {children}
+    </li>
   );
 }
 
