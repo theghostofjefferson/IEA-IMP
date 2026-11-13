@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, type CSSProperties } from "react";
 
 import { useReveal } from "@/hooks/useReveal";
 import { cn } from "@/lib/utils";
@@ -29,7 +29,7 @@ function Words({ words, offset, className }: { words: string[]; offset: number; 
   return (
     <>
       {words.map((w, k) => (
-        <span key={k} aria-hidden="true" className={cn("quote-word", className)} style={{ ["--i" as string]: offset + k }}>
+        <span key={k} aria-hidden="true" className={cn("quote-word", className)} style={{ "--i": offset + k } as CSSProperties}>
           {w}
           {k < words.length - 1 ? " " : ""}
         </span>
@@ -72,7 +72,7 @@ export function MadisonQuote() {
 
           <figcaption
             className="quote-cite mt-8 text-[0.72rem] uppercase tracking-[0.24em] text-ink-muted md:mt-10"
-            style={{ ["--n" as string]: TOTAL }}
+            style={{ "--n": TOTAL } as CSSProperties}
           >
             James Madison <span aria-hidden="true">·</span> Federalist No. 47
           </figcaption>
