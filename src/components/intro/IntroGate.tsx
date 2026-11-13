@@ -1,6 +1,8 @@
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { useLocation } from "react-router";
 
+import { ShatterExit } from "@/components/intro/ShatterExit";
+import { SplashBody } from "@/components/intro/SplashBody";
 import { useIntro } from "@/hooks/useIntro";
 import { cn } from "@/lib/utils";
 
@@ -23,7 +25,7 @@ import { cn } from "@/lib/utils";
    *     a blank screen and a throttled timer cannot produce a broken site
    *   - the overlay catches taps from the first frame, so the tap that closes it
    *     is spent on closing it and cannot reach a link or card underneath
-   *   - the exit can REVEAL the page (a clip-path wipe upward) instead of
+   *   - the exit can REVEAL the page (the splash breaks into shards that fall away) instead of
    *     cross-fading two things, which reads as a designed transition
  *
  * Skipped entirely — not shortened — under `prefers-reduced-motion`, with
@@ -33,6 +35,8 @@ export function IntroGate({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
   const isHome = pathname === "/";
   const { phase, visible, dismiss } = useIntro(isHome);
+  // Where the reader tapped, as a fraction of the screen; the splash breaks from there.
+  const [origin, setOrigin] = useState({ x: 0.5, y: 0.45 });
 
   /**
    * `intro-active` is what makes the page wait before settling in. It is
@@ -56,8 +60,6 @@ export function IntroGate({ children }: { children: ReactNode }) {
 
   if (!visible) return <>{children}</>;
 
-  const exiting = phase === "exiting";
-
   return (
     <>
       {children}
@@ -67,63 +69,29 @@ export function IntroGate({ children }: { children: ReactNode }) {
         afterwards. A screen reader must never be held hostage to a 2-second
         animation — that would be an accessibility failure, not a style choice.
       */}
-      <div
-        aria-hidden="true"
-        data-intro-phase={phase}
-        onClick={dismiss}
-        className={cn(
-          "fixed inset-0 z-50 flex flex-col items-center justify-between bg-ink px-6 pb-12 pt-10 sm:pt-12",
-          // Catches every tap while it is up, including during the 400ms exit, so a
-          // tap meant to dismiss never lands on the page beneath it. It is removed
-          // from the DOM when the exit finishes. `touch-manipulation` removes the
-          // double-tap-zoom delay on phones.
-          "cursor-pointer touch-manipulation",
-          exiting
-            ? "animate-[intro-overlay-out_400ms_cubic-bezier(0.65,0,0.35,1)_both]"
-            : "animate-[intro-overlay-in_300ms_cubic-bezier(0.16,1,0.3,1)_both]",
-        )}
-      >
-        {/* A quiet profile silhouette sits behind the content, low in contrast. */}
-        <div className="intro-portrait" aria-hidden="true" />
-        <div className="intro-frame" aria-hidden="true" />
-
-        <img
-          src="/brand/stacked-dark.webp"
-          alt=""
-          width={900}
-          height={381}
-          className="relative w-56 max-w-[70%] animate-[intro-label-in_600ms_cubic-bezier(0.16,1,0.3,1)_both] sm:w-72"
-          style={{ animationDelay: "100ms" }}
-        />
-
-        <div className="relative flex w-full flex-col items-center gap-5">
-        {/* Holds the height the founder names used to take, so the quote sits
-            where it always has. */}
-        <div aria-hidden="true" className="type-caption invisible">&nbsp;</div>
-
-        <div className="my-4 h-px w-full bg-ink-inverse/20 md:my-6" aria-hidden="true" />
-
-        <p
-          className="type-caption measure-snug text-center text-ink-inverse/90 animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]"
-          style={{ animationDelay: "1600ms" }}
-        >
-          If men were angels, no government would be necessary.
-          <span className="mt-3 block text-[0.7rem] uppercase tracking-[0.22em] text-ink-inverse/50">James Madison · Federalist No. 51</span>
-        </p>
-        </div>
-
-        {/* "Click anywhere to continue". */}
-        <p
+      {phase === "exiting" ? (
+        <ShatterExit originX={origin.x} originY={origin.y} />
+      ) : (
+        <div
+          aria-hidden="true"
+          data-intro-phase={phase}
+          onClick={(e) => {
+            // The crack starts where the reader tapped.
+            setOrigin({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight });
+            dismiss();
+          }}
           className={cn(
-            "absolute inset-x-0 bottom-4 text-center type-caption sm:bottom-6",
-            "px-4 text-ink-inverse/45",
-            "animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]",
+            "fixed inset-0 z-50 flex flex-col items-center justify-between bg-ink px-6 pb-12 pt-10 sm:pt-12",
+            // Catches every tap while it is up, so a tap meant to dismiss never
+            // lands on the page beneath it. `touch-manipulation` removes the
+            // double-tap-zoom delay on phones.
+            "cursor-pointer touch-manipulation",
+            "animate-[intro-overlay-in_300ms_cubic-bezier(0.16,1,0.3,1)_both]",
           )}
-          style={{ animationDelay: "1900ms" }}
         >
-          Click anywhere to continue
-        </p>
-      </div>
+          <SplashBody />
+        </div>
+      )}
     </>
   );
 }
