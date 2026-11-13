@@ -1,8 +1,10 @@
-import { useMemo } from "react";
+import { useMemo, type CSSProperties, type ReactNode } from "react";
 import { Link } from "react-router";
 
 import { Monogram } from "@/components/data-display/Monogram";
+import { useReveal } from "@/hooks/useReveal";
 import { redFlags } from "@/lib/data";
+import { cn } from "@/lib/utils";
 
 /**
  * Fisher–Yates shuffle over a fresh copy, so the source array is never
@@ -30,6 +32,15 @@ function shuffled<T>(list: readonly T[]): T[] {
  * box with canvas-coloured gaps between them, so an incomplete last row never
  * leaves a dark void behind.
  */
+function RedFlagItem({ column, children }: { column: number; children: ReactNode }) {
+  const { ref, visible } = useReveal<HTMLLIElement>();
+  return (
+    <li ref={ref} className={cn("rf-reveal", visible && "rf-reveal-on")} style={{ "--d": column } as CSSProperties}>
+      {children}
+    </li>
+  );
+}
+
 export function RedFlagList() {
   // Shuffled once per mount. A full page reload is a new mount, so the order
   // changes on every reload — the behaviour the page is specified to have.
@@ -37,8 +48,8 @@ export function RedFlagList() {
 
   return (
     <ul className="red-flag-list grid grid-cols-1 gap-8 sm:gap-10 sm:grid-cols-2 lg:grid-cols-3">
-      {list.map((redFlag) => (
-        <li key={redFlag.id}>
+      {list.map((redFlag, i) => (
+        <RedFlagItem key={redFlag.id} column={i % 3}>
           <Link
             to={`/red-flag/${redFlag.id}`}
             className="red-flag-card block h-full p-6 border border-rule-soft bg-canvas transition-colors hover:bg-bronze-wash"
@@ -56,7 +67,7 @@ export function RedFlagList() {
               {redFlag.reasons.length} review item{redFlag.reasons.length === 1 ? "" : "s"} · View details →
             </span>
           </Link>
-        </li>
+        </RedFlagItem>
       ))}
     </ul>
   );

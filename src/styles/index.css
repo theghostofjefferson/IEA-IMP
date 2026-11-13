@@ -1144,17 +1144,6 @@ html.intro-active {
   }
 }
 
-@keyframes red-flag-card-arrive {
-  from {
-    opacity: 0;
-    transform: translateY(18px) scale(0.985);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
 @keyframes red-flag-card-shadow {
   0%,
   100% {
@@ -1219,11 +1208,13 @@ html.intro-active {
   background-color: rgb(244 236 216 / 0.56);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
-  animation: red-flag-card-arrive 850ms var(--ease-brand) both;
+  transition: background-color 200ms var(--ease-brand), box-shadow 300ms var(--ease-brand);
 }
 
 .red-flag-card:hover {
   background-color: rgb(242 234 218 / 0.72);
+  /* A claret edge grows in on the left, like a tab marking the file. */
+  box-shadow: inset 3px 0 0 rgb(107 31 42 / 0.85);
 }
 
 .red-flag-card::after {
@@ -1242,10 +1233,6 @@ html.intro-active {
   z-index: 1;
 }
 
-.red-flag-list > li:nth-child(2) .red-flag-card { animation-delay: 70ms; }
-.red-flag-list > li:nth-child(3) .red-flag-card { animation-delay: 140ms; }
-.red-flag-list > li:nth-child(4) .red-flag-card { animation-delay: 210ms; }
-.red-flag-list > li:nth-child(n + 5) .red-flag-card { animation-delay: 280ms; }
 
 @media (prefers-reduced-motion: reduce) {
   .red-flag-detail-hero::after,
@@ -1510,5 +1497,54 @@ body {
   }
   .hero-rule {
     animation-delay: 0ms !important;
+  }
+}
+
+/* ==========================================================================
+   Red-flag motion
+
+   Cards and review items slide in from the left as they scroll into view, one
+   after another. The "Under review" stamp lands once. Transform/opacity only.
+   ========================================================================== */
+
+.rf-reveal {
+  opacity: 0;
+  transform: translateX(-28px);
+  transition:
+    opacity 700ms var(--ease-brand),
+    transform 700ms var(--ease-brand);
+  transition-delay: calc(var(--d, 0) * 80ms);
+}
+.rf-reveal-on {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes rf-stamp {
+  0% {
+    opacity: 0;
+    transform: scale(1.7);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.rf-stamp {
+  animation: rf-stamp 520ms var(--ease-brand) both;
+  animation-delay: 700ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rf-reveal {
+    transition-delay: 0ms !important;
+  }
+  .rf-stamp {
+    animation-delay: 0ms;
   }
 }
