@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useLayoutEffect, useState, type ReactNode } from "react";
 import { useLocation } from "react-router";
 
 import { ShatterExit } from "@/components/intro/ShatterExit";
@@ -48,7 +48,10 @@ export function IntroGate({ children }: { children: ReactNode }) {
    * showing, every non-home route would render a blank page for two seconds.
    * See docs/09-BUGS.md § A7.
    */
-  useEffect(() => {
+  // A layout effect, so the class is on <html> BEFORE any child's passive effect
+  // runs. `useReveal` and `CountUp` check it on mount; with a passive effect here
+  // the children ran first, saw no splash, and revealed behind it.
+  useLayoutEffect(() => {
     const root = document.documentElement;
     if (!visible || phase === "exiting") {
       root.classList.remove("intro-active");

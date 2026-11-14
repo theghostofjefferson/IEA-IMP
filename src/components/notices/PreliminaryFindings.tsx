@@ -4,24 +4,33 @@ import { CountUp } from "@/components/site/CountUp";
 import { useReveal } from "@/hooks/useReveal";
 import { cn } from "@/lib/utils";
 
-type Finding = {
+export type Finding = {
   value: number;
   /** The source text says "approximately" for two of the three figures and not the third; this keeps it that way. */
   approx: boolean;
   text: string;
+  /** A shorter caption for tight spaces, such as the front-page band. Same claim, fewer words. */
+  short: string;
 };
 
-const FINDINGS: Finding[] = [
-  { value: 82, approx: true, text: "reported observing preferential treatment by teachers." },
+export const FINDINGS: Finding[] = [
+  {
+    value: 82,
+    approx: true,
+    text: "reported observing preferential treatment by teachers.",
+    short: "observed preferential treatment by teachers",
+  },
   {
     value: 67,
     approx: false,
     text: "reported personally experiencing less favourable treatment, either sometimes or regularly.",
+    short: "personally experienced less favourable treatment, sometimes or regularly",
   },
   {
     value: 49,
     approx: true,
     text: "reported observing or experiencing differences they believed might be associated with skin colour, ethnicity, or geographical background.",
+    short: "observed or experienced differences they linked to skin colour, ethnicity or background",
   },
 ];
 
