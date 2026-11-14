@@ -5,7 +5,10 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { mulberry32 } from "@/components/sky/skyData";
 
 const FIGURE_SRC = "/images/madison/figure.png";
-const HEADER_PAD = 64;
+const HEADER_PAD = 24;
+/** Time the figure holds before it starts to come apart, then how long the change takes. */
+const HOLD_MS = 900;
+const PLAY_MS = 4600;
 const SERIF = '"Latin Modern Roman", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif';
 
 type Field = {
@@ -146,8 +149,12 @@ function buildField(img: HTMLImageElement, W: number, H: number): Field | null {
 }
 
 /**
- * The closing statement: Madison's figure, in particles, dissolves as you scroll
- * and the particles regroup into the words of the quotation.
+ * The closing statement: Madison's figure, in particles, dissolves and the
+ * particles regroup into the words of the quotation.
+ *
+ * It plays by itself, once, the first time the section is at least half on
+ * screen. Nothing is tied to scroll position, so no one has to scroll in a
+ * particular way (or at all) to see it finish.
  *
  * The scene is decorative and aria-hidden; the quotation is also present as real
  * text. Reduced motion, a failed image load, or too few particles falls back to
@@ -158,7 +165,6 @@ export function DissolveQuote() {
   const [failed, setFailed] = useState(false);
   const stageRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const hintRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     if (reduced || failed) return;
@@ -174,18 +180,14 @@ export function DissolveQuote() {
     let W = 0;
     let H = 0;
     let field: Field | null = null;
-    let target = 0;
     let cur = 0;
+    let elapsed = 0;
+    let started = false;
+    let last = 0;
     let raf = 0;
     let visible = false;
     let alive = true;
     let img: HTMLImageElement | null = null;
-
-    const measure = () => {
-      const r = stage.getBoundingClientRect();
-      const span = Math.max(1, r.height - window.innerHeight);
-      target = Math.min(1, Math.max(0, -r.top / span));
-    };
 
     const rebuild = () => {
       if (!img) return;
@@ -248,39 +250,38 @@ export function DissolveQuote() {
     const loop = (now: number) => {
       raf = 0;
       if (!alive || !visible) return;
-      cur += (target - cur) * 0.1;
-      if (Math.abs(target - cur) < 0.0004) cur = target;
+      const dt = Math.min(64, now - (last || now));
+      last = now;
+      if (started) elapsed += dt;
+      cur = Math.min(1, Math.max(0, (elapsed - HOLD_MS) / PLAY_MS));
       draw(now);
-      if (hintRef.current) hintRef.current.style.opacity = String(Math.max(0, 1 - cur * 8));
       raf = requestAnimationFrame(loop);
     };
     const kick = () => {
-      if (!raf && visible && alive) raf = requestAnimationFrame(loop);
-    };
-
-    const onScroll = () => {
-      measure();
-      kick();
+      if (!raf && visible && alive) {
+        last = 0;
+        raf = requestAnimationFrame(loop);
+      }
     };
     let resizeTimer = 0;
     const onResize = () => {
       window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(() => {
         rebuild();
-        measure();
         kick();
       }, 150);
     };
 
-    const io = new IntersectionObserver(([e]) => {
-      visible = !!e?.isIntersecting;
-      if (visible) {
-        measure();
-        kick();
-      }
-    });
+    const io = new IntersectionObserver(
+      ([e]) => {
+        visible = !!e?.isIntersecting;
+        // Start the clock once, when at least half the section is in view.
+        if (e && e.intersectionRatio >= 0.5) started = true;
+        if (visible) kick();
+      },
+      { threshold: [0, 0.5] },
+    );
     io.observe(stage);
-    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
 
     const image = new Image();
@@ -289,8 +290,6 @@ export function DissolveQuote() {
       const go = () => {
         if (!alive) return;
         rebuild();
-        measure();
-        cur = target;
         kick();
       };
       // Text is sampled from pixels, so wait for the real serif to be ready.
@@ -305,7 +304,6 @@ export function DissolveQuote() {
       cancelAnimationFrame(raf);
       window.clearTimeout(resizeTimer);
       io.disconnect();
-      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
     };
   }, [reduced, failed]);
@@ -313,17 +311,8 @@ export function DissolveQuote() {
   if (reduced || failed) return <MadisonQuote />;
 
   return (
-    <section ref={stageRef} aria-label="James Madison, Federalist No. 47" className="relative mt-20 h-[250vh] bg-ink md:mt-28 md:h-[300vh]">
-      <div className="sticky top-0 h-dvh overflow-hidden">
-        <canvas ref={canvasRef} aria-hidden="true" className="absolute inset-0 size-full" />
-        <p
-          ref={hintRef}
-          aria-hidden="true"
-          className="type-caption absolute inset-x-0 bottom-8 text-center uppercase tracking-[0.3em] text-ink-inverse/60"
-        >
-          Scroll
-        </p>
-      </div>
+    <section ref={stageRef} aria-label="James Madison, Federalist No. 47" className="relative mt-20 h-[100svh] min-h-[30rem] overflow-hidden bg-ink md:mt-28">
+      <canvas ref={canvasRef} aria-hidden="true" className="absolute inset-0 size-full" />
       <figure className="sr-only">
         <blockquote>{QUOTE_TEXT}</blockquote>
         <figcaption>{QUOTE_CITE}</figcaption>
