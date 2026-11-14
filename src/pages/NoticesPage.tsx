@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router";
 import { useEffect } from "react";
 
 import { Container } from "@/components/site/Container";
+import { DiscriminationNotice } from "@/components/notices/DiscriminationNotice";
 import { Reveal } from "@/components/site/Reveal";
 import { Rule, AccentRule } from "@/components/site/Rule";
 import { SEO, applySeo } from "@/lib/seo";
@@ -26,16 +27,19 @@ const PUBLICATIONS = [
 export function NoticesPage() {
   useEffect(() => applySeo(SEO.notices), []);
 
-  // `/notices#statement`: the page is lazy-loaded, so the browser cannot scroll
-  // to the anchor on its own. Do it once the page has mounted.
+  // `/notices#statement` and `#discrimination`: the page is lazy-loaded, so the
+  // browser cannot scroll to the anchor on its own. Open that notice and scroll
+  // to it once the page has mounted.
   const { hash } = useLocation();
   useEffect(() => {
-    if (hash !== "#statement") return;
-    const id = window.setTimeout(
-      () => document.getElementById("statement")?.scrollIntoView({ behavior: "smooth", block: "start" }),
-      150,
-    );
-    return () => window.clearTimeout(id);
+    const id = hash.slice(1);
+    if (id !== "statement" && id !== "discrimination") return;
+    const timer = window.setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el instanceof HTMLDetailsElement) el.open = true;
+      el?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 150);
+    return () => window.clearTimeout(timer);
   }, [hash]);
 
   return (
@@ -62,10 +66,10 @@ export function NoticesPage() {
           <h2 id="statements" className="type-label text-ink-faint">
             Statements
           </h2>
-          <Reveal className="mt-6 min-w-0" delayMs={60}>
+          <Reveal className="mt-6 flex min-w-0 flex-col gap-5" delayMs={60}>
+      <DiscriminationNotice />
       <details
         id="statement"
-        open
         style={{ borderLeft: "4px solid var(--claret)" }}
         className="group scroll-mt-24 overflow-hidden rounded-md border border-ink-inverse/10 bg-ink text-ink-inverse shadow-[0_18px_40px_-28px_rgba(19,26,44,0.6)] transition-shadow duration-500 open:shadow-[0_26px_55px_-28px_rgba(19,26,44,0.8)]"
       >
