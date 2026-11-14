@@ -21,6 +21,10 @@ const LEAD =
 const EMPHASIS = "the very definition of tyranny [oppression]";
 const TAIL = ".”";
 
+/** The whole quotation as one string, for other renderings of it. */
+export const QUOTE_TEXT = `${LEAD} ${EMPHASIS}${TAIL}`;
+export const QUOTE_CITE = "James Madison · Federalist No. 47";
+
 const LEAD_WORDS = LEAD.split(" ");
 const EMPHASIS_WORDS = EMPHASIS.split(" ");
 const TOTAL = LEAD_WORDS.length + EMPHASIS_WORDS.length;

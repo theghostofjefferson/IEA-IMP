@@ -34,6 +34,7 @@ const MethodologyPage = lazy(() => import("@/pages/MethodologyPage").then((m) =>
 const AnnualReportPage = lazy(() => import("@/pages/AnnualReportPage").then((m) => ({ default: m.AnnualReportPage })));
 const ReportConcernPage = lazy(() => import("@/pages/ReportConcernPage").then((m) => ({ default: m.ReportConcernPage })));
 const NoticesPage = lazy(() => import("@/pages/NoticesPage").then((m) => ({ default: m.NoticesPage })));
+const SkyPage = lazy(() => import("@/pages/SkyPage").then((m) => ({ default: m.SkyPage })));
 const FormsPage = lazy(() => import("@/pages/FormsPage").then((m) => ({ default: m.FormsPage })));
 const RedFlagPage = lazy(() => import("@/pages/RedFlagPage").then((m) => ({ default: m.RedFlagPage })));
 
@@ -76,6 +77,7 @@ function Shell() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/team/:id" element={<TeamMemberPage />} />
           <Route path="/notices" element={<NoticesPage />} />
+          <Route path="/sky" element={<SkyPage />} />
           <Route path="/forms" element={<FormsPage />} />
           <Route path="/report-a-concern" element={<ReportConcernPage />} />
           <Route path="*" element={<NotFoundPage />} />
