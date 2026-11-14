@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 
 import { Button } from "@/components/ui/button";
+import { FindingsBand } from "@/components/home/FindingsBand";
 import { CountUp } from "@/components/site/CountUp";
 import { Reveal } from "@/components/site/Reveal";
 import { ScoreBar } from "@/components/data-display/ScoreBar";
@@ -102,6 +103,10 @@ export function Hero() {
 
       </div>
 
+      {/* The headline findings of the discrimination research, directly under the masthead. */}
+      <Reveal className="min-w-0" delayMs={40}>
+        <FindingsBand />
+      </Reveal>
 
       {/* Stats as a ruled row. */}
       <Reveal className="min-w-0" delayMs={60}>
