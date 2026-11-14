@@ -110,11 +110,20 @@ export function Hero() {
 
       {/* Stats as a ruled row. */}
       <Reveal className="min-w-0" delayMs={60}>
-        <div className="mt-8 grid grid-cols-2 gap-0 border-y border-rule-soft md:grid-cols-4">
+        <div className="mt-8 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+          <p className="type-label text-bronze-ink">The ranking · Edition {meta.edition}</p>
+          <Link
+            to="/rankings?view=all"
+            className="type-caption text-bronze-ink underline decoration-1 underline-offset-4 hover:decoration-2"
+          >
+            View the rankings &rarr;
+          </Link>
+        </div>
+        <div className="mt-3 grid grid-cols-2 gap-0 border-y border-rule-soft md:grid-cols-4">
           <StatCell value={<CountUp to={totalSchools} />} label="schools rated" />
           <StatCell value={<CountUp to={meta.totalResponses} suffix="+" delayMs={120} />} label="responses" border />
           <StatCell value={<CountUp to={redFlags.length} delayMs={240} />} label="under review" border />
-          <StatCell value={formatDate(meta.publicationDate)} label="published" border />
+          <StatCell value={formatDate(meta.publicationDate)} label="ranking published" border />
         </div>
       </Reveal>
 
