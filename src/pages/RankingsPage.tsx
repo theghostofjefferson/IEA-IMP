@@ -1,7 +1,8 @@
 import { useCallback, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import { Container } from "@/components/site/Container";
+import { Notice } from "@/components/site/Notice";
 import { Reveal } from "@/components/site/Reveal";
 import { Rule } from "@/components/site/Rule";
 import { BandBar } from "@/components/rankings/BandBar";
@@ -65,6 +66,23 @@ export function RankingsPage() {
         </header>
 
         <Rule tone="rule" className="mt-8 md:mt-10" />
+
+        {/* What the ranking is for. Shown in both views, above everything else. */}
+        <Reveal className="pt-4" delayMs={20}>
+          <Notice tone="info" label="What this ranking is, and is not">
+            <p>
+              This is not a guide to which school is academically best, and it does not weigh test scores or
+              reputation the way a general league table does. The Institute exists to show what students say these
+              schools are really like, including practices institutions would rather not advertise. The ranking is
+              one part of our method, and a way of reaching students and gathering the responses behind our wider
+              research.{" "}
+              <Link to="/methodology" className="text-bronze-ink underline decoration-1 underline-offset-4 hover:decoration-2">
+                How we work
+              </Link>
+              .
+            </p>
+          </Notice>
+        </Reveal>
 
         {view === "redflags" ? (
           <Reveal className="pt-4" delayMs={30}>
