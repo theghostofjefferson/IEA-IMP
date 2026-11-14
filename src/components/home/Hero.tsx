@@ -125,6 +125,17 @@ export function Hero() {
           <StatCell value={<CountUp to={redFlags.length} delayMs={240} />} label="under review" border />
           <StatCell value={formatDate(meta.publicationDate)} label="ranking published" border />
         </div>
+        <p className="type-caption measure mt-3 text-ink-faint">
+          The ranking is not a verdict on which school is academically best. It is one part of our method for showing
+          what students say these schools are really like.{" "}
+          <Link
+            to="/rankings?view=all"
+            className="text-bronze-ink underline decoration-1 underline-offset-4 hover:decoration-2"
+          >
+            What the ranking is for
+          </Link>
+          .
+        </p>
       </Reveal>
 
       {/* The findings: what students reported first, then what is under review. */}
