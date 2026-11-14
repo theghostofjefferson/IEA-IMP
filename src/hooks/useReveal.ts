@@ -65,7 +65,8 @@ export function useReveal<T extends HTMLElement = HTMLElement>() {
       const observer = new IntersectionObserver(
         (entries) => {
           const entry = entries[0];
-          if (entry?.isIntersecting) {
+          // Still behind the splash? Keep waiting; `onIntroEnd` takes over then.
+          if (entry?.isIntersecting && !root.classList.contains("intro-active")) {
             setVisible(true);
             cleanup();
           }
