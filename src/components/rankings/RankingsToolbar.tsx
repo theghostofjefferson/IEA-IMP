@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Menu, MenuItem, MenuPanel, MenuTrigger } from "@/components/ui/menu";
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { ViewToggle } from "@/components/rankings/ViewToggle";
 import {
   ALL_COLUMNS,
   REQUIRED_COLUMNS,
@@ -128,17 +129,7 @@ export function RankingsToolbar({
   if (view === "redflags") {
     return (
       <div className="red-flag-view-toolbar flex flex-col gap-4">
-        <ToggleGroup
-          type="single"
-          variant="outline"
-          value={view}
-          onValueChange={(v) => v && onView(v as View)}
-          aria-label="Choose between rankings and institutions under review"
-          className="w-fit"
-        >
-          <ToggleGroupItem value="redflags"><span className="hidden sm:inline">Institutions under review</span><span className="sm:hidden">Under review</span></ToggleGroupItem>
-          <ToggleGroupItem value="all">All schools</ToggleGroupItem>
-        </ToggleGroup>
+        <ViewToggle view={view} onView={onView} />
       </div>
     );
   }
@@ -150,17 +141,7 @@ export function RankingsToolbar({
         page: three red-flag schools or all forty-two. URL-backed like
         everything else here, so `?view=all` is shareable and Back works.
       */}
-      <ToggleGroup
-        type="single"
-        variant="outline"
-        value={view}
-        onValueChange={(v) => v && onView(v as View)}
-        aria-label="Choose between rankings and institutions under review"
-        className="w-fit"
-      >
-        <ToggleGroupItem value="redflags"><span className="hidden sm:inline">Institutions under review</span><span className="sm:hidden">Under review</span></ToggleGroupItem>
-        <ToggleGroupItem value="all">All schools</ToggleGroupItem>
-      </ToggleGroup>
+      <ViewToggle view={view} onView={onView} />
 
       <div className="flex flex-wrap items-center gap-3">
         {/* Search */}

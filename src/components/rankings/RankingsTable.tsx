@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { RankCell, SchoolCell } from "@/components/rankings/SchoolCell";
 import { OverallCell, ScoreCell } from "@/components/rankings/ScoreCell";
@@ -20,8 +20,11 @@ import { cn } from "@/lib/utils";
  *    array is built once at module scope and never mutated, so a row only
  *    re-renders when its own `school` prop changes. Typing in the search box
  *    re-renders the table, not all 42 rows.
- * 2. **No row animation.** Sorting reorders instantly. This is the single
- *    largest jank source in v1, and at 42 rows it has no upside.
+ * 2. **Sorting never animates rows.** Sorting reorders instantly; that was the
+ *    largest jank source in v1. The only motion is a one-time fade-in as a row
+ *    first scrolls into view, driven by one IntersectionObserver and a
+ *    `data-in` attribute that React never touches, so a re-sort or re-render
+ *    cannot replay it.
  * 3. **No library.** Filtering and sorting are pure functions in
  *    `@/lib/filters` over an array that is already rank-ordered. A table
  *    library would cost 21.3 kB gzipped to do what a `filter` and a
@@ -50,9 +53,40 @@ export function RankingsTable({
   const visible = ALL_COLUMNS.filter((c) => columns.includes(c));
   const rankVisible = columns.includes("rank");
 
+  // Arm before first paint, so rows never flash visible and then hide.
+  const [armed, setArmed] = useState(false);
+  useLayoutEffect(() => setArmed(true), []);
+
+  const bodyRef = useRef<HTMLTableSectionElement>(null);
+  useEffect(() => {
+    const body = bodyRef.current;
+    if (!body) return;
+    const pending = [...body.querySelectorAll<HTMLElement>("tr.rank-row:not([data-in])")];
+    if (typeof IntersectionObserver === "undefined") {
+      pending.forEach((r) => (r.dataset.in = "1"));
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        // Rows that arrive together cascade; `--d` is their order in this batch.
+        let n = 0;
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          const el = e.target as HTMLElement;
+          el.style.setProperty("--d", String(Math.min(n++, 12)));
+          el.dataset.in = "1";
+          io.unobserve(el);
+        }
+      },
+      { rootMargin: "0px 0px -4% 0px" },
+    );
+    pending.forEach((r) => io.observe(r));
+    return () => io.disconnect();
+  }, [rows]);
+
   return (
     <div className="overflow-x-auto">
-      <table className="w-full border-collapse">
+      <table className={cn("w-full border-collapse", armed && "rank-armed")}>
         <caption className="sr-only">
           Nepali +2 school rankings. {rows.length} schools, sorted by {currentSortLabel(sort)}.
         </caption>
@@ -63,7 +97,7 @@ export function RankingsTable({
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody ref={bodyRef}>
           {rows.map((school) => (
             <SchoolRow key={school.id} school={school} columns={columns} onNavigate={onNavigate} />
           ))}
@@ -201,7 +235,7 @@ const SchoolRow = memo(function SchoolRow({
   return (
     <tr
       onClick={onClick}
-      className="group cursor-pointer border-b border-rule-soft transition-colors hover:bg-bronze-wash"
+      className="rank-row group cursor-pointer border-b border-rule-soft hover:bg-bronze-wash"
     >
       {ALL_COLUMNS.filter((c) => columns.includes(c)).map((col) => (
         <td
