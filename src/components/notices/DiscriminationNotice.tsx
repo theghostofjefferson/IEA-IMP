@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 
+import { PreliminaryFindings } from "@/components/notices/PreliminaryFindings";
 import { DISCRIMINATION_NOTICE } from "@/data/notices";
 
 type Excerpt = {
@@ -73,8 +74,13 @@ export function DiscriminationNotice() {
           <p className="type-body-lg measure">
             The Institute is nearing the end of its research into discrimination in schools. Among the written
             submissions we received from students, we want to share a few passages now. They are shortened, with the
-            line that stayed with us set in larger type, and the context around each is our own summary.
+            line that stayed with us set in larger type, and the context around each is our own summary. First, the
+            preliminary findings.
           </p>
+
+          <PreliminaryFindings />
+
+          <p className="type-label -mb-2 text-gold">In students&rsquo; words</p>
 
           <ul className="flex flex-col gap-8">
             {EXCERPTS.map((e) => (

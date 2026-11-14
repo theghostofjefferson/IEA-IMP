@@ -1632,3 +1632,20 @@ body {
     animation: none;
   }
 }
+
+/* Preliminary findings: the bar under each figure fills once, after the count starts. */
+.finding-fill {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1500ms var(--ease-brand);
+  transition-delay: calc(250ms + var(--i, 0) * 180ms);
+}
+.finding-on .finding-fill {
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .finding-fill {
+    transform: none;
+    transition-delay: 0ms;
+  }
+}
