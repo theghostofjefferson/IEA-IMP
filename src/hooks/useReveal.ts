@@ -18,6 +18,20 @@ import { useEffect, useRef, useState } from "react";
  * The observer disconnects after the first reveal, so a section that has been
  * seen never re-observes it. Elements are revealed once, not on every pass.
  */
+/**
+ * Is enough of the element on screen to reveal it?
+ *
+ * A plain `threshold: 0.15` is unreachable for a very tall block: a 3,000px list
+ * needs 450px of itself in view, so on a phone it stayed invisible (an empty
+ * page) until the reader had scrolled well past its top. Reveal once 15% is
+ * visible OR a reasonable slice (160px) of it is, whichever comes first.
+ */
+const THRESHOLDS = [0, 0.02, 0.05, 0.1, 0.15];
+const MIN_VISIBLE_PX = 160;
+function enough(entry: IntersectionObserverEntry | undefined): boolean {
+  return !!entry && entry.isIntersecting && (entry.intersectionRatio >= 0.15 || entry.intersectionRect.height >= MIN_VISIBLE_PX);
+}
+
 export function useReveal<T extends HTMLElement = HTMLElement>() {
   const ref = useRef<T>(null);
   const [visible, setVisible] = useState(false);
@@ -66,12 +80,12 @@ export function useReveal<T extends HTMLElement = HTMLElement>() {
         (entries) => {
           const entry = entries[0];
           // Still behind the splash? Keep waiting; `onIntroEnd` takes over then.
-          if (entry?.isIntersecting && !root.classList.contains("intro-active")) {
+          if (enough(entry) && !root.classList.contains("intro-active")) {
             setVisible(true);
             cleanup();
           }
         },
-        { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+        { threshold: THRESHOLDS, rootMargin: "0px 0px -40px 0px" },
       );
 
       observer.observe(el);
@@ -94,13 +108,12 @@ export function useReveal<T extends HTMLElement = HTMLElement>() {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const entry = entries[0];
-        if (entry?.isIntersecting) {
+        if (enough(entries[0])) {
           setVisible(true);
           observer.disconnect();
         }
       },
-      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+      { threshold: THRESHOLDS, rootMargin: "0px 0px -40px 0px" },
     );
 
     observer.observe(el);
