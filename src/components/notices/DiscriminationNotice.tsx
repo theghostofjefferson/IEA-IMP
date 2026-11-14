@@ -28,7 +28,7 @@ const EXCERPTS: Excerpt[] = [
   {
     context:
       "A student who has mostly had good teachers says they have seen friends treated differently because of gender and skin colour, mainly through teachers' jokes. They have not witnessed worse first-hand, but say they have heard of it.",
-    highlight: "The jokes that some teachers make (“kale” being the most common).",
+    highlight: "The jokes that some teachers make (‘kale’ being the most common).",
     source: "Student submission · School named by the student: Liverpool International College",
   },
   {
