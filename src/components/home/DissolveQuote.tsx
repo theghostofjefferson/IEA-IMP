@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { MadisonQuote, QUOTE_CITE, QUOTE_TEXT } from "@/components/home/MadisonQuote";
+import { MadisonQuote, QUOTE_CITE, QUOTE_EMPHASIS, QUOTE_TEXT } from "@/components/home/MadisonQuote";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { mulberry32 } from "@/components/sky/skyData";
 
@@ -9,6 +9,8 @@ const HEADER_PAD = 24;
 /** Time the figure holds before it starts to come apart, then how long the change takes. */
 const HOLD_MS = 900;
 const PLAY_MS = 4600;
+const CREAM = "#f4ecd8";
+const GOLD = "#c9a45c";
 const SERIF = '"Latin Modern Roman", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif';
 
 type Field = {
@@ -74,7 +76,7 @@ function pickSorted(points: number[], n: number, rnd: () => number): [number, nu
     .sort((a, b) => a[1] - b[1] || a[0] - b[0]);
 }
 
-function buildField(img: HTMLImageElement, W: number, H: number): Field | null {
+function buildField(img: HTMLImageElement, W: number, H: number, dpr: number): Field | null {
   const off = document.createElement("canvas");
   off.width = W;
   off.height = H;
@@ -93,31 +95,80 @@ function buildField(img: HTMLImageElement, W: number, H: number): Field | null {
   ctx.drawImage(img, fig0.x, fig0.y, fig0.w, fig0.h);
   const fig = sample(ctx, W, H, 2);
 
-  // 2. The quotation, laid out and centred.
-  ctx.clearRect(0, 0, W, H);
+  // 2. The quotation, laid out and centred. Drawn twice from the same layout:
+  //    once at 1x to pick particle targets, once at device resolution to show
+  //    as the finished, sharp text.
   const maxW = Math.min(W * 0.88, 960);
   const fs = mobile ? Math.max(15, W * 0.049) : Math.min(38, Math.max(20, W * 0.028));
-  ctx.fillStyle = "#f4ecd8";
-  ctx.textBaseline = "alphabetic";
-  ctx.textAlign = "center";
+  ctx.clearRect(0, 0, W, H);
   ctx.font = `${fs}px ${SERIF}`;
   const lines = wrap(ctx, QUOTE_TEXT, maxW);
   const lh = fs * 1.4;
   const citeFs = Math.max(11, fs * 0.5);
-  const blockH = lines.length * lh + citeFs * 3.2;
-  let y = top + (usable - blockH) / 2 + fs;
-  for (const l of lines) {
-    ctx.fillText(l, W / 2, y);
-    y += lh;
-  }
-  ctx.font = `${citeFs}px ${SERIF}`;
-  y += citeFs * 1.2;
-  ctx.fillText(QUOTE_CITE.toUpperCase().split("").join(" "), W / 2, y);
+  const orn = fs * 1.7;
+  const blockH = orn + lines.length * lh + citeFs * 3.2;
+  const accentFrom = QUOTE_TEXT.indexOf(QUOTE_EMPHASIS);
+
+  const paint = (c: CanvasRenderingContext2D, scale: number) => {
+    c.setTransform(scale, 0, 0, scale, 0, 0);
+    c.clearRect(0, 0, W, H);
+    c.textBaseline = "alphabetic";
+    c.textAlign = "left";
+    const y0 = top + (usable - blockH) / 2;
+
+    // Ornament: hairlines either side of a small diamond.
+    const oy = y0 + fs * 0.5;
+    const arm = Math.min(W * 0.1, 80);
+    c.strokeStyle = "rgba(201,164,92,0.6)";
+    c.lineWidth = 1;
+    c.beginPath();
+    c.moveTo(W / 2 - 14 - arm, oy);
+    c.lineTo(W / 2 - 14, oy);
+    c.moveTo(W / 2 + 14, oy);
+    c.lineTo(W / 2 + 14 + arm, oy);
+    c.stroke();
+    c.save();
+    c.translate(W / 2, oy);
+    c.rotate(Math.PI / 4);
+    c.strokeStyle = GOLD;
+    c.strokeRect(-3, -3, 6, 6);
+    c.restore();
+
+    // Quotation, line by line, the closing phrase in gold.
+    c.font = `${fs}px ${SERIF}`;
+    let y = y0 + orn + fs;
+    let consumed = 0;
+    for (const line of lines) {
+      const lineStart = QUOTE_TEXT.indexOf(line, consumed);
+      consumed = lineStart + line.length;
+      let x = W / 2 - c.measureText(line).width / 2;
+      const words = line.split(" ");
+      let at = lineStart;
+      words.forEach((w, k) => {
+        const piece = k < words.length - 1 ? `${w} ` : w;
+        c.fillStyle = at >= accentFrom ? GOLD : CREAM;
+        c.fillText(piece, x, y);
+        x += c.measureText(piece).width;
+        at += piece.length;
+      });
+      y += lh;
+    }
+
+    // Attribution.
+    c.font = `${citeFs}px ${SERIF}`;
+    c.fillStyle = "rgba(244,236,216,0.75)";
+    c.textAlign = "center";
+    y += citeFs * 1.2;
+    c.fillText(QUOTE_CITE.toUpperCase().split("").join("\u200A"), W / 2, y);
+  };
+
+  paint(ctx, 1);
   const txt = sample(ctx, W, H, 2);
   const text = document.createElement("canvas");
-  text.width = W;
-  text.height = H;
-  text.getContext("2d")?.drawImage(off, 0, 0);
+  text.width = Math.round(W * dpr);
+  text.height = Math.round(H * dpr);
+  const tctx = text.getContext("2d");
+  if (tctx) paint(tctx, dpr);
 
   const n = Math.min(mobile ? 3000 : 7000, fig.length / 2, txt.length / 2);
   if (n < 200) return null;
@@ -199,7 +250,7 @@ export function DissolveQuote() {
       canvas.width = W * dpr;
       canvas.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      field = buildField(img, W, H);
+      field = buildField(img, W, H, dpr);
       if (!field) setFailed(true);
     };
 
@@ -217,7 +268,7 @@ export function DissolveQuote() {
         ctx.globalAlpha = figA;
         ctx.drawImage(img, fig.x, fig.y, fig.w, fig.h);
       }
-      ctx.globalAlpha = 1 - 0.6 * textFade;
+      ctx.globalAlpha = 1 - textFade;
       for (let pass = 0; pass < 2; pass++) {
         ctx.fillStyle = pass === 0 ? "rgba(244,236,216,0.88)" : "rgba(201,164,92,0.95)";
         for (let i = pass; i < n; i += 2) {

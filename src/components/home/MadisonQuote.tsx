@@ -23,6 +23,8 @@ const TAIL = ".”";
 
 /** The whole quotation as one string, for other renderings of it. */
 export const QUOTE_TEXT = `${LEAD} ${EMPHASIS}${TAIL}`;
+/** The closing phrase, set in the accent colour wherever the quotation appears. */
+export const QUOTE_EMPHASIS = EMPHASIS;
 export const QUOTE_CITE = "James Madison · Federalist No. 47";
 
 const LEAD_WORDS = LEAD.split(" ");
