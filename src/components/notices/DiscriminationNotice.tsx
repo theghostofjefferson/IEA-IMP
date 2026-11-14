@@ -30,13 +30,13 @@ const EXCERPTS: Excerpt[] = [
     context:
       "A student who has mostly had good teachers says they have seen friends treated differently because of gender and skin colour, mainly through teachers' jokes. They have not witnessed worse first-hand, but say they have heard of it.",
     highlight: "The jokes that some teachers make (‘kale’ being the most common).",
-    source: "Student submission · School named by the student: Liverpool International College",
+    source: "Student submission · School identity withheld",
   },
   {
     context:
       "A student says teachers showed little regard for students' mental health and used hurtful language, and that misbehaviour was met with force rather than care.",
     highlight: "Bullying is not taken seriously and physical violence is justified.",
-    source: "Student submission · School named by the student: St. Mary's Secondary School",
+    source: "Student submission · School identity withheld",
   },
 ];
 
