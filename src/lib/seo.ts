@@ -92,6 +92,11 @@ export const SEO = {
     "A confidential form collecting student experiences of educational treatment.",
     { noindex: true, nofollow: true },
   ),
+  sky: build(
+    "The Night Sky",
+    "Every rated school as a star: a decorative view of the 2026 school evaluation.",
+    { noindex: true },
+  ),
   reportConcern: build(
     "Whistleblower & Public Interest Disclosure",
     "Report a violation or a concern about an educational institution to the Institute for Educational Accountability. Providing identifying information is optional.",

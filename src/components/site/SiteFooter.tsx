@@ -121,7 +121,15 @@ export function SiteFooter() {
             .
           </p>
           <p className="type-caption text-ink-inverse/45">
-            &copy; {new Date().getFullYear()} Institute for Educational Accountability
+            &copy; {new Date().getFullYear()} Institute for Educational Accountability{" "}
+            <Link
+              to="/sky"
+              aria-label="The night sky"
+              title="The night sky"
+              className="ml-1 inline-block text-ink-inverse/45 transition-[color,transform] duration-300 hover:rotate-45 hover:text-gold"
+            >
+              <span aria-hidden="true">&#10022;</span>
+            </Link>
           </p>
         </div>
       </Container>
