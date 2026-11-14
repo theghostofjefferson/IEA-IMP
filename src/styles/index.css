@@ -1548,3 +1548,87 @@ body {
     animation-delay: 0ms;
   }
 }
+
+/* ==========================================================================
+   Rankings polish
+
+   Rows fade in the first time they scroll into view; their score bars fill at
+   the same moment. `.rank-armed` is only added once JS is running, so without
+   it (or without IntersectionObserver) every row is simply visible.
+   ========================================================================== */
+
+.rank-armed .rank-row {
+  transition:
+    opacity 600ms var(--ease-brand),
+    background-color 150ms ease;
+  transition-delay: calc(var(--d, 0) * 45ms), 0ms;
+}
+.rank-armed .rank-row:not([data-in]) {
+  opacity: 0;
+}
+.rank-armed .rank-row:not([data-in]) [role="img"] > div {
+  animation: none;
+  transform: scaleX(0);
+}
+.rank-armed .rank-row[data-in] [role="img"] > div {
+  animation-delay: calc(var(--d, 0) * 45ms + 120ms) !important;
+}
+
+/* Podium cards rise in; the ring fills once. */
+.rk-rise {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 700ms var(--ease-brand),
+    transform 700ms var(--ease-brand);
+  transition-delay: calc(var(--d, 0) * 110ms);
+}
+.rk-rise-on {
+  opacity: 1;
+  transform: none;
+}
+
+.podium-ring {
+  stroke-dashoffset: 188.5;
+  transition: stroke-dashoffset 1500ms var(--ease-brand);
+  transition-delay: 350ms;
+}
+.podium-on .podium-ring {
+  stroke-dashoffset: var(--off);
+}
+
+/* Band bar segments grow out from the left. */
+@keyframes band-seg-in {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+.band-seg > span:first-child {
+  transform-origin: left center;
+  animation: band-seg-in 800ms var(--ease-brand) both;
+  animation-delay: calc(var(--d, 0) * 120ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rank-armed .rank-row:not([data-in]) {
+    opacity: 1;
+  }
+  .rank-armed .rank-row:not([data-in]) [role="img"] > div {
+    transform: none;
+  }
+  .rk-rise {
+    opacity: 1;
+    transform: none;
+  }
+  .podium-ring {
+    stroke-dashoffset: var(--off);
+  }
+  .band-seg > span:first-child {
+    animation: none;
+  }
+}

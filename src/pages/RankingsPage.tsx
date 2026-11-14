@@ -4,6 +4,8 @@ import { useNavigate } from "react-router";
 import { Container } from "@/components/site/Container";
 import { Reveal } from "@/components/site/Reveal";
 import { Rule } from "@/components/site/Rule";
+import { BandBar } from "@/components/rankings/BandBar";
+import { Podium } from "@/components/rankings/Podium";
 import { RankingsTable } from "@/components/rankings/RankingsTable";
 import { RankingsToolbar } from "@/components/rankings/RankingsToolbar";
 import { SchoolListRow } from "@/components/rankings/SchoolListRow";
@@ -29,6 +31,10 @@ export function RankingsPage() {
   const onNavigate = useCallback((id: number) => void navigate(`/school/${id}`), [navigate]);
 
   const { rows, filters, sort, columns, view, setSort, setView, toggleColumn, reset, shown, total, isFiltered } = state;
+
+  // "Top three" is only honest while nothing narrows the list. (`isFiltered` also
+  // trips on a changed sort or column set, which do not change who is top.)
+  const narrowed = filters.q !== "" || filters.type !== "all" || filters.band !== "all";
 
   return (
     <Container>
@@ -64,6 +70,14 @@ export function RankingsPage() {
           <Reveal className="pt-4" delayMs={30}>
             <RedFlagLegalNotice />
           </Reveal>
+        ) : null}
+
+        {view !== "redflags" ? (
+          <>
+            {/* Hidden while a search or filter is active: "top three" would mislead. */}
+            {!narrowed ? <Podium /> : null}
+            <BandBar band={filters.band} onBand={state.setBand} />
+          </>
         ) : null}
 
         <Reveal className="py-8 md:py-10" delayMs={60}>
