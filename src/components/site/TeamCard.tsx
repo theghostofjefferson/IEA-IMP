@@ -82,7 +82,7 @@ export function TeamCard({
     </>
   );
 
-  const rootClass = "flex flex-col items-center group";
+  const rootClass = "team-card flex flex-col items-center group";
   return to ? (
     <Link
       to={to}
