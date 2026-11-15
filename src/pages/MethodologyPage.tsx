@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 
 import { Container } from "@/components/site/Container";
 import { Reveal } from "@/components/site/Reveal";
@@ -6,6 +6,7 @@ import { Rule } from "@/components/site/Rule";
 import { SectionHeader } from "@/components/data-display/SectionHeader";
 import { FaqItem, Datum } from "@/components/site/FaqItem";
 import { HowToRead } from "@/components/home/HowToRead";
+import { useReveal } from "@/hooks/useReveal";
 import { SEO, applySeo } from "@/lib/seo";
 import { formatCountPlus, formatDate } from "@/lib/format";
 import { meta } from "@/lib/data";
@@ -179,16 +180,23 @@ function MethodStep({
   step: { title: string; body: string };
 }) {
   const [open, setOpen] = useState(false);
+  const { ref, visible } = useReveal<HTMLLIElement>();
 
   return (
-    <li className="border-b border-rule-soft last:border-b-0">
+    <li
+      ref={ref}
+      className={`step-item relative border-b border-rule-soft last:border-b-0 ${visible ? "step-on" : ""}`}
+      style={{ "--i": n - 1 } as CSSProperties}
+    >
+      {/* A bronze rule draws along the foot of each step as it comes into view. */}
+      <span aria-hidden="true" className="step-rule pointer-events-none absolute inset-x-0 bottom-[-1px] h-px bg-bronze/60" />
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         className="flex w-full items-baseline gap-4 rounded-sm py-4 text-left transition-colors duration-[120ms] hover:bg-bronze-wash focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze"
       >
-        <span className="font-serif type-numeric leading-none text-bronze-ink">
+        <span className="step-num font-serif type-numeric leading-none text-bronze-ink">
           {String(n).padStart(2, "0")}
         </span>
         <span className="type-heading flex-1 text-ink">{step.title}</span>
