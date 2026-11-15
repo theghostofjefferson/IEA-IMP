@@ -1,15 +1,18 @@
+import type { CSSProperties } from "react";
 import { Link } from "react-router";
 
 import { cn } from "@/lib/utils";
+import { useReveal } from "@/hooks/useReveal";
 import { Monogram } from "@/components/data-display/Monogram";
 
 /**
- * One person card — modern sleek glassmorphism design.
+ * One person card.
  *
- * Circular portrait with gradient border, serif name, tracked role below.
- * Hover lifts the card, brightens the border, and reveals the monogram/photo
- * with a glow. Photos load from `public/people/<id>.jpg` when you set `photo`;
- * otherwise a monogram shows.
+ * An arched portrait inside a gold frame. On hover the frame's light travels
+ * round it, the portrait tilts towards the pointer (see `useCardSpotlight`) and
+ * colour returns to the photograph. Cards rise into place as they scroll into
+ * view, staggered by `index`. Photos load from `public/people/<id>.jpg` when
+ * you set `photo`; otherwise a monogram shows.
  */
 export function TeamCard({
   name,
@@ -18,80 +21,76 @@ export function TeamCard({
   featured = false,
   emphasis = false,
   to,
+  index = 0,
 }: {
   name: string;
   role: string;
   photo?: string;
   featured?: boolean;
-  /** A quiet step up in standing: bolder, slightly larger name and a bronze ring on the portrait. */
+  /** A quiet step up in standing: bolder, slightly larger name and a brighter frame. */
   emphasis?: boolean;
   /** When set, the whole card links to this profile page. */
   to?: string;
+  /** Position within its row; sets the entrance delay. */
+  index?: number;
 }) {
+  const { ref, visible } = useReveal<HTMLElement>();
+
   const content = (
     <>
-      {/* Portrait — circular with animated gradient border. */}
-      <div className={cn(
-        "relative size-24 sm:size-36 rounded-full flex items-center justify-center transition-all duration-500 ease-brand",
-        photo ? "bg-canvas" : "bg-sunken",
-        featured && "relative size-32 sm:size-40 border-2",
-        featured && photo &&
-          "border-letter bg-letter-wash group-hover:border-letter group-hover:shadow-[0_0_40px_rgb(47_93_124_0.2)]",
-        featured && !photo &&
-          "border-rule-soft bg-sunken group-hover:border-bronze group-hover:shadow-[0_0_24px_rgb(138_106_53_0.12)]",
-        !featured &&
-          "border border-rule-soft group-hover:border-bronze group-hover:shadow-[0_0_24px_rgb(138_106_53_0.12)]",
-        emphasis && "border-bronze/70 ring-2 ring-bronze/30 ring-offset-2 ring-offset-canvas",
-      )}>
-        {photo ? (
-          <img
-            src={photo}
-            alt={name}
-            className="w-full h-full object-cover rounded-full portrait-img"
-          />
-        ) : (
-          <div className="flex items-center justify-center h-full w-full text-ink-faint font-serif text-[0.9375rem] font-bold tracking-[0.05em]">
-            <Monogram name={name} size={featured ? "xl" : "md"} tone="neutral" />
-          </div>
-        )}
+      <div className={cn("tc-frame", featured && "tc-frame--lg", emphasis && "tc-frame--emph")}>
+        <div className={cn("tc-inner", photo ? "bg-canvas" : "bg-sunken")}>
+          {photo ? (
+            <img src={photo} alt={name} className="tc-img portrait-img" />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center text-ink-faint">
+              <Monogram name={name} size={featured ? "xl" : "md"} tone="neutral" />
+            </div>
+          )}
+        </div>
+        <span aria-hidden="true" className="tc-glow" />
       </div>
 
-      <div className="mt-4 flex flex-col items-center">
-        <p className={cn(
-          "font-serif font-bold text-ink leading-tight text-center transition-colors duration-300 ease-brand group-hover:text-bronze",
-          featured
-            ? "min-w-[14rem] px-2 py-1 text-[1rem] sm:text-[1.125rem]"
-            : emphasis
-              ? "font-black text-[1rem] sm:text-[1.125rem]"
-              : "text-[0.9375rem] sm:text-[1rem]",
-        )}>
+      <div className="mt-5 flex flex-col items-center">
+        <p
+          className={cn(
+            "tc-name font-serif font-bold leading-tight text-ink text-center transition-colors duration-300 ease-brand group-hover:text-bronze",
+            featured
+              ? "px-2 py-1 text-[1.0625rem] sm:text-[1.1875rem]"
+              : emphasis
+                ? "font-black text-[1rem] sm:text-[1.125rem]"
+                : "text-[0.9375rem] sm:text-[1rem]",
+          )}
+        >
           {name}
         </p>
-        <p className={cn(
-          "mt-2 type-caption text-center text-ink-faint uppercase tracking-[0.14em] transition-colors duration-300 ease-brand group-hover:text-bronze group-hover:font-bold",
-          featured ? "text-[0.8125rem]" : "text-[0.8125rem]",
-        )}>
+        <p className="mt-2 type-caption text-center text-[0.75rem] uppercase tracking-[0.14em] text-ink-faint transition-colors duration-300 ease-brand group-hover:text-bronze">
           {role}
         </p>
       </div>
       {to ? (
-        <span className="mt-2 font-sans text-[0.6875rem] font-semibold uppercase tracking-[0.16em] text-bronze-ink opacity-75 transition-opacity duration-300 group-hover:opacity-100">
-          View profile &rarr;
+        <span className="tc-cta mt-2 font-sans text-[0.6875rem] font-semibold uppercase tracking-[0.16em] text-bronze-ink">
+          View profile <span aria-hidden="true">&rarr;</span>
         </span>
       ) : null}
     </>
   );
 
-  const rootClass = "team-card flex flex-col items-center group";
+  const rootClass = cn("team-card tc-card flex flex-col items-center group", visible && "tc-on");
+  const style = { "--d": `${(index % 6) * 80}ms` } as CSSProperties;
   return to ? (
     <Link
+      ref={ref as React.Ref<HTMLAnchorElement>}
       to={to}
+      style={style}
       aria-label={`${name}, ${role} - view profile`}
       className={cn(rootClass, "rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bronze")}
     >
       {content}
     </Link>
   ) : (
-    <div className={rootClass}>{content}</div>
+    <div ref={ref as React.Ref<HTMLDivElement>} style={style} className={rootClass}>
+      {content}
+    </div>
   );
 }

@@ -20,6 +20,7 @@ import { applySeo, memberSeo } from "@/lib/seo";
 import type { Contributor } from "@/lib/types";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { cn } from "@/lib/utils";
+import { useCardSpotlight } from "@/hooks/useCardSpotlight";
 
 /**
  * One member of the Institute.
@@ -45,6 +46,7 @@ function MemberDetail({ member }: { member: Contributor }) {
   const all = profileMembers();
   const idx = all.findIndex((m) => m.id === member.id);
   const others = all.filter((m) => m.id !== member.id);
+  const gridRef = useCardSpotlight<HTMLDivElement>();
 
   return (
     <Container>
@@ -57,28 +59,32 @@ function MemberDetail({ member }: { member: Contributor }) {
 
         <Reveal className="py-12 md:py-16" delayMs={60}>
           <h2 className="type-label text-ink-faint">More from the team</h2>
-          <div className="mt-8 grid grid-cols-2 justify-items-center gap-8 sm:grid-cols-3 lg:grid-cols-6">
-            {others.map((m) => (
-              <TeamCard key={m.id} name={m.name} role={m.role} photo={memberPhoto(m)} to={profilePath(m.id)} />
+          <div ref={gridRef} className="mt-8 grid grid-cols-2 justify-items-center gap-x-6 gap-y-12 sm:grid-cols-3 lg:grid-cols-6">
+            {others.map((m, i) => (
+              <TeamCard key={m.id} index={i} name={m.name} role={m.role} photo={memberPhoto(m)} to={profilePath(m.id)} />
             ))}
           </div>
         </Reveal>
 
         <Rule />
 
-        <nav aria-label="Profiles" className="flex flex-wrap items-center justify-between gap-4 py-8">
+        <nav aria-label="Profiles" className="py-8">
           <Link to="/about" className="type-caption text-bronze-ink underline underline-offset-4 hover:decoration-2">
             &larr; Back to the team
           </Link>
-          <div className="flex gap-6">
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {idx > 0 ? (
-              <Link to={profilePath(all[idx - 1]!.id)!} className="type-caption text-ink-muted hover:text-ink">
-                &larr; {all[idx - 1]!.name}
+              <Link to={profilePath(all[idx - 1]!.id)!} className="mp-pn text-left">
+                <span className="type-label text-ink-faint">&larr; Previous</span>
+                <span className="mt-1 block font-serif text-lg font-bold text-ink">{all[idx - 1]!.name}</span>
+                <span className="type-caption text-ink-muted">{all[idx - 1]!.role}</span>
               </Link>
-            ) : null}
+            ) : <span />}
             {idx < all.length - 1 ? (
-              <Link to={profilePath(all[idx + 1]!.id)!} className="type-caption text-ink-muted hover:text-ink">
-                {all[idx + 1]!.name} &rarr;
+              <Link to={profilePath(all[idx + 1]!.id)!} className="mp-pn text-right sm:col-start-2">
+                <span className="type-label text-ink-faint">Next &rarr;</span>
+                <span className="mt-1 block font-serif text-lg font-bold text-ink">{all[idx + 1]!.name}</span>
+                <span className="type-caption text-ink-muted">{all[idx + 1]!.role}</span>
               </Link>
             ) : null}
           </div>
@@ -92,32 +98,47 @@ function MemberDetail({ member }: { member: Contributor }) {
 
 function StandardHeader({ member, profile }: { member: Contributor; profile: MemberProfile }) {
   const photo = memberPhoto(member);
+  const words = member.name.split(" ");
+  const initials = words.map((w) => w[0]).join("").slice(0, 2).toUpperCase();
   return (
-    <header className="pt-10 md:pt-16">
-      <Link to="/about" className="type-caption text-bronze-ink underline underline-offset-4 hover:decoration-2">
+    <header className="mp-stage relative isolate overflow-hidden pt-10 md:pt-16">
+      <div aria-hidden="true" className="ab-aurora" />
+      <span aria-hidden="true" className="mp-ghost">{initials}</span>
+      <Link to="/about" className="mp-fade type-caption text-bronze-ink underline underline-offset-4 hover:decoration-2">
         &larr; The team
       </Link>
-      <div className="mt-8 grid items-start gap-6 sm:grid-cols-[auto_1fr] sm:gap-10">
-        <div className="w-28 sm:w-36">
-          <div className="aspect-[4/5] overflow-hidden rounded-sm border border-rule-soft bg-sunken">
-            {photo ? (
-              <img src={photo} alt={member.name} className="size-full object-cover object-[50%_25%]" />
-            ) : (
-              <div className="flex size-full items-center justify-center">
-                <Monogram name={member.name} size="xl" tone="neutral" />
-              </div>
-            )}
+      <div className="mt-10 grid items-center gap-10 pb-6 sm:grid-cols-[auto_1fr] sm:gap-14">
+        <div className="mp-arch mx-auto sm:mx-0">
+          <div className="tc-frame tc-frame--lg" style={{ ["--size" as string]: "clamp(11rem, 30vw, 17rem)" }}>
+            <div className={cn("tc-inner", photo ? "bg-canvas" : "bg-sunken")}>
+              {photo ? (
+                <img src={photo} alt={member.name} className="tc-img" />
+              ) : (
+                <div className="flex size-full items-center justify-center">
+                  <Monogram name={member.name} size="xl" tone="neutral" />
+                </div>
+              )}
+            </div>
           </div>
         </div>
         <div className="min-w-0">
-          <p className="type-label text-bronze-ink">{member.role}</p>
+          <p className="mp-fade type-label text-bronze-ink" style={{ ["--d" as string]: ".15s" }}>{member.role}</p>
           <h1 tabIndex={-1} className="type-title mt-3 text-ink outline-none">
-            {member.name}
+            {words.map((w, i) => (
+              <span key={i} className="mp-word" style={{ ["--w" as string]: i }}>
+                {w}
+                {i < words.length - 1 ? "\u00a0" : ""}
+              </span>
+            ))}
           </h1>
-          <div aria-hidden="true" className="mt-5 h-px w-16 bg-bronze/70" />
-          {profile.summary ? <p className="type-body-lg measure mt-5 text-ink-muted">{profile.summary}</p> : null}
+          <div aria-hidden="true" className="mp-rule mt-5 h-px w-24 bg-bronze/70" />
+          {profile.summary ? (
+            <p className="mp-fade type-body-lg measure mt-5 text-ink-muted" style={{ ["--d" as string]: ".7s" }}>
+              {profile.summary}
+            </p>
+          ) : null}
           {profile.quote ? (
-            <blockquote className="mt-6 max-w-xl border-l-2 border-bronze pl-4">
+            <blockquote className="mp-fade mt-6 max-w-xl border-l-2 border-bronze pl-4" style={{ ["--d" as string]: ".9s" }}>
               <p className="font-serif text-lg italic text-ink">&ldquo;{profile.quote.text}&rdquo;</p>
               {profile.quote.source ? <footer className="type-caption mt-1 text-ink-faint">{profile.quote.source}</footer> : null}
             </blockquote>
