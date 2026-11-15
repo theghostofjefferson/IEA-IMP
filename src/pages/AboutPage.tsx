@@ -191,10 +191,6 @@ export function AboutPage() {
                   role="Founder, Executive Chairman & Chief of Investigations"
                   featured
                 />
-                <p className="mx-auto mt-5 max-w-[20rem] text-center font-serif text-[0.9375rem] italic leading-[1.6] text-bronze-ink">
-                  The architect of the Institute &mdash; a student of James Madison,
-                  and the reason this work began.
-                </p>
                 <Link
                   to="/notices#statement"
                   aria-label="Read the IEA statement of 31 October 2026 on the assault on freedom of expression in Nepal"
