@@ -51,15 +51,13 @@ export const PROFILE_IDS: readonly string[] = [
 
 export const profiles: Record<string, MemberProfile> = {
   "eron-subedi": {
-    summary: "Architect of the Institute and a lifelong student of James Madison.",
+    summary: "Founded the Institute and leads its investigations.",
     bio: [
-      "Eron Subedi is the architect of the Institute for Educational Accountability. He serves as its Founder, Executive Chairman, and Chief of Investigations.",
-      "James Madison is the thread running through everything he builds. He has said he would not have undertaken this project without Madison’s ideas: that power must be checked, that those who hold it must answer to the people it affects, and that open information is a precondition of self-government. The Institute is his attempt to carry that conviction into education.",
+      "Eron Subedi serves as the Founder, Executive Chairman, and Chief of Investigations at the Institute for Educational Accountability.",
       "He provides the Institute’s overall vision and institutional direction, oversees its strategic development and operations, and leads its investigative initiatives.",
       "His longstanding engagement with constitutional law informs IEA’s legal strategy, including the development of legal challenges and the application of constitutional principles to questions of educational accountability.",
     ],
     focus: [
-      "The Madisonian foundations of the Institute",
       "Vision and institutional direction",
       "Strategy and operations",
       "Investigations",
