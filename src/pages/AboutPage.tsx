@@ -8,6 +8,10 @@ import { StatBlock, StatRow } from "@/components/data-display/StatBlock";
 import { SectionHeader } from "@/components/data-display/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { TeamCard } from "@/components/site/TeamCard";
+import { TierHeader } from "@/components/about/TierHeader";
+import { CountUp } from "@/components/site/CountUp";
+import { useReveal } from "@/hooks/useReveal";
+import { useCardSpotlight } from "@/hooks/useCardSpotlight";
 import { Notice } from "@/components/site/Notice";
 import { FaqItem } from "@/components/site/FaqItem";
 import { MessageModal } from "@/components/site/MessageModal";
@@ -16,7 +20,7 @@ import { contributors } from "@/data/contributors";
 import { profilePathByName } from "@/data/profiles";
 import { SEO, applySeo } from "@/lib/seo";
 import { bandCounts, meanResponses, meta, totalSchools } from "@/lib/data";
-import { formatCount, formatCountPlus, formatDate } from "@/lib/format";
+import { formatDate } from "@/lib/format";
 
 /**
  * The institute, the numbers, the people.
@@ -44,13 +48,16 @@ export function AboutPage() {
     return () => window.clearTimeout(id);
   }, [hash]);
 
+  const teamRef = useCardSpotlight<HTMLDivElement>();
+
   /** Which founder letter is open: null, "president", or "founder". */
   const [letter, setLetter] = useState<"president" | "founder" | null>(null);
 
   return (
     <Container>
       <div className="animate-route-in">
-        <header className="pt-12 md:pt-20">
+        <header className="relative isolate pt-12 md:pt-20">
+          <div aria-hidden="true" className="ab-aurora" />
           <Reveal staggerMs={60}>
             <div className="flex items-center gap-3">
               <AccentRule />
@@ -106,17 +113,17 @@ export function AboutPage() {
         <Reveal className="py-12 md:py-16" delayMs={60}>
           <StatRow>
             <StatBlock
-              value={formatCount(totalSchools)}
+              value={<CountUp to={totalSchools} />}
               label="schools rated"
               sublabel={`${formatDate(meta.publicationDate)}`}
             />
             <StatBlock
-              value={formatCountPlus(meta.totalResponses)}
+              value={<CountUp to={meta.totalResponses} suffix="+" />}
               label="students answered"
               sublabel={`mean ${meanResponses} per school`}
             />
             <StatBlock
-              value={formatCount(bandCounts.strong)}
+              value={<CountUp to={bandCounts.strong} />}
               label="rated strong"
               sublabel={`${bandCounts.fair} fair, ${bandCounts.weak} weak`}
             />
@@ -139,34 +146,7 @@ export function AboutPage() {
             <span className="type-label text-bronze-ink">Research and development</span>
           </div>
           <h2 className="type-heading mt-4 text-ink">How the work has developed</h2>
-          <div className="mt-8 max-w-[46rem] border-l border-rule pl-5 md:pl-7">
-            <div className="mb-6">
-              <p className="type-label text-bronze-ink">2025</p>
-              <p className="type-body mt-1 text-ink-muted">Survey design and methodology development began.</p>
-            </div>
-            <div className="mb-6">
-              <p className="type-label text-bronze-ink">Early 2026</p>
-              <p className="type-body mt-1 text-ink-muted">Online research and literature review began.</p>
-            </div>
-            <div className="mb-6">
-              <p className="type-label text-bronze-ink">Mid 2026</p>
-              <p className="type-body mt-1 text-ink-muted">The first batch of surveys was completed.</p>
-            </div>
-            <div className="mb-6">
-              <p className="type-label text-bronze-ink">Third quarter of 2026</p>
-              <p className="type-body mt-1 text-ink-muted">Field research began.</p>
-            </div>
-            <div className="mb-6">
-              <p className="type-label text-bronze-ink">September 2026</p>
-              <p className="type-body mt-1 text-ink-muted">The litigation process began.</p>
-            </div>
-            <div>
-              <p className="type-label text-bronze-ink">First quarter of 2027 · expected</p>
-              <p className="type-body mt-1 text-ink-muted">
-                The Institute expects to publish its research, field findings, and reporting on litigation-related work.
-              </p>
-            </div>
-          </div>
+          <Timeline />
             </div>
           </section>
         </Reveal>
@@ -175,14 +155,15 @@ export function AboutPage() {
 
         {/* --- people ------------------------------------------------------ */}
         <Reveal className="py-8 md:py-20" delayMs={180}>
-          <div className="mb-12 text-center md:mb-16">
+          <div ref={teamRef}>
+          <div className="mb-4 text-center md:mb-6">
             <h2 className="type-title text-ink mb-6 bg-clip-text text-transparent bg-gradient-to-r from-ink via-bronze to-ink">
               The team
             </h2>
           </div>
 
-          {/* Founders */}
-          <section className="relative mb-14 md:mb-20">
+          <TierHeader label="Founders" className="!mt-8" />
+          <section className="relative mb-6 md:mb-10">
             <div className="absolute inset-0 -z-10 bg-bronze-soft/40 rounded-2xl blur-3xl" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
               <div className="founder-profile-card founder-profile-card--liberte md:col-start-1">
@@ -239,43 +220,43 @@ export function AboutPage() {
             </div>
           </section>
 
-          <div aria-hidden="true" className="my-10 h-px w-full bg-bronze/35 md:my-12" />
+          <TierHeader label="Leadership" />
 
           {/* Leadership — Aarohan, S. Lamichhane, Tikaram, Prajjwal (Management Advisor) */}
-          <section className="mb-14 md:mb-20">
+          <section className="mb-6 md:mb-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 items-start justify-items-center">
-              <TeamCard name="Aarohan Baral" to={profilePathByName("Aarohan Baral")} role="Founding Member & Lead Developer" photo={photoByName.get("Aarohan Baral")} />
-              <TeamCard name="S. Lamichhane" to={profilePathByName("S. Lamichhane")} role="Founding Member & Vice President" photo={photoByName.get("S. Lamichhane")} />
-              <TeamCard name="Tikaram Sharma" to={profilePathByName("Tikaram Sharma")} role="Co-Founder & Statistical Analyst" photo={photoByName.get("Tikaram Sharma")} />
-              <TeamCard name="Prajjwal Dhakal" to={profilePathByName("Prajjwal Dhakal")} role="Management Advisor" photo={photoByName.get("Prajjwal Dhakal")} />
+              <TeamCard index={0} name="Aarohan Baral" to={profilePathByName("Aarohan Baral")} role="Founding Member & Lead Developer" photo={photoByName.get("Aarohan Baral")} />
+              <TeamCard index={1} name="S. Lamichhane" to={profilePathByName("S. Lamichhane")} role="Founding Member & Vice President" photo={photoByName.get("S. Lamichhane")} />
+              <TeamCard index={2} name="Tikaram Sharma" to={profilePathByName("Tikaram Sharma")} role="Co-Founder & Statistical Analyst" photo={photoByName.get("Tikaram Sharma")} />
+              <TeamCard index={3} name="Prajjwal Dhakal" to={profilePathByName("Prajjwal Dhakal")} role="Management Advisor" photo={photoByName.get("Prajjwal Dhakal")} />
             </div>
           </section>
 
-          <div aria-hidden="true" className="my-10 h-px w-full bg-bronze/35 md:my-12" />
+          <TierHeader label="Editorial and research leads" />
 
           {/* Editorial and research leadership: editors, then the research leads. */}
-          <section className="mb-14 md:mb-20">
+          <section className="mb-6 md:mb-10">
             <div className="mx-auto flex max-w-3xl flex-col gap-10 md:gap-14">
               <div className="grid grid-cols-2 items-start justify-items-center gap-4 sm:gap-8 md:gap-12">
-                <TeamCard name="Aishani Rai" to={profilePathByName("Aishani Rai")} role="Editorial Lead" photo={photoByName.get("Aishani Rai")} />
-                <TeamCard name="Ashmit Pandey" to={profilePathByName("Ashmit Pandey")} role="Managing Editor and Associate Researcher" photo={photoByName.get("Ashmit Pandey")} />
+                <TeamCard index={4} name="Aishani Rai" to={profilePathByName("Aishani Rai")} role="Editorial Lead" photo={photoByName.get("Aishani Rai")} />
+                <TeamCard index={5} name="Ashmit Pandey" to={profilePathByName("Ashmit Pandey")} role="Managing Editor and Associate Researcher" photo={photoByName.get("Ashmit Pandey")} />
               </div>
               <div className="grid grid-cols-2 items-start justify-items-center gap-4 sm:gap-8 md:gap-12">
-                <TeamCard name="Abinash Poudel" to={profilePathByName("Abinash Poudel")} role="Lead of Online Research" photo={photoByName.get("Abinash Poudel")} />
-                <TeamCard name="Krinjal Timalsina" to={profilePathByName("Krinjal Timalsina")} role="Lead Researcher" photo={photoByName.get("Krinjal Timalsina")} />
+                <TeamCard index={6} name="Abinash Poudel" to={profilePathByName("Abinash Poudel")} role="Lead of Online Research" photo={photoByName.get("Abinash Poudel")} />
+                <TeamCard index={7} name="Krinjal Timalsina" to={profilePathByName("Krinjal Timalsina")} role="Lead Researcher" photo={photoByName.get("Krinjal Timalsina")} />
               </div>
             </div>
           </section>
 
-          <div aria-hidden="true" className="my-10 h-px w-full bg-bronze/35 md:my-12" />
+          <TierHeader label="Research team" />
 
           {/* Research Executives, with the Research Analysts set beneath them in a
               bracketed panel so the reporting line reads at a glance. */}
-          <section className="mb-14 md:mb-20" aria-label="Research Executives and the Research Analysts working under them">
+          <section className="mb-6 md:mb-10" aria-label="Research Executives and the Research Analysts working under them">
             <div className="mx-auto grid max-w-3xl grid-cols-3 items-start justify-items-center gap-3 sm:gap-8 md:gap-10">
-              <TeamCard name="Nischal Ghimire" to={profilePathByName("Nischal Ghimire")} role="Research Executive" photo={photoByName.get("Nischal Ghimire")} />
-              <TeamCard name="Kaustuv Rimal" to={profilePathByName("Kaustuv Rimal")} role="Research Executive" emphasis />
-              <TeamCard name="Aaditya Jha" to={profilePathByName("Aaditya Jha")} role="Research Executive" photo={photoByName.get("Aaditya Jha")} />
+              <TeamCard index={8} name="Nischal Ghimire" to={profilePathByName("Nischal Ghimire")} role="Research Executive" photo={photoByName.get("Nischal Ghimire")} />
+              <TeamCard index={9} name="Kaustuv Rimal" to={profilePathByName("Kaustuv Rimal")} role="Research Executive" emphasis />
+              <TeamCard index={10} name="Aaditya Jha" to={profilePathByName("Aaditya Jha")} role="Research Executive" photo={photoByName.get("Aaditya Jha")} />
             </div>
 
             {/* Stem from the executives down into the analysts' panel. */}
@@ -289,12 +270,12 @@ export function AboutPage() {
                 Research Analysts
               </span>
               <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-6 md:gap-8 justify-items-center">
-                <TeamCard name="Aadarsha Pandey" to={profilePathByName("Aadarsha Pandey")} role="Research Analyst" />
-                <TeamCard name="Piyush Joshi" to={profilePathByName("Piyush Joshi")} role="Research Analyst" photo={photoByName.get("Piyush Joshi")} />
-                <TeamCard name="Pratyush Neupane" to={profilePathByName("Pratyush Neupane")} role="Research Analyst" photo={photoByName.get("Pratyush Neupane")} />
-                <TeamCard name="Sambriddhi Bhattarai" to={profilePathByName("Sambriddhi Bhattarai")} role="Research Analyst" photo={photoByName.get("Sambriddhi Bhattarai")} />
-                <TeamCard name="Paul Thapa" to={profilePathByName("Paul Thapa")} role="Research Analyst" />
-                <TeamCard name="Kashyap Shrestha" to={profilePathByName("Kashyap Shrestha")} role="Research Analyst" photo={photoByName.get("Kashyap Shrestha")} />
+                <TeamCard index={11} name="Aadarsha Pandey" to={profilePathByName("Aadarsha Pandey")} role="Research Analyst" />
+                <TeamCard index={12} name="Piyush Joshi" to={profilePathByName("Piyush Joshi")} role="Research Analyst" photo={photoByName.get("Piyush Joshi")} />
+                <TeamCard index={13} name="Pratyush Neupane" to={profilePathByName("Pratyush Neupane")} role="Research Analyst" photo={photoByName.get("Pratyush Neupane")} />
+                <TeamCard index={14} name="Sambriddhi Bhattarai" to={profilePathByName("Sambriddhi Bhattarai")} role="Research Analyst" photo={photoByName.get("Sambriddhi Bhattarai")} />
+                <TeamCard index={15} name="Paul Thapa" to={profilePathByName("Paul Thapa")} role="Research Analyst" />
+                <TeamCard index={16} name="Kashyap Shrestha" to={profilePathByName("Kashyap Shrestha")} role="Research Analyst" photo={photoByName.get("Kashyap Shrestha")} />
               </div>
             </div>
 
@@ -304,10 +285,11 @@ export function AboutPage() {
                 Other Analysts
               </span>
               <div className="flex justify-center">
-                <TeamCard name="Noaime G." role="Statistical Analyst" />
+                <TeamCard index={17} name="Noaime G." role="Statistical Analyst" />
               </div>
             </div>
           </section>
+          </div>
         </Reveal>
 
         <Notice tone="info" label="A note on names" className="mt-6 max-w-[46rem]">
@@ -532,5 +514,44 @@ export function AboutPage() {
         />
       </div>
     </Container>
+  );
+}
+
+/* ------------------------------ research timeline ------------------------- */
+
+const TIMELINE: { when: string; what: string; next?: boolean }[] = [
+  { when: "2025", what: "Survey design and methodology development began." },
+  { when: "Early 2026", what: "Online research and literature review began." },
+  { when: "Mid 2026", what: "The first batch of surveys was completed." },
+  { when: "Third quarter of 2026", what: "Field research began." },
+  { when: "September 2026", what: "The litigation process began." },
+  {
+    when: "First quarter of 2027 \u00b7 expected",
+    what: "The Institute expects to publish its research, field findings, and reporting on litigation-related work.",
+    next: true,
+  },
+];
+
+/** A vertical line that draws down the page, each milestone's dot popping as it is reached. */
+function Timeline() {
+  const { ref, visible } = useReveal<HTMLDivElement>();
+  return (
+    <div ref={ref} className={`tl-wrap mt-8 max-w-[46rem] pl-5 md:pl-7 ${visible ? "tl-on" : ""}`}>
+      <span aria-hidden="true" className="tl-line" />
+      {TIMELINE.map((t) => (
+        <TimelineItem key={t.when} {...t} />
+      ))}
+    </div>
+  );
+}
+
+function TimelineItem({ when, what, next }: { when: string; what: string; next?: boolean }) {
+  const { ref, visible } = useReveal<HTMLDivElement>();
+  return (
+    <div ref={ref} className={`tl-item ${next ? "tl-item--next" : ""} ${visible ? "tl-on" : ""}`}>
+      <span aria-hidden="true" className="tl-dot" />
+      <p className="type-label text-bronze-ink">{when}</p>
+      <p className="type-body mt-1 text-ink-muted">{what}</p>
+    </div>
   );
 }
