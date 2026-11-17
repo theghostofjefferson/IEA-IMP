@@ -285,8 +285,7 @@ export function AboutPage() {
                 Other Analysts
               </span>
               <div className="flex flex-wrap items-start justify-center gap-8 sm:gap-12">
-                <TeamCard index={17} name="Noaime G." role="Statistical Analyst" />
-                <TeamCard index={18} name="Sadbhab Timilsina" role="Data Analyst" />
+                <TeamCard index={17} name="Sadbhab Timilsina" role="Data Analyst" />
               </div>
             </div>
           </section>
