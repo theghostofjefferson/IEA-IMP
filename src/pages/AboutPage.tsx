@@ -170,6 +170,7 @@ export function AboutPage() {
                 <TeamCard
                   name="Eron Subedi" to={profilePathByName("Eron Subedi")}
                   role="Founder, Executive Chairman & Chief of Investigations"
+                  photo={photoByName.get("Eron Subedi")}
                   featured
                 />
                 <Link
