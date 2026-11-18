@@ -66,6 +66,8 @@ export const profiles: Record<string, MemberProfile> = {
     contact: [
       { label: "Institute enquiries", value: "founder@ieainstitute.org", href: "mailto:founder@ieainstitute.org" },
     ],
+    // Initials in the portrait frame for now; remove this line to show his photo.
+    showPhoto: false,
   },
   "yogeshwor-sharma": {
     summary: "Leads the Institute's operations and its day-to-day work as President.",
