@@ -228,8 +228,8 @@ export function AboutPage() {
               <TeamCard index={0} name="Aarohan Baral" to={profilePathByName("Aarohan Baral")} role="Founding Member & Lead Developer" photo={photoByName.get("Aarohan Baral")} />
               <TeamCard index={1} name="S. Lamichhane" to={profilePathByName("S. Lamichhane")} role="Founding Member & Vice President" photo={photoByName.get("S. Lamichhane")} />
               <TeamCard index={2} name="Tikaram Sharma" to={profilePathByName("Tikaram Sharma")} role="Co-Founder & Statistical Analyst" photo={photoByName.get("Tikaram Sharma")} />
-              <TeamCard index={3} name="Prajjwal Dhakal" to={profilePathByName("Prajjwal Dhakal")} role="Management Advisor" photo={photoByName.get("Prajjwal Dhakal")} />
-              <TeamCard index={4} name="D. Rijal" role="Managing Executive" />
+              <TeamCard index={3} name="D. Rijal" role="Managing Executive" />
+              <TeamCard index={4} name="Prajjwal Dhakal" to={profilePathByName("Prajjwal Dhakal")} role="Management Advisor" photo={photoByName.get("Prajjwal Dhakal")} />
             </div>
           </section>
 
