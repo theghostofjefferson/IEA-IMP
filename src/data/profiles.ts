@@ -39,6 +39,7 @@ export const PROFILE_IDS: readonly string[] = [
   "aarohan-baral",
   "s-lamichhane",
   "tikaram-sharma",
+  "d-rijal",
   "prajjwal-dhakal",
   "aishani-rai",
   "ashmit-pandey",
@@ -115,6 +116,13 @@ export const profiles: Record<string, MemberProfile> = {
       "Data analysis and statistics",
       "Survey initiatives",
       "Interpretation and presentation of findings",
+    ],
+  },
+  "d-rijal": {
+    bio: [
+      "D. Rijal joined the Institute for Educational Accountability as a Managing Executive and, within moments of joining, began contributing well beyond what is ordinarily expected of a new member.",
+      "Her impact on the Institute’s work was visible almost immediately, and it has only grown since.",
+      "She is held in the highest regard throughout the organisation, and is widely admired and loved by her colleagues across every team.",
     ],
   },
   "prajjwal-dhakal": {
@@ -220,6 +228,8 @@ export function memberContact(c: Contributor): NonNullable<MemberProfile["contac
   const explicit = profiles[c.id]?.contact;
   if (explicit?.length) return explicit;
   const first = c.name.split(/\s+/)[0]!.toLowerCase().replace(/[^a-z]/g, "");
+  // An initial ("D. Rijal") is not an address; show nothing rather than guess one.
+  if (first.length < 3) return [];
   const email = `${first}@ieainstitute.org`;
   return [{ label: "Email", value: email, href: `mailto:${email}` }];
 }

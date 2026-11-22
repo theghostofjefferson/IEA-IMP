@@ -117,6 +117,7 @@ const STATIC_ROUTES = [
     "yogeshwor-sharma",
     "aarohan-baral",
     "tikaram-sharma",
+    "d-rijal",
     "prajjwal-dhakal",
     "aishani-rai",
     "ashmit-pandey",
