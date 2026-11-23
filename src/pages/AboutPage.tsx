@@ -180,30 +180,6 @@ export function AboutPage() {
                   role="Founder, Executive Chairman & Chief of Investigations"
                   featured
                 />
-                <Link
-                  to="/notices#statement"
-                  aria-label="Read the IEA statement of 31 October 2026 on the assault on freedom of expression in Nepal"
-                  className="group relative mx-auto mt-6 block w-full max-w-[20rem] rounded-2xl border border-bronze/30 bg-gradient-to-b from-surface to-bronze-wash px-7 pb-5 pt-9 text-center shadow-[0_12px_30px_rgba(19,26,44,0.08)]"
-                >
-                  {/* Opening quotation mark, set into the top edge of the card. */}
-                  <span
-                    aria-hidden="true"
-                    className="absolute left-1/2 top-0 flex size-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-bronze/30 bg-surface font-serif text-2xl text-bronze-ink"
-                  >
-                    <span className="translate-y-[3px]">&ldquo;</span>
-                  </span>
-                  <span className="block font-serif text-[1.0625rem] font-medium leading-[1.55] text-[color:var(--ink)]">
-                    We are not content to stand still by the will of God.
-                  </span>
-                  <span aria-hidden="true" className="mx-auto mt-4 block h-px w-10 bg-bronze/50" />
-                  <span className="mt-3 block font-sans text-[0.6875rem] font-semibold uppercase tracking-[0.22em] text-bronze-ink">
-                    31 October 2026
-                  </span>
-                  <span className="mt-1.5 inline-flex items-center gap-1.5 font-sans text-xs text-[color:var(--ink-muted)] transition-colors duration-300 group-hover:text-bronze-ink">
-                    Read the IEA statement
-                    <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
-                  </span>
-                </Link>
                 <Button
                   onClick={() => setLetter("founder")}
                   className="bg-letter text-ink-inverse hover:bg-letter-deep active:bg-letter-deep"
