@@ -162,6 +162,14 @@ export function AboutPage() {
             </h2>
           </div>
 
+          <Notice tone="info" label="Changes to the team" className="mx-auto mt-2 max-w-[46rem]">
+            Several members have left the Institute and are marked as former members below. The
+            Office of the Founder has issued a notice on the reconstitution of its personnel.{" "}
+            <Link to="/notices#personnel" className="font-semibold text-bronze-ink underline underline-offset-4 hover:decoration-2">
+              Read the notice &rarr;
+            </Link>
+          </Notice>
+
           <TierHeader label="Founders" className="!mt-8" />
           <section className="relative mb-6 md:mb-10">
             <div className="absolute inset-0 -z-10 bg-bronze-soft/40 rounded-2xl blur-3xl" />
