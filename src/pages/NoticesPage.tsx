@@ -3,6 +3,7 @@ import { useEffect } from "react";
 
 import { Container } from "@/components/site/Container";
 import { DiscriminationNotice } from "@/components/notices/DiscriminationNotice";
+import { PersonnelNotice } from "@/components/notices/PersonnelNotice";
 import { Reveal } from "@/components/site/Reveal";
 import { Rule, AccentRule } from "@/components/site/Rule";
 import { SEO, applySeo } from "@/lib/seo";
@@ -33,7 +34,7 @@ export function NoticesPage() {
   const { hash } = useLocation();
   useEffect(() => {
     const id = hash.slice(1);
-    if (id !== "statement" && id !== "discrimination") return;
+    if (id !== "statement" && id !== "discrimination" && id !== "personnel") return;
     const timer = window.setTimeout(() => {
       const el = document.getElementById(id);
       if (el instanceof HTMLDetailsElement) el.open = true;
@@ -67,6 +68,7 @@ export function NoticesPage() {
             Statements
           </h2>
           <Reveal className="mt-6 flex min-w-0 flex-col gap-5" delayMs={60}>
+      <PersonnelNotice />
       <DiscriminationNotice />
       <details
         id="statement"
