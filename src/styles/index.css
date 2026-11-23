@@ -1769,3 +1769,11 @@ body {
   .step-item:not(.step-on) .step-num { opacity: 1; transform: none; }
   .nf-numeral, .nf-rule { animation: none; }
 }
+
+
+/* ---- former members ---- */
+.tc-former { display: inline-block; font: 600 .625rem/1 var(--font-sans, sans-serif); letter-spacing: .18em; text-transform: uppercase; color: #6b6558; border: 1px solid rgb(107 101 88 / .45); border-radius: 999px; padding: .35rem .7rem; }
+.tc-frame--former { background: conic-gradient(from var(--tc-a), rgb(150 146 135 / .35), rgb(170 166 155 / .85), rgb(150 146 135 / .35), rgb(170 166 155 / .85), rgb(150 146 135 / .35)); box-shadow: 0 8px 20px -12px rgb(19 26 44 / .3); }
+.tc-card--former .tc-name { color: #4d4a43; }
+.tc-frame--former .tc-img { filter: grayscale(1) contrast(1.02) !important; opacity: .88; }
+.tc-card--former:hover .tc-glow { opacity: .35; }

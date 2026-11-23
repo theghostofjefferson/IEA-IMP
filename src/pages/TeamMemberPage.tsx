@@ -9,6 +9,7 @@ import { inline } from "@/components/site/MessageModal";
 import { Monogram } from "@/components/data-display/Monogram";
 import {
   getProfileMember,
+  isFormer,
   memberContact,
   memberPhoto,
   profileMembers,
@@ -61,7 +62,7 @@ function MemberDetail({ member }: { member: Contributor }) {
           <h2 className="type-label text-ink-faint">More from the team</h2>
           <div ref={gridRef} className="mt-8 grid grid-cols-2 justify-items-center gap-x-6 gap-y-12 sm:grid-cols-3 lg:grid-cols-6">
             {others.map((m, i) => (
-              <TeamCard key={m.id} index={i} name={m.name} role={m.role} photo={memberPhoto(m)} to={profilePath(m.id)} />
+              <TeamCard key={m.id} index={i} former={isFormer(m.id)} name={m.name} role={m.role} photo={memberPhoto(m)} to={profilePath(m.id)} />
             ))}
           </div>
         </Reveal>
@@ -109,7 +110,7 @@ function StandardHeader({ member, profile }: { member: Contributor; profile: Mem
       </Link>
       <div className="mt-10 grid items-center gap-10 pb-6 sm:grid-cols-[auto_1fr] sm:gap-14">
         <div className="mp-arch mx-auto sm:mx-0">
-          <div className="tc-frame tc-frame--lg" style={{ ["--size" as string]: "clamp(11rem, 30vw, 17rem)" }}>
+          <div className={cn("tc-frame tc-frame--lg", isFormer(member.id) && "tc-frame--former")} style={{ ["--size" as string]: "clamp(11rem, 30vw, 17rem)" }}>
             <div className={cn("tc-inner", photo ? "bg-canvas" : "bg-sunken")}>
               {photo ? (
                 <img src={photo} alt={member.name} className="tc-img" />
@@ -122,7 +123,10 @@ function StandardHeader({ member, profile }: { member: Contributor; profile: Mem
           </div>
         </div>
         <div className="min-w-0">
-          <p className="mp-fade type-label text-bronze-ink" style={{ ["--d" as string]: ".15s" }}>{member.role}</p>
+          <p className="mp-fade type-label text-bronze-ink" style={{ ["--d" as string]: ".15s" }}>
+            {isFormer(member.id) ? "Former " : ""}{member.role}
+          </p>
+          {isFormer(member.id) ? <p className="mp-fade tc-former mt-3" style={{ ["--d" as string]: ".3s" }}>No longer with the Institute</p> : null}
           <h1 tabIndex={-1} className="type-title mt-3 text-ink outline-none">
             {words.map((w, i) => (
               <span key={i} className="mp-word" style={{ ["--w" as string]: i }}>

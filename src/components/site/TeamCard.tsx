@@ -22,6 +22,7 @@ export function TeamCard({
   emphasis = false,
   to,
   index = 0,
+  former = false,
 }: {
   name: string;
   role: string;
@@ -33,12 +34,14 @@ export function TeamCard({
   to?: string;
   /** Position within its row; sets the entrance delay. */
   index?: number;
+  /** Has left the Institute: muted portrait, and a "Former member" label. */
+  former?: boolean;
 }) {
   const { ref, visible } = useReveal<HTMLElement>();
 
   const content = (
     <>
-      <div className={cn("tc-frame", featured && "tc-frame--lg", emphasis && "tc-frame--emph")}>
+      <div className={cn("tc-frame", featured && "tc-frame--lg", emphasis && "tc-frame--emph", former && "tc-frame--former")}>
         <div className={cn("tc-inner", photo ? "bg-canvas" : "bg-sunken")}>
           {photo ? (
             <img src={photo} alt={name} className="tc-img portrait-img" />
@@ -67,6 +70,7 @@ export function TeamCard({
         <p className="mt-2 type-caption text-center text-[0.75rem] uppercase tracking-[0.14em] text-ink-faint transition-colors duration-300 ease-brand group-hover:text-bronze">
           {role}
         </p>
+        {former ? <span className="tc-former mt-2">Former member</span> : null}
       </div>
       {to ? (
         <span className="tc-cta mt-2 font-sans text-[0.6875rem] font-semibold uppercase tracking-[0.16em] text-bronze-ink">
@@ -76,14 +80,14 @@ export function TeamCard({
     </>
   );
 
-  const rootClass = cn("team-card tc-card flex flex-col items-center group", visible && "tc-on");
+  const rootClass = cn("team-card tc-card flex flex-col items-center group", visible && "tc-on", former && "tc-card--former");
   const style = { "--d": `${(index % 6) * 80}ms` } as CSSProperties;
   return to ? (
     <Link
       ref={ref as React.Ref<HTMLAnchorElement>}
       to={to}
       style={style}
-      aria-label={`${name}, ${role} - view profile`}
+      aria-label={`${name}, ${former ? "former " : ""}${role} - view profile`}
       className={cn(rootClass, "rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bronze")}
     >
       {content}
