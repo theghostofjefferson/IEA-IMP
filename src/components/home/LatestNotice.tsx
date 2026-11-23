@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 
-import { DISCRIMINATION_NOTICE } from "@/data/notices";
+import { DISCRIMINATION_NOTICE, PERSONNEL_NOTICE } from "@/data/notices";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionHeader } from "@/components/data-display/SectionHeader";
 
@@ -29,8 +29,37 @@ export function LatestNotice() {
         />
 
         <Link
-          to={`/notices#${DISCRIMINATION_NOTICE.id}`}
+          to={`/notices#${PERSONNEL_NOTICE.id}`}
           className="group mt-8 flex items-start gap-4 rounded-md border border-ink-inverse/10 border-l-4 border-l-gold bg-ink p-5 text-ink-inverse shadow-[0_18px_40px_-28px_rgba(19,26,44,0.6)] transition-[transform,box-shadow] duration-500 ease-brand hover:-translate-y-0.5 hover:shadow-[0_26px_55px_-28px_rgba(19,26,44,0.8)] sm:items-center sm:gap-5 sm:p-7"
+        >
+          <span className="relative block h-24 w-[4.5rem] shrink-0 overflow-hidden rounded-sm border border-gold/50 sm:h-28 sm:w-20">
+            <img
+              src="/notices/personnel-notice-2026-11-23.jpg"
+              alt=""
+              loading="lazy"
+              className="absolute inset-0 size-full object-cover object-top transition-transform duration-700 ease-brand group-hover:scale-105"
+            />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="type-label block text-gold">
+              Office of the Founder · <time dateTime={PERSONNEL_NOTICE.date}>{PERSONNEL_NOTICE.dateLabel}</time>
+            </span>
+            <span className="type-heading mt-1 block text-ink-inverse">A notice from the Office of the Founder</span>
+            <span className="type-caption mt-2 block text-ink-inverse/65">
+              Revisions to the About section and the reconstitution of the Institute&rsquo;s personnel
+            </span>
+          </span>
+          <span className="type-caption hidden shrink-0 text-gold sm:block">
+            Read the notice{" "}
+            <span aria-hidden="true" className="inline-block transition-transform duration-300 group-hover:translate-x-1">
+              &rarr;
+            </span>
+          </span>
+        </Link>
+
+        <Link
+          to={`/notices#${DISCRIMINATION_NOTICE.id}`}
+          className="group mt-5 flex items-start gap-4 rounded-md border border-ink-inverse/10 border-l-4 border-l-gold bg-ink p-5 text-ink-inverse shadow-[0_18px_40px_-28px_rgba(19,26,44,0.6)] transition-[transform,box-shadow] duration-500 ease-brand hover:-translate-y-0.5 hover:shadow-[0_26px_55px_-28px_rgba(19,26,44,0.8)] sm:items-center sm:gap-5 sm:p-7"
         >
           <span
             aria-hidden="true"
