@@ -1,5 +1,7 @@
 import { PERSONNEL_NOTICE, PERSONNEL_VACATED } from "@/data/notices";
 
+const IMAGE = "/notices/personnel-notice-2026-11-23.jpg";
+
 /**
  * A notice from the Office of the Founder on the reconstitution of personnel.
  * Set as a formal document: dated, ruled, signed.
@@ -38,6 +40,23 @@ export function PersonnelNotice() {
 
       <article className="border-t border-gold/30 px-5 py-6 sm:px-7 md:py-8">
         <div className="mx-auto flex max-w-4xl flex-col gap-6">
+          <a
+            href={IMAGE}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Open the notice as issued, full size"
+            className="mx-auto block w-full max-w-[40rem] overflow-hidden rounded-sm border border-gold/40 shadow-[0_20px_50px_-24px_rgba(0,0,0,0.7)]"
+          >
+            <img
+              src={IMAGE}
+              alt="The notice as issued: A Notice from the Office of the Founder, dated 23 November 2026, regarding revisions to the Institute's About section and the reconstitution of its personnel. The full text is reproduced below."
+              width={1200}
+              height={1789}
+              loading="lazy"
+              className="block h-auto w-full"
+            />
+          </a>
+          <p className="type-caption text-center text-ink-inverse/60">The notice as issued. The text follows.</p>
           <p className="type-body-lg measure">
             It is hereby brought to the attention of the Institute&rsquo;s members, associates, and the
             public that certain revisions have been effected upon the Institute&rsquo;s About section,
