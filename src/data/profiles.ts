@@ -195,6 +195,30 @@ export const profiles: Record<string, MemberProfile> = {
 const byId = new Map(contributors.map((c) => [c.id, c]));
 const byName = new Map(contributors.map((c) => [c.name, c]));
 
+/** Members who have left the Institute. Their cards and pages say so. */
+export const FORMER_IDS: ReadonlySet<string> = new Set([
+  "aishani-rai",
+  "krinjal-timalsina",
+  "prajjwal-dhakal",
+  "nischal-ghimire",
+  "kaustuv-rimal",
+  "aaditya-jha",
+  "aadarsha-pandey",
+  "piyush-joshi",
+  "pratyush-neupane",
+  "sambriddhi-bhattarai",
+  "kashyap-shrestha",
+]);
+
+export function isFormer(id: string): boolean {
+  return FORMER_IDS.has(id);
+}
+
+export function isFormerByName(name: string): boolean {
+  const c = byName.get(name);
+  return !!c && FORMER_IDS.has(c.id);
+}
+
 export function profileMembers(): Contributor[] {
   return PROFILE_IDS.map((id) => byId.get(id)).filter((c): c is Contributor => !!c);
 }
