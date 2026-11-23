@@ -6,3 +6,26 @@ export const DISCRIMINATION_NOTICE = {
   title: "Our research on discrimination is nearing its end",
   standfirst: "Voices from the student submissions we have received",
 } as const;
+
+/** The Office of the Founder's notice on the reconstitution of personnel. */
+export const PERSONNEL_NOTICE = {
+  id: "personnel",
+  date: "2026-11-23",
+  dateLabel: "23 November 2026",
+  title: "Revisions to the About section and the reconstitution of personnel",
+} as const;
+
+/** The offices named in that notice, as published. */
+export const PERSONNEL_VACATED: readonly { name: string; role: string }[] = [
+  { name: "Aishani Rai", role: "Editorial Lead" },
+  { name: "Krinjal Timalsina", role: "Lead Researcher" },
+  { name: "Prajjwal Dhakal", role: "Management Advisor" },
+  { name: "Nischal Ghimire", role: "Research Executive" },
+  { name: "Kaustuv Rimal", role: "Research Executive" },
+  { name: "Aaditya Jha", role: "Research Executive" },
+  { name: "Aadarsha Pandey", role: "Research Analyst" },
+  { name: "Piyush Joshi", role: "Research Analyst" },
+  { name: "Pratyush Neupane", role: "Research Analyst" },
+  { name: "Sambriddhi Bhattarai", role: "Research Analyst" },
+  { name: "Kashyap Shrestha", role: "Research Analyst" },
+];
