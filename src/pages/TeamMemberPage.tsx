@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link, useParams } from "react-router";
+import { Link, Navigate, useParams } from "react-router";
 
 import { Container } from "@/components/site/Container";
 import { Reveal } from "@/components/site/Reveal";
@@ -17,6 +17,7 @@ import {
   profiles,
   type MemberProfile,
 } from "@/data/profiles";
+import { isHiddenPerson } from "@/config/restrictions";
 import { applySeo, memberSeo } from "@/lib/seo";
 import type { Contributor } from "@/lib/types";
 import { NotFoundPage } from "@/pages/NotFoundPage";
@@ -34,6 +35,7 @@ import { useCardSpotlight } from "@/hooks/useCardSpotlight";
  */
 export function TeamMemberPage() {
   const { id } = useParams<{ id: string }>();
+  if (id && isHiddenPerson(id)) return <Navigate to="/about" replace />;
   const member = getProfileMember(id);
   if (!member) return <NotFoundPage />;
   return <MemberDetail member={member} />;

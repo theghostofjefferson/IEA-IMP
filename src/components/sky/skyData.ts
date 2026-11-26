@@ -1,3 +1,4 @@
+import { hidesUnderReview } from "@/config/restrictions";
 import { redFlags, schools } from "@/lib/data";
 
 export type StarKind = "school" | "review";
@@ -60,9 +61,9 @@ export function buildStars(): Star[] {
     out.push({
       id: `review-${r.id}`,
       kind: "review",
-      label: r.name,
-      detail: "Institution under review",
-      href: `/red-flag/${r.id}`,
+      label: hidesUnderReview() ? "Institution under review" : r.name,
+      detail: hidesUnderReview() ? "Details temporarily restricted" : "Institution under review",
+      href: hidesUnderReview() ? "/rankings?view=redflags" : `/red-flag/${r.id}`,
       nx: 0.1 + ((i * 0.381966 + 0.13) % 1) * 0.8,
       ny: 0.74 + rnd() * 0.12,
       size: 0.7,

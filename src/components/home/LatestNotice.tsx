@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 
+import { hidesLeadership } from "@/config/restrictions";
 import { DISCRIMINATION_NOTICE, PERSONNEL_NOTICE } from "@/data/notices";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionHeader } from "@/components/data-display/SectionHeader";
@@ -32,14 +33,23 @@ export function LatestNotice() {
           to={`/notices#${PERSONNEL_NOTICE.id}`}
           className="group mt-8 flex items-start gap-4 rounded-md border border-ink-inverse/10 border-l-4 border-l-gold bg-ink p-5 text-ink-inverse shadow-[0_18px_40px_-28px_rgba(19,26,44,0.6)] transition-[transform,box-shadow] duration-500 ease-brand hover:-translate-y-0.5 hover:shadow-[0_26px_55px_-28px_rgba(19,26,44,0.8)] sm:items-center sm:gap-5 sm:p-7"
         >
+          {hidesLeadership() ? (
+            <span
+              aria-hidden="true"
+              className="inline-flex size-11 shrink-0 items-center justify-center border border-gold/70 font-serif text-xl font-bold text-gold"
+            >
+              III
+            </span>
+          ) : (
           <span className="relative block h-24 w-[4.5rem] shrink-0 overflow-hidden rounded-sm border border-gold/50 sm:h-28 sm:w-20">
-            <img
-              src="/notices/personnel-notice-2026-11-23.jpg"
-              alt=""
-              loading="lazy"
-              className="absolute inset-0 size-full object-cover object-top transition-transform duration-700 ease-brand group-hover:scale-105"
-            />
-          </span>
+              <img
+                src="/notices/personnel-notice-2026-11-23.jpg"
+                alt=""
+                loading="lazy"
+                className="absolute inset-0 size-full object-cover object-top transition-transform duration-700 ease-brand group-hover:scale-105"
+              />
+            </span>
+          )}
           <span className="min-w-0 flex-1">
             <span className="type-label block text-gold">
               Office of the Founder · <time dateTime={PERSONNEL_NOTICE.date}>{PERSONNEL_NOTICE.dateLabel}</time>

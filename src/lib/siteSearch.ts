@@ -1,5 +1,6 @@
 import { contributors } from "@/data/contributors";
 import { profilePath } from "@/data/profiles";
+import { hidesUnderReview, isHiddenPerson } from "@/config/restrictions";
 import { redFlags, schools } from "@/lib/data";
 
 /**
@@ -121,7 +122,7 @@ export function searchIndex(): SearchEntry[] {
     rank: s.rank,
   }));
 
-  const reviewEntries: SearchEntry[] = redFlags.map((r) => ({
+  const reviewEntries: SearchEntry[] = hidesUnderReview() ? [] : redFlags.map((r) => ({
     key: `review:${r.id}`,
     kind: "review",
     title: r.name,
@@ -130,7 +131,7 @@ export function searchIndex(): SearchEntry[] {
     keywords: r.reasons.join(" "),
   }));
 
-  const peopleEntries: SearchEntry[] = contributors.map((c) => ({
+  const peopleEntries: SearchEntry[] = contributors.filter((c) => !isHiddenPerson(c.id)).map((c) => ({
     key: `person:${c.id}`,
     kind: "person",
     title: c.name,

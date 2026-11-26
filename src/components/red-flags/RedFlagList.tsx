@@ -3,6 +3,7 @@ import { Link } from "react-router";
 
 import { Monogram } from "@/components/data-display/Monogram";
 import { useReveal } from "@/hooks/useReveal";
+import { hidesUnderReview, RESTRICTED_LABEL, UNDER_REVIEW_NOTE } from "@/config/restrictions";
 import { redFlags } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
@@ -45,6 +46,41 @@ export function RedFlagList() {
   // Shuffled once per mount. A full page reload is a new mount, so the order
   // changes on every reload — the behaviour the page is specified to have.
   const list = useMemo(() => shuffled(redFlags), []);
+
+  // Restricted: the institutions stay counted but unnamed, with no link and no reasons.
+  if (hidesUnderReview()) {
+    return (
+      <div>
+        <p className="type-body-lg measure text-ink-inverse/90">{UNDER_REVIEW_NOTE}</p>
+        <ul className="red-flag-list mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-10 lg:grid-cols-3">
+          {list.map((r, i) => (
+            <RedFlagItem key={r.id} column={i % 3}>
+              <div className="red-flag-card block h-full border border-rule-soft bg-canvas p-6">
+                <div className="flex items-center gap-3">
+                  <span
+                    aria-hidden="true"
+                    className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-rule-soft text-ink-faint"
+                  >
+                    <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="5" y="11" width="14" height="9" rx="1.5" />
+                      <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+                    </svg>
+                  </span>
+                  <span className="min-w-0 flex-1 font-serif text-[1rem] font-bold text-ink">
+                    Institution under review
+                  </span>
+                </div>
+                <p className="type-caption mt-2 text-ink-muted">{RESTRICTED_LABEL}</p>
+                <span className="type-caption mt-2 block text-ink-faint">
+                  {r.reasons.length} review item{r.reasons.length === 1 ? "" : "s"} on record
+                </span>
+              </div>
+            </RedFlagItem>
+          ))}
+        </ul>
+      </div>
+    );
+  }
 
   return (
     <ul className="red-flag-list grid grid-cols-1 gap-8 sm:gap-10 sm:grid-cols-2 lg:grid-cols-3">

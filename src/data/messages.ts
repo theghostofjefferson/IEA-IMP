@@ -10,6 +10,8 @@
  * Edit the text here — the modal and the buttons in `AboutPage` read from these
  * constants and need no changes.
  */
+import { redactNames, RESTRICTIONS } from "@/config/restrictions";
+
 export type MessageBlock =
   /** Opening quotation, set italic with its attribution. */
   | { kind: "epigraph"; text: string; source: string }
@@ -113,3 +115,19 @@ export const founderMessage: MessageBlock[] = [
     ],
   },
 ];
+
+/**
+ * The letter as it should be shown. While names are restricted, every hidden
+ * name in the text becomes "Name withheld" and the personal address is dropped
+ * (it would identify the writer). A no-op when the switch is off.
+ */
+export function redactBlocks(blocks: MessageBlock[]): MessageBlock[] {
+  if (!RESTRICTIONS.hideLeadershipNames) return blocks;
+  return blocks
+    .filter((b) => !(b.kind === "p" && b.text.includes("@gmail.com")))
+    .map((b): MessageBlock => {
+      if (b.kind === "sign") return { ...b, lines: b.lines.map(redactNames) };
+      if (b.kind === "epigraph") return { ...b, text: redactNames(b.text), source: redactNames(b.source) };
+      return { ...b, text: redactNames(b.text) };
+    });
+}

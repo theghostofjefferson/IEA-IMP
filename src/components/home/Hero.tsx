@@ -10,6 +10,7 @@ import { SectionHeader } from "@/components/data-display/SectionHeader";
 import { StatBlock } from "@/components/data-display/StatBlock";
 import { bandColor } from "@/lib/scoring";
 import { formatDate } from "@/lib/format";
+import { hidesUnderReview, UNDER_REVIEW_NOTE } from "@/config/restrictions";
 import { meta, redFlags, schools, totalSchools } from "@/lib/data";
 
 /**
@@ -158,6 +159,9 @@ export function Hero() {
                 Institutions under review <span aria-hidden="true">→</span>
               </Link>
             </h2>
+            {hidesUnderReview() ? (
+              <p className="type-body mt-4 text-ink-inverse/80">{UNDER_REVIEW_NOTE}</p>
+            ) : (
             <div className="mt-4 grid gap-3">
               {flaggedPreview.map((redFlag) => (
                 <Link
@@ -183,6 +187,7 @@ export function Hero() {
                 </Link>
               ))}
             </div>
+            )}
             <Link
               to="/rankings?view=redflags"
               className="type-caption mt-4 inline-block text-gold underline decoration-1 underline-offset-4 hover:decoration-2"
