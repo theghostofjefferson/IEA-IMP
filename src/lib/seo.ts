@@ -92,6 +92,11 @@ export const SEO = {
     "A confidential form collecting student experiences of educational treatment.",
     { noindex: true, nofollow: true },
   ),
+  recruits: build(
+    "Membership Application",
+    "Apply to become a member of the Institute for Educational Accountability.",
+    { noindex: true, nofollow: true },
+  ),
   sky: build(
     "The Night Sky",
     "Every rated school as a star: a decorative view of the 2026 school evaluation.",
