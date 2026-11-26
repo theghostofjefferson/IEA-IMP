@@ -1,3 +1,4 @@
+import { isHiddenPerson } from "@/config/restrictions";
 import { INTRO_CONTRIBUTOR_SLOTS, SHOW_INTRO_PORTRAITS, introOverflow, introSlots } from "@/data/contributors";
 import { Monogram } from "@/components/data-display/Monogram";
 import { Portrait } from "@/components/data-display/Portrait";
@@ -41,7 +42,7 @@ export function ContributorStrip({ phase }: { phase: IntroPhase }) {
         aria-hidden="true"
       >
         {slots.map((person, i) => {
-          const name = person?.name.trim() ?? "";
+          const name = person && !isHiddenPerson(person.id) ? person.name.trim() : "";
           const delay = 1250 + i * 40;
 
           return (
@@ -55,7 +56,7 @@ export function ContributorStrip({ phase }: { phase: IntroPhase }) {
                 className="animate-[intro-person-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]"
                 style={{ animationDelay: `${delay}ms` }}
               >
-                {person && SHOW_INTRO_PORTRAITS && person.photo ? (
+                {person && SHOW_INTRO_PORTRAITS && person.photo && !isHiddenPerson(person.id) ? (
                   <Portrait contributor={person} size="sm" shape="circle" />
                 ) : (
                   <Monogram

@@ -108,6 +108,7 @@ const restrictionsSrc = readFileSync(join(ROOT, "src/config/restrictions.ts"), "
 const restricted = (name) => new RegExp(`${name}:\\s*true`).test(restrictionsSrc);
 const HIDE_LEADERSHIP = restricted("hideLeadershipNames");
 const HIDE_UNDER_REVIEW = restricted("hideUnderReview");
+const HIDE_ALL_NAMES = restricted("hideAllMemberNames");
 const HIDDEN_PEOPLE = ["eron-subedi", "yogeshwor-sharma"];
 
 /** Routes that are not schools. Priority reflects how much we want them read. */
@@ -134,7 +135,7 @@ const STATIC_ROUTES = [
     "nischal-ghimire",
     "aaditya-jha",
     "krinjal-timalsina",
-  ].filter((id) => !(HIDE_LEADERSHIP && HIDDEN_PEOPLE.includes(id))).map((id) => ({ path: `/team/${id}`, priority: "0.4", changefreq: "monthly" })),
+  ].filter((id) => !(HIDE_ALL_NAMES || (HIDE_LEADERSHIP && HIDDEN_PEOPLE.includes(id)))).map((id) => ({ path: `/team/${id}`, priority: "0.4", changefreq: "monthly" })),
 ];
 
 const xmlEscape = (s) =>
