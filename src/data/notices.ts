@@ -29,3 +29,11 @@ export const PERSONNEL_VACATED: readonly { name: string; role: string }[] = [
   { name: "Sambriddhi Bhattarai", role: "Research Analyst" },
   { name: "Kashyap Shrestha", role: "Research Analyst" },
 ];
+
+/** The Office of the Founder's notice on the temporary website restrictions. */
+export const RESTRICTIONS_NOTICE = {
+  id: "restrictions",
+  date: "2026-11-26",
+  dateLabel: "26 November 2026",
+  title: "Temporary Website Restrictions and Institutional Information Security Measures",
+} as const;

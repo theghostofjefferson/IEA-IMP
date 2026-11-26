@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 
 import { hidesLeadership } from "@/config/restrictions";
-import { DISCRIMINATION_NOTICE, PERSONNEL_NOTICE } from "@/data/notices";
+import { DISCRIMINATION_NOTICE, PERSONNEL_NOTICE, RESTRICTIONS_NOTICE } from "@/data/notices";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionHeader } from "@/components/data-display/SectionHeader";
 
@@ -30,8 +30,26 @@ export function LatestNotice() {
         />
 
         <Link
+          to={`/notices#${RESTRICTIONS_NOTICE.id}`}
+          className="group mt-8 block rounded-md border border-ink-inverse/10 border-l-[6px] border-l-gold bg-ink p-6 text-ink-inverse shadow-[0_26px_60px_-28px_rgba(19,26,44,0.8)] transition-[transform,box-shadow] duration-500 ease-brand hover:-translate-y-0.5 sm:p-9"
+        >
+          <span className="type-label block text-gold">
+            Official institutional notice &middot; <time dateTime={RESTRICTIONS_NOTICE.date}>{RESTRICTIONS_NOTICE.dateLabel}</time>
+          </span>
+          <span className="type-title mt-3 block max-w-[46rem] text-ink-inverse">{RESTRICTIONS_NOTICE.title}</span>
+          <span className="type-body-lg mt-4 block max-w-[46rem] text-ink-inverse/85">
+            The Office of the Founder has temporarily restricted certain institutional information to protect the Institute and
+            its people as its public profile grows. The Institute remains fully operational.
+          </span>
+          <span className="type-caption mt-5 inline-block text-gold">
+            Read the full notice{" "}
+            <span aria-hidden="true" className="inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+          </span>
+        </Link>
+
+        <Link
           to={`/notices#${PERSONNEL_NOTICE.id}`}
-          className="group mt-8 flex items-start gap-4 rounded-md border border-ink-inverse/10 border-l-4 border-l-gold bg-ink p-5 text-ink-inverse shadow-[0_18px_40px_-28px_rgba(19,26,44,0.6)] transition-[transform,box-shadow] duration-500 ease-brand hover:-translate-y-0.5 hover:shadow-[0_26px_55px_-28px_rgba(19,26,44,0.8)] sm:items-center sm:gap-5 sm:p-7"
+          className="group mt-5 flex items-start gap-4 rounded-md border border-ink-inverse/10 border-l-4 border-l-gold bg-ink p-5 text-ink-inverse shadow-[0_18px_40px_-28px_rgba(19,26,44,0.6)] transition-[transform,box-shadow] duration-500 ease-brand hover:-translate-y-0.5 hover:shadow-[0_26px_55px_-28px_rgba(19,26,44,0.8)] sm:items-center sm:gap-5 sm:p-7"
         >
           {hidesLeadership() ? (
             <span
