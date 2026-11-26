@@ -1,8 +1,17 @@
+import { contributors } from "@/data/contributors";
+
 /**
  * TEMPORARY RESTRICTIONS — the on/off switches.
  *
  * IEA is going heavily public, so two things are withheld for now and will be
  * relaxed gradually. Everything is driven from this one file:
+ *
+ *   hideAllMemberNames   true  = EVERY member's name is locked: "Name withheld"
+ *                                with a lock on cards, no profile pages, no
+ *                                search or sitemap entries, no names in the
+ *                                notices or intro. Roles stay. This covers
+ *                                everything `hideLeadershipNames` does and more.
+ *                        false = only the people below are locked.
  *
  *   hideLeadershipNames  true  = the Founder's and President's names are
  *                                hidden everywhere on the site: cards, profile
@@ -30,6 +39,7 @@
  * them from `public/people/` if that matters too.
  */
 export const RESTRICTIONS = {
+  hideAllMemberNames: true,
   hideLeadershipNames: true,
   hideUnderReview: true,
   blurMemberPhotos: true,
@@ -51,6 +61,8 @@ export const HIDDEN_PERSON_NAMES: readonly string[] = ["Eron Subedi", "Yogeshwor
 export const WITHHELD_NAME = "Name withheld";
 export const RESTRICTED_LABEL = "Temporarily restricted";
 
+export const ALL_NAMES_NOTE =
+  "Member names are temporarily restricted while IEA goes heavily public. Roles are shown; names will be restored gradually.";
 export const LEADERSHIP_NOTE =
   "The names of the Founder and the President are temporarily restricted while IEA goes heavily public. This will be adjusted gradually.";
 export const UNDER_REVIEW_NOTE =
@@ -64,12 +76,30 @@ export function hidesUnderReview(): boolean {
   return RESTRICTIONS.hideUnderReview;
 }
 
+export function hidesAllNames(): boolean {
+  return RESTRICTIONS.hideAllMemberNames;
+}
+
 export function isHiddenPerson(id: string): boolean {
+  if (RESTRICTIONS.hideAllMemberNames) return true;
   return RESTRICTIONS.hideLeadershipNames && HIDDEN_PERSON_IDS.includes(id);
+}
+
+/** Is this member's name withheld right now? Looks the person up by name. */
+export function isHiddenName(name: string): boolean {
+  if (RESTRICTIONS.hideAllMemberNames) return contributors.some((c) => c.name === name);
+  const c = contributors.find((x) => x.name === name);
+  return !!c && isHiddenPerson(c.id);
+}
+
+/** The name to show for a member: the real one, or "Name withheld". */
+export function shownName(name: string): string {
+  return isHiddenName(name) ? WITHHELD_NAME : name;
 }
 
 /** Replace the hidden names inside a piece of prose. A no-op when the switch is off. */
 export function redactNames(text: string): string {
-  if (!RESTRICTIONS.hideLeadershipNames) return text;
-  return HIDDEN_PERSON_NAMES.reduce((t, n) => t.split(n).join(WITHHELD_NAME), text);
+  if (!RESTRICTIONS.hideLeadershipNames && !RESTRICTIONS.hideAllMemberNames) return text;
+  const names = RESTRICTIONS.hideAllMemberNames ? contributors.map((c) => c.name) : HIDDEN_PERSON_NAMES;
+  return names.reduce((t, n) => t.split(n).join(WITHHELD_NAME), text);
 }

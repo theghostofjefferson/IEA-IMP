@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import { cn } from "@/lib/utils";
 import { useReveal } from "@/hooks/useReveal";
 import { Monogram } from "@/components/data-display/Monogram";
-import { photoBlurClass, RESTRICTED_LABEL, WITHHELD_NAME } from "@/config/restrictions";
+import { isHiddenName, photoBlurClass, RESTRICTED_LABEL, WITHHELD_NAME } from "@/config/restrictions";
 
 /**
  * One person card.
@@ -42,6 +42,7 @@ export function TeamCard({
   restricted?: boolean;
 }) {
   const { ref, visible } = useReveal<HTMLElement>();
+  restricted = restricted || isHiddenName(name);
   if (restricted) {
     name = WITHHELD_NAME;
     photo = undefined;

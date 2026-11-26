@@ -8,7 +8,7 @@ import { StatBlock, StatRow } from "@/components/data-display/StatBlock";
 import { SectionHeader } from "@/components/data-display/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { TeamCard } from "@/components/site/TeamCard";
-import { hidesLeadership, LEADERSHIP_NOTE, PHOTO_NOTE, RESTRICTIONS, WITHHELD_NAME } from "@/config/restrictions";
+import { ALL_NAMES_NOTE, hidesAllNames, hidesLeadership, LEADERSHIP_NOTE, PHOTO_NOTE, RESTRICTIONS, shownName } from "@/config/restrictions";
 import { TierHeader } from "@/components/about/TierHeader";
 import { CountUp } from "@/components/site/CountUp";
 import { useReveal } from "@/hooks/useReveal";
@@ -173,9 +173,12 @@ export function AboutPage() {
           </Notice>
 
           <TierHeader label="Founders" className="!mt-8" />
-          {hidesLeadership() ? (
+          {hidesAllNames() || hidesLeadership() ? (
             <Notice tone="info" label="Temporarily restricted" className="mx-auto mb-8 max-w-[46rem]">
-              {LEADERSHIP_NOTE}
+              {hidesAllNames() ? ALL_NAMES_NOTE : LEADERSHIP_NOTE}{" "}
+              <Link to="/notices#restrictions" className="font-semibold text-bronze-ink underline underline-offset-4 hover:decoration-2">
+                Read the notice &rarr;
+              </Link>
             </Notice>
           ) : null}
           <section className="relative mb-6 md:mb-10">
@@ -286,10 +289,12 @@ export function AboutPage() {
           </div>
         </Reveal>
 
-        <Notice tone="info" label="A note on names" className="mt-6 max-w-[46rem]">
-          Some names on this page are shown in part rather than in full. This
-          is done to protect members who might otherwise be put at risk.
-        </Notice>
+        {hidesAllNames() ? null : (
+          <Notice tone="info" label="A note on names" className="mt-6 max-w-[46rem]">
+            Some names on this page are shown in part rather than in full. This
+            is done to protect members who might otherwise be put at risk.
+          </Notice>
+        )}
 
         <Notice tone="info" label="With thanks" className="mt-6 max-w-[46rem]">
           We want to show our gratitude to all those who answered the surveys
@@ -495,14 +500,14 @@ export function AboutPage() {
         <MessageModal
           open={letter === "president"}
           onClose={() => setLetter(null)}
-          name={hidesLeadership() ? WITHHELD_NAME : "Yogeshwor Sharma"}
+          name={shownName("Yogeshwor Sharma")}
           role="Message from the President"
           blocks={redactBlocks(presidentMessage)}
         />
         <MessageModal
           open={letter === "founder"}
           onClose={() => setLetter(null)}
-          name={hidesLeadership() ? WITHHELD_NAME : "Eron Subedi"}
+          name={shownName("Eron Subedi")}
           role="Message from the Founder"
           blocks={redactBlocks(founderMessage)}
         />
