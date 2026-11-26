@@ -8,6 +8,8 @@ import { BackToTop } from "@/components/site/BackToTop";
 import { ScrollManager } from "@/components/site/ScrollManager";
 import { SiteFooter } from "@/components/site/SiteFooter";
 
+import { isAttackModeBlocking } from "@/config/restrictions";
+import { AttackPage } from "@/pages/AttackPage";
 import { HomePage } from "@/pages/HomePage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 
@@ -59,9 +61,15 @@ const RedFlagPage = lazy(() => import("@/pages/RedFlagPage").then((m) => ({ defa
 export function App() {
   return (
     <BrowserRouter>
-      <Shell />
+      <AttackGate />
     </BrowserRouter>
   );
+}
+
+/** With attack mode on, every path except the open ones shows the attack page. */
+function AttackGate() {
+  const { pathname } = useLocation();
+  return isAttackModeBlocking(pathname) ? <AttackPage /> : <Shell />;
 }
 
 function Shell() {

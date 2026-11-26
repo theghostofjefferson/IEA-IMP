@@ -6,6 +6,11 @@ import { contributors } from "@/data/contributors";
  * IEA is going heavily public, so two things are withheld for now and will be
  * relaxed gradually. Everything is driven from this one file:
  *
+ *   attackMode           true  = the whole site is replaced by the "under
+ *                                attack, inaccessible" page, except the paths in
+ *                                `ATTACK_MODE_OPEN_PATHS`.
+ *                        false = the site is served as normal.
+ *
  *   hideAllMemberNames   true  = EVERY member's name is locked: "Name withheld"
  *                                with a lock on cards, no profile pages, no
  *                                search or sitemap entries, no names in the
@@ -39,6 +44,7 @@ import { contributors } from "@/data/contributors";
  * them from `public/people/` if that matters too.
  */
 export const RESTRICTIONS = {
+  attackMode: true,
   hideAllMemberNames: true,
   hideLeadershipNames: true,
   hideUnderReview: true,
@@ -102,4 +108,13 @@ export function redactNames(text: string): string {
   if (!RESTRICTIONS.hideLeadershipNames && !RESTRICTIONS.hideAllMemberNames) return text;
   const names = RESTRICTIONS.hideAllMemberNames ? contributors.map((c) => c.name) : HIDDEN_PERSON_NAMES;
   return names.reduce((t, n) => t.split(n).join(WITHHELD_NAME), text);
+}
+
+/** Paths that stay reachable while `attackMode` is on. */
+export const ATTACK_MODE_OPEN_PATHS: readonly string[] = ["/recruits"];
+
+export function isAttackModeBlocking(pathname: string): boolean {
+  if (!RESTRICTIONS.attackMode) return false;
+  const p = pathname.replace(/\/+$/, "") || "/";
+  return !ATTACK_MODE_OPEN_PATHS.includes(p);
 }
