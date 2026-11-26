@@ -9,7 +9,8 @@ import { Monogram } from "@/components/data-display/Monogram";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { useReveal } from "@/hooks/useReveal";
 import { cn } from "@/lib/utils";
-import { applySeo, redFlagSeo } from "@/lib/seo";
+import { hidesUnderReview, UNDER_REVIEW_NOTE } from "@/config/restrictions";
+import { applySeo, redFlagSeo, SEO } from "@/lib/seo";
 import { getRedFlag, schools } from "@/lib/data";
 import { meta } from "@/lib/data";
 import type { RedFlag, School } from "@/lib/types";
@@ -22,8 +23,41 @@ export function RedFlagPage() {
   const redFlag = getRedFlag(id);
 
   if (!redFlag) return <NotFoundPage />;
+  if (hidesUnderReview()) return <RestrictedReview />;
 
   return <RedFlagDetail redFlag={redFlag} />;
+}
+
+/**
+ * What a review page shows while the details are restricted: no name, no
+ * reasons. The id is never read, so nothing about the institution reaches the page.
+ */
+function RestrictedReview() {
+  useEffect(() => applySeo(SEO.rankings), []);
+  return (
+    <div className="red-flag-page border-l-2 border-claret">
+      <Container>
+        <div className="red-flag-detail-hero animate-route-in">
+          <nav aria-label="Breadcrumb" className="type-caption text-ink-inverse/75">
+            <Link to="/rankings?view=redflags" className="text-gold underline underline-offset-4 hover:decoration-2">
+              Institutions under review
+            </Link>
+          </nav>
+          <p className="type-label mt-8 text-gold">Temporarily restricted</p>
+          <h1 tabIndex={-1} className="type-display measure-tight mt-4 text-ink-inverse outline-none">
+            Institution under review
+          </h1>
+          <p className="type-heading mt-6 max-w-[40rem] text-ink-inverse">{UNDER_REVIEW_NOTE}</p>
+          <Link
+            to="/rankings?view=redflags"
+            className="type-caption mt-8 inline-block text-gold underline underline-offset-4 hover:decoration-2"
+          >
+            &larr; All institutions under review
+          </Link>
+        </div>
+      </Container>
+    </div>
+  );
 }
 
 function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {

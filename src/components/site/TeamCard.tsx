@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import { cn } from "@/lib/utils";
 import { useReveal } from "@/hooks/useReveal";
 import { Monogram } from "@/components/data-display/Monogram";
+import { RESTRICTED_LABEL, WITHHELD_NAME } from "@/config/restrictions";
 
 /**
  * One person card.
@@ -23,6 +24,7 @@ export function TeamCard({
   to,
   index = 0,
   former = false,
+  restricted = false,
 }: {
   name: string;
   role: string;
@@ -36,14 +38,28 @@ export function TeamCard({
   index?: number;
   /** Has left the Institute: muted portrait, and a "Former member" label. */
   former?: boolean;
+  /** Name and portrait are withheld (see `config/restrictions.ts`): shows a placeholder, no link. */
+  restricted?: boolean;
 }) {
   const { ref, visible } = useReveal<HTMLElement>();
+  if (restricted) {
+    name = WITHHELD_NAME;
+    photo = undefined;
+    to = undefined;
+  }
 
   const content = (
     <>
       <div className={cn("tc-frame", featured && "tc-frame--lg", emphasis && "tc-frame--emph", former && "tc-frame--former")}>
         <div className={cn("tc-inner", photo ? "bg-canvas" : "bg-sunken")}>
-          {photo ? (
+          {restricted ? (
+            <div aria-hidden="true" className="flex h-full w-full flex-col items-center justify-center gap-2 text-ink-faint">
+              <svg viewBox="0 0 24 24" className="size-9" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="5" y="11" width="14" height="9" rx="1.5" />
+                <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+              </svg>
+            </div>
+          ) : photo ? (
             <img src={photo} alt={name} className="tc-img portrait-img" />
           ) : (
             <div className="flex h-full w-full items-center justify-center text-ink-faint">
@@ -71,6 +87,7 @@ export function TeamCard({
           {role}
         </p>
         {former ? <span className="tc-former mt-2">Former member</span> : null}
+        {restricted ? <span className="tc-former mt-2">{RESTRICTED_LABEL}</span> : null}
       </div>
       {to ? (
         <span className="tc-cta mt-2 font-sans text-[0.6875rem] font-semibold uppercase tracking-[0.16em] text-bronze-ink">

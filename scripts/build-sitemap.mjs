@@ -102,6 +102,14 @@ export function resolveOrigin(argv = process.argv, env = process.env) {
 
 const data = JSON.parse(readFileSync(join(ROOT, "src/data/schools.json"), "utf8"));
 
+// Temporary restrictions (src/config/restrictions.ts). Read the switches from
+// that file so one edit there also keeps the withheld pages out of the sitemap.
+const restrictionsSrc = readFileSync(join(ROOT, "src/config/restrictions.ts"), "utf8");
+const restricted = (name) => new RegExp(`${name}:\\s*true`).test(restrictionsSrc);
+const HIDE_LEADERSHIP = restricted("hideLeadershipNames");
+const HIDE_UNDER_REVIEW = restricted("hideUnderReview");
+const HIDDEN_PEOPLE = ["eron-subedi", "yogeshwor-sharma"];
+
 /** Routes that are not schools. Priority reflects how much we want them read. */
 const STATIC_ROUTES = [
   { path: "/", priority: "1.0", changefreq: "weekly" },
@@ -126,7 +134,7 @@ const STATIC_ROUTES = [
     "nischal-ghimire",
     "aaditya-jha",
     "krinjal-timalsina",
-  ].map((id) => ({ path: `/team/${id}`, priority: "0.4", changefreq: "monthly" })),
+  ].filter((id) => !(HIDE_LEADERSHIP && HIDDEN_PEOPLE.includes(id))).map((id) => ({ path: `/team/${id}`, priority: "0.4", changefreq: "monthly" })),
 ];
 
 const xmlEscape = (s) =>
@@ -156,7 +164,7 @@ export function buildSitemap(origin) {
     })),
     // The curated red-flag list. A flagged school may not be in the ranked
     // roster, so these URLs come from their own array.
-    ...data.redFlags.map((r) => ({
+    ...(HIDE_UNDER_REVIEW ? [] : data.redFlags).map((r) => ({
       loc: `${origin}/red-flag/${r.id}`,
       priority: "0.5",
       changefreq: "monthly",

@@ -1,4 +1,5 @@
 import { contributors } from "@/data/contributors";
+import { isHiddenPerson } from "@/config/restrictions";
 import type { Contributor } from "@/lib/types";
 
 /**
@@ -220,16 +221,19 @@ export function isFormerByName(name: string): boolean {
 }
 
 export function profileMembers(): Contributor[] {
-  return PROFILE_IDS.map((id) => byId.get(id)).filter((c): c is Contributor => !!c);
+  return PROFILE_IDS.filter((id) => !isHiddenPerson(id))
+    .map((id) => byId.get(id))
+    .filter((c): c is Contributor => !!c);
 }
 
+/** `undefined` for an unknown id and, while restricted, for the hidden people. */
 export function getProfileMember(id: string | undefined): Contributor | undefined {
-  return id && PROFILE_IDS.includes(id) ? byId.get(id) : undefined;
+  return id && PROFILE_IDS.includes(id) && !isHiddenPerson(id) ? byId.get(id) : undefined;
 }
 
 /** `/team/<id>` for people with a page, `undefined` for everyone else. */
 export function profilePath(id: string): string | undefined {
-  return PROFILE_IDS.includes(id) ? `/team/${id}` : undefined;
+  return PROFILE_IDS.includes(id) && !isHiddenPerson(id) ? `/team/${id}` : undefined;
 }
 
 export function profilePathByName(name: string): string | undefined {

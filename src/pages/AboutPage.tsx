@@ -8,6 +8,7 @@ import { StatBlock, StatRow } from "@/components/data-display/StatBlock";
 import { SectionHeader } from "@/components/data-display/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { TeamCard } from "@/components/site/TeamCard";
+import { hidesLeadership, LEADERSHIP_NOTE, WITHHELD_NAME } from "@/config/restrictions";
 import { TierHeader } from "@/components/about/TierHeader";
 import { CountUp } from "@/components/site/CountUp";
 import { useReveal } from "@/hooks/useReveal";
@@ -15,7 +16,7 @@ import { useCardSpotlight } from "@/hooks/useCardSpotlight";
 import { Notice } from "@/components/site/Notice";
 import { FaqItem } from "@/components/site/FaqItem";
 import { MessageModal } from "@/components/site/MessageModal";
-import { founderMessage, presidentMessage } from "@/data/messages";
+import { founderMessage, presidentMessage, redactBlocks } from "@/data/messages";
 import { contributors } from "@/data/contributors";
 import { profilePathByName } from "@/data/profiles";
 import { SEO, applySeo } from "@/lib/seo";
@@ -171,6 +172,11 @@ export function AboutPage() {
           </Notice>
 
           <TierHeader label="Founders" className="!mt-8" />
+          {hidesLeadership() ? (
+            <Notice tone="info" label="Temporarily restricted" className="mx-auto mb-8 max-w-[46rem]">
+              {LEADERSHIP_NOTE}
+            </Notice>
+          ) : null}
           <section className="relative mb-6 md:mb-10">
             <div className="absolute inset-0 -z-10 bg-bronze-soft/40 rounded-2xl blur-3xl" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
@@ -179,6 +185,7 @@ export function AboutPage() {
                   name="Eron Subedi" to={profilePathByName("Eron Subedi")}
                   role="Founder, Executive Chairman & Chief of Investigations"
                   featured
+                  restricted={hidesLeadership()}
                 />
                 <Button
                   onClick={() => setLetter("founder")}
@@ -193,6 +200,7 @@ export function AboutPage() {
                   role="Co-Founder, President, & Head of Operations"
                   featured
                   photo={photoByName.get("Yogeshwor Sharma")}
+                  restricted={hidesLeadership()}
                 />
                 <Button
                   onClick={() => setLetter("president")}
@@ -486,16 +494,16 @@ export function AboutPage() {
         <MessageModal
           open={letter === "president"}
           onClose={() => setLetter(null)}
-          name="Yogeshwor Sharma"
+          name={hidesLeadership() ? WITHHELD_NAME : "Yogeshwor Sharma"}
           role="Message from the President"
-          blocks={presidentMessage}
+          blocks={redactBlocks(presidentMessage)}
         />
         <MessageModal
           open={letter === "founder"}
           onClose={() => setLetter(null)}
-          name="Eron Subedi"
+          name={hidesLeadership() ? WITHHELD_NAME : "Eron Subedi"}
           role="Message from the Founder"
-          blocks={founderMessage}
+          blocks={redactBlocks(founderMessage)}
         />
       </div>
     </Container>

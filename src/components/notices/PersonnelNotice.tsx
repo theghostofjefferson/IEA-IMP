@@ -1,3 +1,4 @@
+import { hidesLeadership, WITHHELD_NAME } from "@/config/restrictions";
 import { PERSONNEL_NOTICE, PERSONNEL_VACATED } from "@/data/notices";
 
 const IMAGE = "/notices/personnel-notice-2026-11-23.jpg";
@@ -40,6 +41,8 @@ export function PersonnelNotice() {
 
       <article className="border-t border-gold/30 px-5 py-6 sm:px-7 md:py-8">
         <div className="mx-auto flex max-w-4xl flex-col gap-6">
+          {hidesLeadership() ? null : (
+            <>
           <a
             href={IMAGE}
             target="_blank"
@@ -57,6 +60,8 @@ export function PersonnelNotice() {
             />
           </a>
           <p className="type-caption text-center text-ink-inverse/60">The notice as issued. The text follows.</p>
+            </>
+          )}
           <p className="type-body-lg measure">
             It is hereby brought to the attention of the Institute&rsquo;s members, associates, and the
             public that certain revisions have been effected upon the Institute&rsquo;s About section,
@@ -109,14 +114,14 @@ export function PersonnelNotice() {
           <div className="mt-2 grid gap-8 border-t border-gold/30 pt-6 sm:grid-cols-2">
             <div>
               <p className="type-caption text-ink-inverse/70">By Order of the Founder,</p>
-              <p className="mt-3 font-serif text-lg font-bold uppercase tracking-wide text-ink-inverse">Eron Subedi</p>
+              <p className="mt-3 font-serif text-lg font-bold uppercase tracking-wide text-ink-inverse">{hidesLeadership() ? WITHHELD_NAME : "Eron Subedi"}</p>
               <p className="type-caption italic text-ink-inverse/75">Founder, Executive Chairman &amp; Chief of Investigations</p>
               <p className="type-caption italic text-ink-inverse/75">Office of the Founder</p>
               <p className="type-caption italic text-ink-inverse/75">The Institute for Educational Accountability</p>
             </div>
             <div>
               <p className="type-caption text-ink-inverse/70">Approved by:</p>
-              <p className="mt-3 font-serif text-lg font-bold text-ink-inverse">Yogeshwor Sharma</p>
+              <p className="mt-3 font-serif text-lg font-bold text-ink-inverse">{hidesLeadership() ? WITHHELD_NAME : "Yogeshwor Sharma"}</p>
               <p className="type-caption italic text-ink-inverse/75">President</p>
               <p className="type-caption italic text-ink-inverse/75">The Institute for Educational Accountability (IEA)</p>
             </div>
