@@ -237,7 +237,7 @@ export function AboutPage() {
               </div>
               <div className="grid grid-cols-2 items-start justify-items-center gap-4 sm:gap-8 md:gap-12">
                 <TeamCard index={6} name="Abinash Poudel" to={profilePathByName("Abinash Poudel")} role="Lead of Online Research" photo={photoByName.get("Abinash Poudel")} />
-                <TeamCard index={7} name="Krinjal Timalsina" former to={profilePathByName("Krinjal Timalsina")} role="Lead Researcher" photo={photoByName.get("Krinjal Timalsina")} />
+                <TeamCard index={7} name="Krinjal Timalsina" to={profilePathByName("Krinjal Timalsina")} role="Lead Researcher" photo={photoByName.get("Krinjal Timalsina")} />
               </div>
             </div>
           </section>

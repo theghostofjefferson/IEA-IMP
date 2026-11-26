@@ -18,7 +18,6 @@ export const PERSONNEL_NOTICE = {
 /** The offices named in that notice, as published. */
 export const PERSONNEL_VACATED: readonly { name: string; role: string }[] = [
   { name: "Aishani Rai", role: "Editorial Lead" },
-  { name: "Krinjal Timalsina", role: "Lead Researcher" },
   { name: "Prajjwal Dhakal", role: "Management Advisor" },
   { name: "Nischal Ghimire", role: "Research Executive" },
   { name: "Kaustuv Rimal", role: "Research Executive" },

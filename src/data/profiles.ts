@@ -199,7 +199,6 @@ const byName = new Map(contributors.map((c) => [c.name, c]));
 /** Members who have left the Institute. Their cards and pages say so. */
 export const FORMER_IDS: ReadonlySet<string> = new Set([
   "aishani-rai",
-  "krinjal-timalsina",
   "prajjwal-dhakal",
   "nischal-ghimire",
   "kaustuv-rimal",
