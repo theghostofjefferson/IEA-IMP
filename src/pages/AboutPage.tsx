@@ -8,7 +8,7 @@ import { StatBlock, StatRow } from "@/components/data-display/StatBlock";
 import { SectionHeader } from "@/components/data-display/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { TeamCard } from "@/components/site/TeamCard";
-import { hidesLeadership, LEADERSHIP_NOTE, WITHHELD_NAME } from "@/config/restrictions";
+import { hidesLeadership, LEADERSHIP_NOTE, PHOTO_NOTE, RESTRICTIONS, WITHHELD_NAME } from "@/config/restrictions";
 import { TierHeader } from "@/components/about/TierHeader";
 import { CountUp } from "@/components/site/CountUp";
 import { useReveal } from "@/hooks/useReveal";
@@ -165,7 +165,8 @@ export function AboutPage() {
 
           <Notice tone="info" label="Changes to the team" className="mx-auto mt-2 max-w-[46rem]">
             Several members have left the Institute and are marked as former members below. The
-            Office of the Founder has issued a notice on the reconstitution of its personnel.{" "}
+            Office of the Founder has issued a notice on the reconstitution of its personnel.
+            {RESTRICTIONS.blurMemberPhotos ? ` ${PHOTO_NOTE}` : ""}{" "}
             <Link to="/notices#personnel" className="font-semibold text-bronze-ink underline underline-offset-4 hover:decoration-2">
               Read the notice &rarr;
             </Link>

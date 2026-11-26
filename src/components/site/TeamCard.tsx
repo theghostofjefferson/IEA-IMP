@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import { cn } from "@/lib/utils";
 import { useReveal } from "@/hooks/useReveal";
 import { Monogram } from "@/components/data-display/Monogram";
-import { RESTRICTED_LABEL, WITHHELD_NAME } from "@/config/restrictions";
+import { photoBlurClass, RESTRICTED_LABEL, WITHHELD_NAME } from "@/config/restrictions";
 
 /**
  * One person card.
@@ -60,7 +60,7 @@ export function TeamCard({
               </svg>
             </div>
           ) : photo ? (
-            <img src={photo} alt={name} className="tc-img portrait-img" />
+            <img src={photo} alt={name} className={cn("tc-img portrait-img", photoBlurClass())} />
           ) : (
             <div className="flex h-full w-full items-center justify-center text-ink-faint">
               <Monogram name={name} size={featured ? "xl" : "md"} tone="neutral" />
