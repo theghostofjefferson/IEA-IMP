@@ -16,6 +16,11 @@
  *                                the details are temporarily restricted.
  *                        false = full pages as normal.
  *
+ *   blurMemberPhotos     true  = every member portrait is blurred and
+ *                                greyscale, on cards, profile pages and the
+ *                                intro strip, including on hover.
+ *                        false = portraits show as normal.
+ *
  * To turn one off: change `true` to `false` and deploy. Nothing else needs
  * editing. (`scripts/build-sitemap.mjs` reads this file, so keep each switch on
  * a single `name: true|false,` line.)
@@ -27,7 +32,15 @@
 export const RESTRICTIONS = {
   hideLeadershipNames: true,
   hideUnderReview: true,
+  blurMemberPhotos: true,
 };
+
+export const PHOTO_NOTE = "Member portraits are blurred for now, in line with these temporary restrictions.";
+
+/** The class that blurs a portrait, or nothing when `blurMemberPhotos` is off. */
+export function photoBlurClass(): string {
+  return RESTRICTIONS.blurMemberPhotos ? "photo-blur" : "";
+}
 
 /** People whose names are withheld while `hideLeadershipNames` is on. */
 export const HIDDEN_PERSON_IDS: readonly string[] = ["eron-subedi", "yogeshwor-sharma"];

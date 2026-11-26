@@ -1777,3 +1777,7 @@ body {
 .tc-card--former .tc-name { color: #4d4a43; }
 .tc-frame--former .tc-img { filter: grayscale(1) contrast(1.02) !important; opacity: .88; }
 .tc-card--former:hover .tc-glow { opacity: .35; }
+
+
+/* ---- restricted portraits (config/restrictions.ts: blurMemberPhotos) ---- */
+.photo-blur { filter: blur(11px) grayscale(1) !important; transform: scale(1.25) !important; }

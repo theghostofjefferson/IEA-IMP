@@ -1,3 +1,4 @@
+import { photoBlurClass } from "@/config/restrictions";
 import type { Contributor } from "@/lib/types";
 import { Monogram } from "@/components/data-display/Monogram";
 import { cn } from "@/lib/utils";
@@ -54,7 +55,7 @@ export function Portrait({
           decoding="async"
           // 3:4 crop. `object-position: center 25%` biases toward the face,
           // since portraits are usually framed with headroom.
-          className="size-full object-cover object-[center_25%]"
+          className={`size-full object-cover object-[center_25%] ${photoBlurClass()}`}
         />
       </span>
     );

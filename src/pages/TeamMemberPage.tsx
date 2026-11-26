@@ -17,7 +17,7 @@ import {
   profiles,
   type MemberProfile,
 } from "@/data/profiles";
-import { isHiddenPerson } from "@/config/restrictions";
+import { photoBlurClass, isHiddenPerson } from "@/config/restrictions";
 import { applySeo, memberSeo } from "@/lib/seo";
 import type { Contributor } from "@/lib/types";
 import { NotFoundPage } from "@/pages/NotFoundPage";
@@ -115,7 +115,7 @@ function StandardHeader({ member, profile }: { member: Contributor; profile: Mem
           <div className={cn("tc-frame tc-frame--lg", isFormer(member.id) && "tc-frame--former")} style={{ ["--size" as string]: "clamp(11rem, 30vw, 17rem)" }}>
             <div className={cn("tc-inner", photo ? "bg-canvas" : "bg-sunken")}>
               {photo ? (
-                <img src={photo} alt={member.name} className="tc-img" />
+                <img src={photo} alt={member.name} className={cn("tc-img", photoBlurClass())} />
               ) : (
                 <div className="flex size-full items-center justify-center">
                   <Monogram name={member.name} size="xl" tone="neutral" />
