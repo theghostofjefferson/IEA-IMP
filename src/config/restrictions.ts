@@ -6,6 +6,14 @@ import { contributors } from "@/data/contributors";
  * IEA is going heavily public, so two things are withheld for now and will be
  * relaxed gradually. Everything is driven from this one file:
  *
+ *   restrictedPhase      true  = a banner on every page and a statement on the
+ *                                home page say, explicitly, that IEA is in a
+ *                                restricted phase and its website is being
+ *                                restricted, and invite people to join at
+ *                                /recruits.
+ *                        false = no banner or statement. (The other switches
+ *                                below still apply on their own.)
+ *
  *   attackMode           true  = the whole site is replaced by the "under
  *                                attack, inaccessible" page, except the paths in
  *                                `ATTACK_MODE_OPEN_PATHS`.
@@ -44,7 +52,8 @@ import { contributors } from "@/data/contributors";
  * them from `public/people/` if that matters too.
  */
 export const RESTRICTIONS = {
-  attackMode: true,
+  restrictedPhase: true,
+  attackMode: false,
   hideAllMemberNames: true,
   hideLeadershipNames: true,
   hideUnderReview: true,
@@ -118,3 +127,10 @@ export function isAttackModeBlocking(pathname: string): boolean {
   const p = pathname.replace(/\/+$/, "") || "/";
   return !ATTACK_MODE_OPEN_PATHS.includes(p);
 }
+
+export function inRestrictedPhase(): boolean {
+  return RESTRICTIONS.restrictedPhase;
+}
+
+export const RESTRICTED_PHASE_LINE =
+  "During this phase, we are restricting the website of the Institute for Educational Accountability.";
