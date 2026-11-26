@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
 import { Container } from "@/components/site/Container";
+import { RestrictedPhasePanel } from "@/components/home/RestrictedPhasePanel";
 import { Hero } from "@/components/home/Hero";
 import { LatestNotice } from "@/components/home/LatestNotice";
 import { ReportBanner } from "@/components/home/ReportBanner";
@@ -21,6 +22,7 @@ export function HomePage() {
   return (
     <>
       <Container>
+        <RestrictedPhasePanel />
         <Hero />
         <LatestNotice />
         <ReportBanner />

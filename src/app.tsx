@@ -6,6 +6,7 @@ import { IntroGate } from "@/components/intro/IntroGate";
 import { Masthead } from "@/components/site/Masthead";
 import { BackToTop } from "@/components/site/BackToTop";
 import { ScrollManager } from "@/components/site/ScrollManager";
+import { PhaseBanner } from "@/components/site/PhaseBanner";
 import { SiteFooter } from "@/components/site/SiteFooter";
 
 import { isAttackModeBlocking } from "@/config/restrictions";
@@ -129,6 +130,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
       </a>
 
       <div className="flex min-h-dvh flex-col">
+        <PhaseBanner />
         <Masthead />
         <main id="main" className="flex-1">
           {/* `resetKey` clears a previous route's render error on navigation. */}
