@@ -22,8 +22,8 @@ export function HomePage() {
   return (
     <>
       <Container>
-        <RestrictedPhasePanel />
         <Hero />
+        <RestrictedPhasePanel />
         <LatestNotice />
         <ReportBanner />
       </Container>

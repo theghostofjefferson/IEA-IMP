@@ -1,5 +1,7 @@
 import raw from "@/data/schools.json";
 
+import { RESTRICTIONS, SCHOOL_WITHHELD } from "@/config/restrictions";
+
 import type { Dataset, RedFlag, School, SchoolType } from "@/lib/types";
 
 /**
@@ -26,7 +28,10 @@ const data = raw as Dataset;
 export const meta = data.meta;
 
 /** All schools, in rank order ascending. Keep this order when editing the data. */
-export const schools: readonly School[] = data.schools;
+export const schools: readonly School[] = RESTRICTIONS.hideSchoolNames
+  ? // Names are withheld at the source, so no page can leak one by accident.
+    data.schools.map((s) => ({ ...s, name: SCHOOL_WITHHELD, shortName: SCHOOL_WITHHELD, initials: "\u2022", logoColor: "#6b6558" }))
+  : data.schools;
 
 /**
  * The curated red-flag list, in the order it was supplied.

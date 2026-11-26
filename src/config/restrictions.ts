@@ -19,6 +19,11 @@ import { contributors } from "@/data/contributors";
  *                                `ATTACK_MODE_OPEN_PATHS`.
  *                        false = the site is served as normal.
  *
+ *   hideSchoolNames      true  = the ranked schools' names are withheld in the
+ *                                ranking, school pages, search and the Night
+ *                                Sky. Ranks, bands and scores still show.
+ *                        false = names show as normal.
+ *
  *   hideAllMemberNames   true  = EVERY member's name is locked: "Name withheld"
  *                                with a lock on cards, no profile pages, no
  *                                search or sitemap entries, no names in the
@@ -54,6 +59,7 @@ import { contributors } from "@/data/contributors";
 export const RESTRICTIONS = {
   restrictedPhase: true,
   attackMode: false,
+  hideSchoolNames: true,
   hideAllMemberNames: true,
   hideLeadershipNames: true,
   hideUnderReview: true,
@@ -134,3 +140,11 @@ export function inRestrictedPhase(): boolean {
 
 export const RESTRICTED_PHASE_LINE =
   "During this phase, we are restricting the website of the Institute for Educational Accountability.";
+
+export const SCHOOL_WITHHELD = "School withheld";
+export const SCHOOL_NAMES_NOTE =
+  "School names are temporarily restricted while IEA goes heavily public. Ranks, bands and scores are shown; names will be restored gradually.";
+
+export function hidesSchoolNames(): boolean {
+  return RESTRICTIONS.hideSchoolNames;
+}

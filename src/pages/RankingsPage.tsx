@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router";
 
 import { Container } from "@/components/site/Container";
 import { Notice } from "@/components/site/Notice";
+import { hidesSchoolNames, SCHOOL_NAMES_NOTE } from "@/config/restrictions";
 import { Reveal } from "@/components/site/Reveal";
 import { Rule } from "@/components/site/Rule";
 import { BandBar } from "@/components/rankings/BandBar";
@@ -69,6 +70,11 @@ export function RankingsPage() {
 
         {/* What the ranking is for. Shown in both views, above everything else. */}
         <Reveal className="pt-4" delayMs={20}>
+          {hidesSchoolNames() ? (
+            <Notice tone="info" label="Temporarily restricted" className="mb-4">
+              {SCHOOL_NAMES_NOTE}
+            </Notice>
+          ) : null}
           <Notice tone="info" label="What this ranking is, and is not">
             <p>
               This is not a guide to which school is academically best, and it does not weigh test scores or
