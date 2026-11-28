@@ -59,7 +59,7 @@ import { contributors } from "@/data/contributors";
 export const RESTRICTIONS = {
   restrictedPhase: true,
   attackMode: false,
-  hideSchoolNames: true,
+  hideSchoolNames: false,
   hideAllMemberNames: true,
   hideLeadershipNames: true,
   hideUnderReview: true,
