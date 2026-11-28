@@ -57,7 +57,7 @@ import { contributors } from "@/data/contributors";
  * them from `public/people/` if that matters too.
  */
 export const RESTRICTIONS = {
-  restrictedPhase: true,
+  restrictedPhase: false,
   attackMode: false,
   hideSchoolNames: false,
   hideAllMemberNames: true,
