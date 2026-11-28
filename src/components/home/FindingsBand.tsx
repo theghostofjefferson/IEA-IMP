@@ -24,16 +24,16 @@ export function FindingsBand() {
       </div>
 
       <ul className="mt-3 grid grid-cols-3 border-y border-rule-soft">
-        {FINDINGS.map((f, i) => (
+        {FINDINGS.filter((f) => f.home).map((f, i) => (
           <li key={f.value} className={i > 0 ? "min-w-0 border-l border-rule-soft px-3 py-4 sm:px-5" : "min-w-0 py-4 pl-0 pr-3 sm:pr-5"}>
             <p className="type-caption h-4 text-[0.6rem] uppercase tracking-[0.12em] text-ink-faint sm:text-[0.65rem]">
-              {f.approx ? "Approximately" : ""}
+              {f.lead}
             </p>
             <p className="mt-0.5 font-serif text-3xl font-bold leading-none text-bronze-ink sm:text-5xl">
-              <CountUp to={f.value} suffix="%" durationMs={1600} delayMs={i * 160} />
+              <CountUp to={f.value} decimals={1} suffix="%" durationMs={1600} delayMs={i * 160} />
             </p>
             <p className="type-caption mt-2 text-[0.7rem] leading-snug text-ink-muted sm:text-sm">
-              <span className="font-bold text-ink">of respondents</span> {f.short}
+              {f.short}
             </p>
           </li>
         ))}

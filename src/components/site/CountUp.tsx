@@ -15,12 +15,15 @@ export function CountUp({
   suffix = "",
   durationMs = 1400,
   delayMs = 0,
+  decimals = 0,
   className,
 }: {
   to: number;
   suffix?: string;
   durationMs?: number;
   delayMs?: number;
+  /** Digits after the point; the final value is exact, only the in-between frames are rounded. */
+  decimals?: number;
   className?: string;
 }) {
   const { ref, visible } = useReveal<HTMLSpanElement>();
@@ -42,17 +45,18 @@ export function CountUp({
       const t = Math.min(Math.max((now - start) / durationMs, 0), 1);
       // easeOutExpo: fast start, long settle.
       const eased = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-      setValue(Math.round(to * eased));
+      const k = 10 ** decimals;
+      setValue(Math.round(to * eased * k) / k);
       if (t < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [visible, to, durationMs, delayMs]);
+  }, [visible, to, durationMs, delayMs, decimals]);
 
   return (
     <span ref={ref} aria-label={`${to}${suffix}`} className={className} style={{ fontVariantNumeric: "tabular-nums" }}>
       <span aria-hidden="true">
-        {value}
+        {value.toFixed(decimals)}
         {suffix}
       </span>
     </span>
