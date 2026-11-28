@@ -16,27 +16,32 @@ type Excerpt = {
  */
 const EXCERPTS: Excerpt[] = [
   {
-    context: "A student describes being treated differently from classmates with lighter skin.",
-    highlight: "They would treat the whiter than milk girls/guys as their own kids but not me.",
-    source: "Student submission · School not stated",
+    context:
+      "A student reflects on how academic standing dictates classroom hierarchy, and who gets left behind when they don\u2019t top the exam.",
+    highlight:
+      "The student who scores high in the exam gets better treatment, and those who don\u2019t are denied the encouragement to improve.",
+    source: "Student submission \u00b7 School identity withheld",
   },
   {
     context:
-      "A student says a lecturer sometimes remarks on classmates' accents in front of the whole class. They believe she means no harm, but that for students from outside central Kathmandu it becomes a way of being picked out.",
-    highlight: "It feels like singling them out.",
-    source: "Student submission · School identity withheld",
+      "A student describes being repeatedly singled out over their complexion, explaining how remarks framed as classroom humour leave a lasting mark.",
+    highlight:
+      "Even when comments about my darker skin tone are presented as jokes, they hurt\u2014and teachers still use complexion nicknames.",
+    source: "Student submission \u00b7 School identity withheld",
   },
   {
     context:
-      "A student who has mostly had good teachers says they have seen friends treated differently because of gender and skin colour, mainly through teachers' jokes. They have not witnessed worse first-hand, but say they have heard of it.",
-    highlight: "The jokes that some teachers make (‘kale’ being the most common).",
-    source: "Student submission · School identity withheld",
+      "A student recounts watching classmates from the Terai region targeted in front of peers over where they come from.",
+    highlight:
+      "Students from the Terai are referred to through derogatory nicknames\u2014it becomes a way of singling them out.",
+    source: "Student submission \u00b7 School identity withheld",
   },
   {
     context:
-      "A student says teachers showed little regard for students' mental health and used hurtful language, and that misbehaviour was met with force rather than care.",
-    highlight: "Bullying is not taken seriously and physical violence is justified.",
-    source: "Student submission · School identity withheld",
+      "A student describes how teachers\u2019 casual assumptions quietly dictate which doors open for boys versus girls in school activities.",
+    highlight:
+      "Teachers make assumptions about which activities boys or girls are suited for, deciding opportunities before we even try.",
+    source: "Student submission \u00b7 School identity withheld",
   },
 ];
 
@@ -72,10 +77,17 @@ export function DiscriminationNotice() {
       <article className="border-t border-gold/30 px-5 py-6 sm:px-7 md:py-8">
         <div className="mx-auto flex max-w-4xl flex-col gap-8">
           <p className="type-body-lg measure">
-            The Institute is nearing the end of its research into discrimination in schools. Among the written
-            submissions we received from students, we want to share a few passages now. They are shortened, with the
-            line that stayed with us set in larger type, and the context around each is our own summary. First, the
-            preliminary findings.
+            The Institute for Educational Accountability (IEA) is nearing the conclusion of its landmark multi-province
+            investigation into classroom conduct, unequal treatment, and institutional fairness across Nepali
+            educational institutions. Drawing on extensive testimony and survey data collected from students across
+            multiple provinces, cities, and school systems, we are releasing an initial snapshot of the findings ahead
+            of our final Q1 2027 report.
+          </p>
+          <p className="type-body measure text-ink-inverse/85">
+            First, the preliminary numbers point to a systemic pattern, one that students directly link to the overall
+            quality of their education. Below that, we are sharing selected excerpts directly from students&rsquo;
+            written submissions. Each passage has been edited for length and privacy, with the line that stayed with us
+            set in larger type, accompanied by our editorial context.
           </p>
 
           <PreliminaryFindings />
@@ -97,13 +109,13 @@ export function DiscriminationNotice() {
           </ul>
 
           <p className="type-body measure border-l-2 border-gold/70 pl-4">
-            These are individual accounts, quoted in part and as submitted. They are not findings: the Institute has not
-            independently verified them, and nothing here is a conclusion about any school. If you have an experience
-            you would like to share, you can{" "}
+            These are individual accounts, quoted in part and anonymized to protect student privacy. Nothing here is a
+            formal conclusion about any individual school or educator. Have an experience to share? Submit a
+            confidential report through{" "}
             <Link to="/report-a-concern" className="font-bold text-gold underline underline-offset-4">
-              report it to us
+              our portal
             </Link>{" "}
-            or write to{" "}
+            or write directly to{" "}
             <a href="mailto:help@ieainstitute.org" className="font-bold text-gold underline underline-offset-4">
               help@ieainstitute.org
             </a>

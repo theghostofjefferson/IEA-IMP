@@ -6,38 +6,55 @@ import { cn } from "@/lib/utils";
 
 export type Finding = {
   value: number;
-  /** The source text says "approximately" for two of the three figures and not the third; this keeps it that way. */
-  approx: boolean;
+  /** The scale in words, as the Institute phrases it: "Nearly 4 in 5". */
+  lead: string;
   text: string;
   /** A shorter caption for tight spaces, such as the front-page band. Same claim, fewer words. */
   short: string;
+  /** Shown in the front-page band, which has room for three. */
+  home?: boolean;
 };
 
 export const FINDINGS: Finding[] = [
   {
-    value: 82,
-    approx: true,
-    text: "reported observing preferential treatment by teachers.",
-    short: "observed preferential treatment by teachers",
+    value: 79.8,
+    lead: "Nearly 4 in 5",
+    text: "of surveyed students reported observing teachers give preferential treatment to particular students, either sometimes or regularly.",
+    short: "of surveyed students observed teachers give preferential treatment, sometimes or regularly",
+    home: true,
   },
   {
-    value: 67,
-    approx: false,
-    text: "reported personally experiencing less favourable treatment, either sometimes or regularly.",
-    short: "personally experienced less favourable treatment, sometimes or regularly",
+    value: 69.8,
+    lead: "Nearly 7 in 10",
+    text: "believe that eliminating unequal treatment and disparities would produce at least moderate improvements in their school\u2019s academic environment, including 53.5% who anticipate considerable or significant academic gains.",
+    short: "believe ending unequal treatment would improve their school\u2019s academic environment",
   },
   {
-    value: 49,
-    approx: true,
-    text: "reported observing or experiencing differences they believed might be associated with skin colour, ethnicity, or geographical background.",
-    short: "observed or experienced differences they linked to skin colour, ethnicity or background",
+    value: 61.7,
+    lead: "More than 3 in 5",
+    text: "reported personally feeling that a teacher treated them less favourably than their peers.",
+    short: "personally felt a teacher treated them less favourably than their peers",
+    home: true,
+  },
+  {
+    value: 41.5,
+    lead: "Over 2 in 5",
+    text: "reported observing or experiencing differences in teacher treatment they believed were linked to skin colour, ethnicity, or geographical background.",
+    short: "observed or experienced treatment they linked to skin colour, ethnicity or background",
+    home: true,
+  },
+  {
+    value: 42.6,
+    lead: "Nearly half",
+    text: "reported that teachers fail to provide consistent, equal academic assistance and attention to all students regardless of background.",
+    short: "said teachers do not give all students consistent, equal attention",
   },
 ];
 
 /**
  * The headline figures of the discrimination research, set as large as the
  * notice allows: a big numeral that counts up, a bar showing the share, and one
- * line saying what was measured. The exact wording of the finding follows as
+ * line saying what was measured. The Institute's reading of them follows as
  * prose, so the numbers are never separated from their qualifications.
  */
 export function PreliminaryFindings() {
@@ -47,18 +64,18 @@ export function PreliminaryFindings() {
         Preliminary findings
       </h3>
 
-      <ul className="mt-6 grid gap-8 md:grid-cols-3 md:gap-6">
+      <ul className="mt-6 grid gap-8 md:grid-cols-2 md:gap-x-10 md:gap-y-10 lg:grid-cols-3">
         {FINDINGS.map((f, i) => (
           <Stat key={f.value} finding={f} index={i} />
         ))}
       </ul>
 
       <p className="type-body-lg measure mt-8 text-ink-inverse/90">
-        The preliminary findings suggest that unequal treatment is a recurring concern in students&rsquo; educational
-        experiences. Approximately 82% of respondents reported observing preferential treatment by teachers, while 67%
-        reported personally experiencing less favourable treatment, either sometimes or regularly. Furthermore,
-        approximately 49% reported observing or experiencing differences they believed might be associated with skin
-        colour, ethnicity, or geographical background.
+        Taken together, these preliminary figures demonstrate that classroom disparities are not merely an abstract
+        question of fairness. They directly shape learning outcomes and the broader academic environment. While academic
+        performance was the single most cited factor behind differential attention, a substantial share of students
+        pointed directly to complexion, regional origin, and personal identity, reinforcing why institutional reform is
+        essential for elevating educational standards across Nepal.
       </p>
     </section>
   );
@@ -72,15 +89,15 @@ function Stat({ finding, index }: { finding: Finding; index: number }) {
       className={cn("finding", visible && "finding-on")}
       style={{ "--i": index } as CSSProperties}
     >
-      <p className="type-label h-4 text-ink-inverse/60">{finding.approx ? "Approximately" : ""}</p>
+      <p className="type-label min-h-4 text-ink-inverse/70">{finding.lead}</p>
       <p className="mt-1 font-serif text-7xl font-bold leading-none text-gold md:text-8xl">
-        <CountUp to={finding.value} suffix="%" durationMs={1700} delayMs={index * 180} />
+        <CountUp to={finding.value} decimals={1} suffix="%" durationMs={1700} delayMs={index * 180} />
       </p>
       <div aria-hidden="true" className="mt-4 h-1 w-full overflow-hidden rounded-full bg-ink-inverse/15">
         <div className="finding-fill h-full rounded-full bg-gold" style={{ width: `${finding.value}%` }} />
       </div>
       <p className="type-body mt-4 text-ink-inverse">
-        <span className="font-bold">of respondents</span> {finding.text}
+        {finding.text}
       </p>
     </li>
   );
